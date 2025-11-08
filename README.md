@@ -1,59 +1,25 @@
-# EmcaliTeamManager
+# 🏀 Emcali Team Manager
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.9.
+Comprehensive management system for basketball teams with role-based access control and real-time statistics visualization.
 
-## Development server
+![Angular](https://img.shields.io/badge/Angular-17+-DD0031?style=flat&logo=angular)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-3178C6?style=flat&logo=typescript)
+![License](https://img.shields.io/badge/License-MIT-green.svg)
 
-To start a local development server, run:
+## 🎯 About The Project
 
-```bash
-ng serve
-```
+Basketball Team Manager is a modern web application designed to simplify basketball team management. It allows administrators to keep all team information up to date (players, statistics, games) while providing fans and the general public with read-only access to this information.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### Problem It Solves
 
-## Code scaffolding
+- ❌ Team information scattered across multiple platforms
+- ❌ Manual statistics updates in different places
+- ❌ Lack of control over who can modify sensitive data
+- ❌ Difficulty sharing updated information with fans
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Solution
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- ✅ Centralized platform for all team information
+- ✅ Real-time updates from a single dashboard
+- ✅ Role-based system with granular permission control
+- ✅ Attractive and easy-to-share public view

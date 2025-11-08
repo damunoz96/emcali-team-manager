@@ -1,1 +1,51 @@
 /* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+
+
+@theme {
+  --color-background: #172126;
+  --color-foreground: #f1f4f4;
+
+  --color-card: #202c32;
+  --color-card-foreground: #f1f4f4;
+
+  --color-popover: #202c32;
+  --color-popover-foreground: hsl(180 10% 95%);
+
+  --color-primary: #20c5b5;
+  --color-primary-foreground: #f1f4f4;
+
+  --color-secondary: #BFD1E5;
+  --color-secondary-foreground: hsl(0 0% 100%);
+
+  --color-muted: hsl(200 20% 22%);
+  --color-muted-foreground: hsl(180 8% 65%);
+
+  --color-accent: hsl(16 85% 62%);
+  --color-accent-foreground: hsl(0 0% 100%);
+
+  --color-border: hsl(200 20% 25%);
+  --color-input: hsl(200 20% 25%);
+  --color-ring: hsl(174 72% 45%);
+
+  --color-gradient-primary: linear-gradient(135deg, hsl(174 72% 45%), hsl(185 62% 50%));
+  --color-gradient-accent: linear-gradient(135deg, hsl(16 85% 62%), hsl(25 95% 58%));
+
+  --shadow-glow: 0 0 20px hsl(174 72% 45% / 0.3);
+  --shadow-elevated: 0 10px 15px -3px hsl(200 25% 8% / 0.4), 0 4px 6px -2px hsl(200 25% 8% / 0.2);
+  --shadow-card: 0 4px 6px -1px hsl(200 25% 8% / 0.3), 0 2px 4px -1px hsl(200 25% 8% / 0.15);
+
+
+  --radius: 0.75rem;
+
+
+
+
+
+  --font-inter: 'Inter', sans-serif;
+}
+
+:root {
+  background-color: var(--color-background);
+  font-family: var(--font-inter);
+}

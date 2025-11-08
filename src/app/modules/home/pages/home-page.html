@@ -1,0 +1,46 @@
+<div class="flex flex-col items-center">
+  <!-- players summary -->
+  <div class="bg-secondary text-xl p-4 m-6 rounded-lg border">
+    <div class="font-bold">
+      Emcali´s summary
+    </div>
+    <div class="">
+      <div class="font-bold grid grid-cols-5 ">
+        <div>Name</div>
+        <div class="text-center">Games</div>
+        <div class="text-center">Points</div>
+        <div class="text-center">PPG</div>
+        <div class="text-center">FPG</div>
+      </div>
+      <div class="grid grid-cols-5">
+      @for (player of players; track player.name) {
+        <div>{{player.name}} {{player.last_name}}</div>
+        <div class="text-center">{{player.games}}</div>
+        <div class="text-center">{{player.points}}</div>
+        <div class="text-center">{{player.points / player.games}}</div>
+        <div class="text-center">{{player.fouls / player.games}}</div>
+      }
+      </div>
+    </div>
+  </div>
+  <!-- Recent games -->
+  <div class="bg-[#f0784c] border-none shadow-elevated overflow-hidden rounded-lg">
+    <div class="p-6 border-b border-accent-foreground/10">
+      <h2 class="text-2xl font-bold text-accent-foreground flex items-center gap-2">
+        Recent games
+      </h2>
+      <div class="p-6 space-y-3">
+        @for (game of games; track game.title) {
+          <div class="bg-accent-foreground/10 flex gap-6 rounded-lg pl-8 p-2 hover:bg-accent-foreground/15 transition-all duration-300">
+            <div class="text-sm font-medium">
+              {{ game.date }}
+            </div>
+            <div class="text-accent-foreground font-semibold">
+              {{ game.local.name }} {{ game.local.score }} - {{ game.visitor.score }} {{ game.visitor.name }}
+            </div>
+          </div>
+          }
+      </div>
+    </div>
+  </div>
+</div>
