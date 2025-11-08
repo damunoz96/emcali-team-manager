@@ -1,11 +1,21 @@
 import { Component, signal } from '@angular/core';
+import { MatTableModule } from '@angular/material/table';
 
+const players = [
+  { name: 'Daniel', last_name: 'Munoz', position: 'F', games: 10, points: 200, fouls: 5 },
+  { name: 'Fabian', last_name: 'Duenas', position: 'PG', games: 10, points: 500, fouls: 2 },
+  { name: 'Camilo', last_name: 'Garcia', position: 'G', games: 10, points: 1000, fouls: 1 },
+];
 @Component({
   selector: 'home-page',
   templateUrl: './home-page.html',
+  imports: [MatTableModule],
 })
 export class HomePage {
-  games = [
+  displayedColumnsPlayers: string[] = ['Name', 'Games', 'Points', 'PPG', 'FPG'];
+  dataSourcePlayers = players;
+
+   games = [
     {
       gameid: 1,
       title: 'Game 1',
@@ -45,11 +55,5 @@ export class HomePage {
         score: 10,
       },
     },
-  ];
-
-  players = [
-    { name: 'Daniel', last_name: 'Munoz', position: 'F', games: 10, points: 200, fouls: 5 },
-    { name: 'Fabian', last_name: 'Duenas', position: 'PG', games: 10, points: 500, fouls: 2 },
-    { name: 'Camilo', last_name: 'Garcia', position: 'G', games: 10, points: 1000, fouls: 1 },
   ];
 }
