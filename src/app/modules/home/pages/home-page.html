@@ -1,24 +1,26 @@
-<div class="flex flex-col items-center">
+<div class="flex flex-col items-center gap-12">
   <!-- players summary -->
-  <div class="bg-secondary text-xl p-4 m-6 rounded-lg border">
-    <div class="font-bold">
-      Emcali´s summary
+  <div class="bg-card border-border shadow-elevated overflow-hidden rounded-2xl">
+    <div class="p-6 border-b border-border bg-gradient-subtle">
+      <h2 class="text-2xl font-bold text-foreground flex items-center gap-2">
+        Emcali´s summary
+      </h2>
     </div>
-    <div class="">
-      <div class="font-bold grid grid-cols-5 ">
-        <div>Name</div>
-        <div class="text-center">Games</div>
-        <div class="text-center">Points</div>
-        <div class="text-center">PPG</div>
-        <div class="text-center">FPG</div>
+    <div class="w-full">
+      <div class="font-bold grid grid-cols-5 bg-muted/50 ">
+        <div class="px-6 py-4 text-left text-sm font-semibold text-foreground">Name</div>
+        <div class="px-6 py-4 text-center text-sm font-semibold text-foreground">Games</div>
+        <div class="px-6 py-4 text-center text-sm font-semibold text-foreground">Points</div>
+        <div class="px-6 py-4 text-center text-sm font-semibold text-foreground">PPG</div>
+        <div class="px-6 py-4 text-center text-sm font-semibold text-foreground">FPG</div>
       </div>
-      <div class="grid grid-cols-5">
+      <div class="grid grid-cols-5 border-t border-border hover:bg-muted/30 transition-colors duration-200">
       @for (player of players; track player.name) {
-        <div>{{player.name}} {{player.last_name}}</div>
-        <div class="text-center">{{player.games}}</div>
-        <div class="text-center">{{player.points}}</div>
-        <div class="text-center">{{player.points / player.games}}</div>
-        <div class="text-center">{{player.fouls / player.games}}</div>
+          <div class="px-6 py-4 text-foreground font-medium">{{player.name}} {{player.last_name}}</div>
+          <div class="px-6 py-4 text-center text-muted-foreground">{{player.games}}</div>
+          <div class="px-6 py-4 text-center text-muted-foreground">{{player.points}}</div>
+          <div class="px-6 py-4 text-center text-muted-foreground">{{player.points / player.games}}</div>
+          <div class="px-6 py-4 text-center text-muted-foreground">{{player.fouls / player.games}}</div>
       }
       </div>
     </div>
