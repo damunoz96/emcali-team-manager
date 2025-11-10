@@ -74,7 +74,7 @@
         Recent games
       </h2>
       <div class="p-6 space-y-3">
-        @for (game of games; track game.title) {
+        @for (game of dataSourceGames; track game.title) {
           <div class="bg-accent-foreground/10 flex gap-6 rounded-lg pl-8 p-2 hover:bg-accent-foreground/15 transition-all duration-300">
             <div class="text-sm font-medium">
               {{ game.date }}
