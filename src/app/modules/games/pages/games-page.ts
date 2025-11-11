@@ -1,17 +1,12 @@
 import { Component } from '@angular/core';
+import { Game, GameCardComponent } from '../components/game-card.component';
 
-interface Game {
-  id: number;
-  date: string;
-  opponent: string;
-  location: string;
-  score?: { emcali: number; opponent: number };
-  status: 'upcoming' | 'completed' | 'in-progress';
-}
+
 
 @Component({
   selector: 'games-page',
   templateUrl: './games-page.html',
+  imports: [GameCardComponent],
 })
 export class GamesPage {
   games: Game[] = [
@@ -19,7 +14,7 @@ export class GamesPage {
       id: 1,
       date: '2024-06-15',
       opponent: 'Dragones',
-      location: 'Home',
+      location: 'Coliseo Evangelista Mora',
       score: { emcali: 100, opponent: 90 },
       status: 'completed',
     },
