@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { Game, GameCardComponent } from '../components/game-card.component';
+import { CardComponent } from "../../../shared/components/card.component";
 
 
 
 @Component({
   selector: 'games-page',
   templateUrl: './games-page.html',
-  imports: [GameCardComponent],
+  imports: [GameCardComponent, CardComponent],
 })
 export class GamesPage {
   games: Game[] = [
@@ -22,7 +23,7 @@ export class GamesPage {
       id: 2,
       date: '2024-06-10',
       opponent: 'END',
-      location: 'Away',
+      location: 'Coliseo Evangelista Mora',
       score: { emcali: 80, opponent: 30 },
       status: 'completed',
     },
@@ -30,7 +31,7 @@ export class GamesPage {
       id: 3,
       date: '2024-06-05',
       opponent: 'Leones',
-      location: 'Home',
+      location: 'Coliseo Evangelista Mora',
       score: { emcali: 50, opponent: 10 },
       status: 'completed',
     },
@@ -38,16 +39,23 @@ export class GamesPage {
       id: 4,
       date: '2024-06-20',
       opponent: 'Tigres',
-      location: 'Away',
+      location: 'Coliseo Evangelista Mora',
       status: 'upcoming',
     },
     {
       id: 5,
       date: '2024-06-25',
       opponent: 'Águilas',
-      location: 'Home',
+      location: 'Coliseo Evangelista Mora',
       status: 'upcoming',
     },
+  ];
+
+  cardsData = [
+    { title: 'Total Games', content: this.completedGames.length },
+    { title: 'Total Wins', content: this.totalWins },
+    { title: 'Total Losses', content: this.totalLosses },
+    { title: 'Average Points per Game', content: parseFloat(this.avgPoints) },
   ];
 
   get completedGames(): Game[] {
