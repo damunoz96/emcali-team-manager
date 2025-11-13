@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { PlayerCardComponent } from "../components/player-card.component";
+import { Player, PlayerCardComponent } from "../components/player-card.component";
 import { CardComponent } from "../../../shared/components/card.component";
 
 const players = [
@@ -24,7 +24,7 @@ const cardsData = [
 })
 export class PlayersPage {
 
-  dataSourcePlayers = players;
+  dataSourcePlayers: Player[] = players;
   datasourceCards = cardsData;
 
 }

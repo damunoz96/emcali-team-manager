@@ -3,13 +3,13 @@ import { Game, GameCardComponent } from '../components/game-card.component';
 import { CardComponent } from "../../../shared/components/card.component";
 
 
-
 @Component({
   selector: 'games-page',
   templateUrl: './games-page.html',
   imports: [GameCardComponent, CardComponent],
 })
 export class GamesPage {
+
   games: Game[] = [
     {
       id: 1,
