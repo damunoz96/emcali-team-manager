@@ -32,7 +32,7 @@ export interface Game {
             <div class="text-xl lg:text-3xl text-white">{{ game.opponent }}</div>
           </div>
         </div>
-          <div class="flex items-center gap-5 w-full justify-center border-t border-border pt-2">
+          <div class="flex items-center gap-5 w-full justify-center border-t border-border pt-2 mt-4">
             <span class=" text-muted-foreground font-ligh max-lg:text-sm">{{
               game.date
             }}</span>
