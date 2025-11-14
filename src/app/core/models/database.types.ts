@@ -22,7 +22,7 @@ export type Database = {
           opponent: string
           opponent_score: number
           score: number
-          status: string
+          status: Database["public"]["Enums"]["game_status"]
         }
         Insert: {
           created_at?: string
@@ -31,7 +31,7 @@ export type Database = {
           opponent: string
           opponent_score: number
           score: number
-          status: string
+          status?: Database["public"]["Enums"]["game_status"]
         }
         Update: {
           created_at?: string
@@ -40,7 +40,7 @@ export type Database = {
           opponent?: string
           opponent_score?: number
           score?: number
-          status?: string
+          status?: Database["public"]["Enums"]["game_status"]
         }
         Relationships: []
       }
@@ -49,10 +49,27 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_winning_games: {
+        Args: never
+        Returns: {
+          created_at: string
+          id: number
+          location: string
+          opponent: string
+          opponent_score: number
+          score: number
+          status: Database["public"]["Enums"]["game_status"]
+        }[]
+        SetofOptions: {
+          from: "*"
+          to: "games"
+          isOneToOne: false
+          isSetofReturn: true
+        }
+      }
     }
     Enums: {
-      [_ in never]: never
+      game_status: "upcoming" | "completed"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -179,6 +196,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      game_status: ["upcoming", "completed"],
+    },
   },
 } as const

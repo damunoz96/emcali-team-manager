@@ -10,10 +10,12 @@
 
         <!-- Stats Summary -->
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          @for (card of cardsData; track card.title) {
-            <app-card [title]="card.title" [content]="card.content"></app-card>
-          }
+          <app-card title="Total Games" content="0"></app-card>
+          <app-card title="Total Wins" [content]="totalWins.data()"></app-card>
+          <app-card title="Total Losses" content="0"></app-card>
+          <app-card title="Average Points per Game" content="0"></app-card>
         </div>
+
         <!-- Upcoming Games -->
          @if (upcomingGames().length > 0) {
            <div class="mb-8" >

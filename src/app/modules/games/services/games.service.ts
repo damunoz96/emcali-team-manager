@@ -8,4 +8,10 @@ export class GameService {
     if (error) throw error;
     return data;
   }
+
+  async getTotalWins() {
+    const { data, error } = await supabase.rpc('get_winning_games');
+    if (error) throw error;
+    return data;
+  }
 }
