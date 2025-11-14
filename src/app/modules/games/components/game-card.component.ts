@@ -1,4 +1,4 @@
-import { Component, input, Input } from "@angular/core";
+import { Component, input } from "@angular/core";
 
 export interface Game {
   id: number;
@@ -12,7 +12,7 @@ export interface Game {
 @Component({
   selector: 'app-game-card',
   template: `
-  @let game = this.game();
+    @let game = this.game();
     <div
       class="container relative bg-card rounded-xl p-6 shadow-elevated border border-border hover:shadow-glow transition-all duration-300"
     >
@@ -46,5 +46,5 @@ export interface Game {
   `,
 })
 export class GameCardComponent {
-  game=input.required<Game>();
+  game = input.required<Game>();
 }

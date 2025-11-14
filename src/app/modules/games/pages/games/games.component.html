@@ -15,26 +15,33 @@
           }
         </div>
         <!-- Upcoming Games -->
-         @if (upcomingGames.length > 0) {
+         @if (upcomingGames().length > 0) {
            <div class="mb-8" >
              <h2 class="text-2xl font-bold text-foreground mb-4">Upcoming games</h2>
              <div class="flex flex-col gap-4">
-              @for (game of upcomingGames; track game.id) {
+              @for (game of upcomingGames(); track game.id) {
                 <app-game-card [game]="game"></app-game-card>
               }
              </div>
            </div>
-
          }
 
         <!-- Completed Games -->
         <div>
           <h2 class="text-2xl font-bold text-foreground mb-4">Game history</h2>
           <div class="flex flex-col gap-4">
-            @for (game of completedGames; track game.id) {
-              <app-game-card [game]="game"></app-game-card>
+            @if (games.data(); as data) {
+              @for (game of completedGames(); track game.id) {
+                <app-game-card [game]="game"></app-game-card>
+              }
+            } @else if (games.isLoading()) {
+              <div class="h-[150px] w-full rounded-xl bg-card animate-pulse"></div>
+              <div class="h-[150px] w-full rounded-xl bg-card animate-pulse"></div>
+              <div class="h-[150px] w-full rounded-xl bg-card animate-pulse"></div>
+              <div class="h-[150px] w-full rounded-xl bg-card animate-pulse"></div>
+            } @else if (games.isError()) {
+              <p class="text-xl text-white font-semibold">{{ games.error() }}</p>
             }
-
           </div>
         </div>
       </main>
