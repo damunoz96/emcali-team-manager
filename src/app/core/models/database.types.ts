@@ -58,24 +58,6 @@ export type Database = {
           won: number
         }[]
       }
-      get_winning_games: {
-        Args: never
-        Returns: {
-          created_at: string
-          id: number
-          location: string
-          opponent: string
-          opponent_score: number
-          score: number
-          status: Database["public"]["Enums"]["game_status"]
-        }[]
-        SetofOptions: {
-          from: "*"
-          to: "games"
-          isOneToOne: false
-          isSetofReturn: true
-        }
-      }
     }
     Enums: {
       game_status: "upcoming" | "completed"
