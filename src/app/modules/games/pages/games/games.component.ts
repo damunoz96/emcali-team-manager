@@ -2,26 +2,35 @@ import { Component, computed, inject } from '@angular/core';
 import { GameCardComponent } from '../../components/game-card.component';
 import { CardComponent } from "../../../../shared/components/card.component";
 import { GameService } from '../../services/games.service';
-import { injectQuery } from '@tanstack/angular-query-experimental';
-import { Game } from '../../models/games.model';
+import { injectInfiniteQuery, injectQuery } from '@tanstack/angular-query-experimental';
+import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
 
 @Component({
   selector: 'app-games-page',
   templateUrl: './games.component.html',
-  imports: [GameCardComponent, CardComponent],
+  imports: [
+    GameCardComponent,
+    CardComponent,
+    InfiniteScrollDirective
+  ],
 })
 export class GamesComponent {
   private readonly gameService = inject(GameService);
 
-  readonly games = injectQuery(() => ({
+  readonly games = injectInfiniteQuery(() => ({
     queryKey: ['games'],
-    queryFn: () => this.gameService.getGames(),
+    queryFn: ({ pageParam }) => this.gameService.getGames({ page: pageParam }),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, _allPages, lastPageParam) => {
+      if (lastPage.length < 10) return undefined;
+      return lastPageParam + 1
+    },
+    select: (data) => data.pages.flat(),
   }));
 
-  readonly totalWins = injectQuery(() => ({
+  readonly stats = injectQuery(() => ({
     queryKey: ['games', 'total-wins'],
-    queryFn: () => this.gameService.getTotalWins(),
-    select: (data: Game[]) => data.length,
+    queryFn: () => this.gameService.getStats(),
   }));
 
   readonly completedGames = computed(() => {
@@ -48,11 +57,4 @@ export class GamesComponent {
     if (this.completedGames().length <= 0) return 0;
     return (this.totalPoints() / this.completedGames().length);
   });
-
-  cardsData = [
-    { title: 'Total Games', content: this.completedGames().length },
-    { title: 'Total Wins', content: this.totalWins.data() },
-    { title: 'Total Losses', content: this.totalLosses() },
-    { title: 'Average Points per Game', content: this.avgPoints() },
-  ];
 }

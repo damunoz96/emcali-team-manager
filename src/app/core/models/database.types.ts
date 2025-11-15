@@ -49,6 +49,15 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      get_games_stats: {
+        Args: never
+        Returns: {
+          average_points: number
+          lost: number
+          total: number
+          won: number
+        }[]
+      }
       get_winning_games: {
         Args: never
         Returns: {

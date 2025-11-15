@@ -3,15 +3,21 @@ import { supabase } from "../../../core/supabase/supabase.client";
 
 @Injectable({ providedIn: 'root' })
 export class GameService {
-  async getGames() {
-    const { data, error } = await supabase.from('games').select('*');
+  async getGames(options: { page: number }) {
+    const init = (options.page - 1) * 10;
+    const end = (options.page * 10) - 1;
+    const { data, error } = await supabase
+      .from('games')
+      .select('*')
+      .order('created_at', { ascending: false })
+      .range(init, end);
     if (error) throw error;
     return data;
   }
 
-  async getTotalWins() {
-    const { data, error } = await supabase.rpc('get_winning_games');
+  async getStats() {
+    const { data, error } = await supabase.rpc('get_games_stats');
     if (error) throw error;
-    return data;
+    return data[0];
   }
 }

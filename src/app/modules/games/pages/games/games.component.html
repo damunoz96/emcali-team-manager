@@ -10,10 +10,19 @@
 
         <!-- Stats Summary -->
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <app-card title="Total Games" content="0"></app-card>
-          <app-card title="Total Wins" [content]="totalWins.data()"></app-card>
-          <app-card title="Total Losses" content="0"></app-card>
-          <app-card title="Average Points per Game" content="0"></app-card>
+          @if (stats.data(); as stats) {
+            <app-card title="Total Games" [content]="stats.total" />
+            <app-card title="Total Wins" [content]="stats.won" />
+            <app-card title="Total Losses" [content]="stats.lost" />
+            <app-card title="Average Points per Game" [content]="stats.average_points" />
+          } @else if (stats.isLoading()) {
+            <div class="h-[114px] w-full rounded-xl bg-card animate-pulse"></div>
+            <div class="h-[114px] w-full rounded-xl bg-card animate-pulse"></div>
+            <div class="h-[114px] w-full rounded-xl bg-card animate-pulse"></div>
+            <div class="h-[114px] w-full rounded-xl bg-card animate-pulse"></div>
+          } @else if (stats.isError()) {
+            <p class="text-xl text-white font-semibold">{{ stats.error() }}</p>
+          }
         </div>
 
         <!-- Upcoming Games -->
@@ -31,20 +40,27 @@
         <!-- Completed Games -->
         <div>
           <h2 class="text-2xl font-bold text-foreground mb-4">Game history</h2>
-          <div class="flex flex-col gap-4">
-            @if (games.data(); as data) {
+          @if (games.data(); as data) {
+            <div
+              (scrolled)="games.fetchNextPage()"
+              [infiniteScrollDisabled]="!games.hasNextPage()"
+              infinite-scroll
+              class="flex flex-col gap-6"
+            >
               @for (game of completedGames(); track game.id) {
                 <app-game-card [game]="game"></app-game-card>
               }
+            </div>
             } @else if (games.isLoading()) {
-              <div class="h-[150px] w-full rounded-xl bg-card animate-pulse"></div>
-              <div class="h-[150px] w-full rounded-xl bg-card animate-pulse"></div>
-              <div class="h-[150px] w-full rounded-xl bg-card animate-pulse"></div>
-              <div class="h-[150px] w-full rounded-xl bg-card animate-pulse"></div>
+              <div class="flex flex-col gap-6">
+                <div class="h-[150px] w-full rounded-xl bg-card animate-pulse"></div>
+                <div class="h-[150px] w-full rounded-xl bg-card animate-pulse"></div>
+                <div class="h-[150px] w-full rounded-xl bg-card animate-pulse"></div>
+                <div class="h-[150px] w-full rounded-xl bg-card animate-pulse"></div>
+              </div>
             } @else if (games.isError()) {
               <p class="text-xl text-white font-semibold">{{ games.error() }}</p>
             }
-          </div>
         </div>
       </main>
     </div>
