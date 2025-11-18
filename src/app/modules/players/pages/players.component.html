@@ -23,7 +23,7 @@
 
 
 
-        @if (players.data()) {
+        @if (players.data(); as data) {
             <div
             (scrolled)="players.fetchNextPage()"
             [infiniteScrollDisabled]="!players.hasNextPage()"
@@ -32,7 +32,17 @@
             @for (player of players.data(); track player.id) {
               <app-player-card [player]="player"></app-player-card>
             }
-          </div>
+            @if (players.isFetchingNextPage()) {
+              <p class="text-center text-sm text-accent-foreground font-normal">
+                Cargando...
+              </p>
+              }
+            </div>
+
+          } @else if (players.isLoading()) {
+            <div class="h-[150px] w-full rounded-xl bg-card animate-pulse"></div>
+          } @else if (players.isError()) {
+            <p class="text-xl text-white font-semibold">{{ players.error() }}</p>
           }
 
       </main>
