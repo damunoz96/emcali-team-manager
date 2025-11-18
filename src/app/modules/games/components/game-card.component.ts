@@ -14,13 +14,13 @@ import { DatePipe } from "@angular/common";
         {{ game.status }}
       </span>
       <div class="flex flex-col items-center gap-4">
-        <div class="flex items-center gap-4 lg:gap-6 max-lg:pt-2">
-          <div class="flex items-center gap-4 lg:gap-10">
+        <div class="grid grid-cols-[1fr_auto_1fr] items-center gap-4 lg:gap-6 max-lg:pt-2">
+          <div class="flex items-center justify-end gap-4 lg:gap-10">
             <div class="text-xl lg:text-3xl text-primary">Emcali</div>
             <div class="text-xl lg:text-3xl font-bold text-primary">{{ game.score || 0 }}</div>
           </div>
           <div class="text-md lg:text-2xl text-muted-foreground">vs</div>
-          <div class="flex items-center gap-2 lg:gap-10">
+          <div class="flex items-center justify-start gap-2 lg:gap-10">
             <div class="text-xl lg:text-3xl font-bold text-foreground">
               {{ game.opponent_score }}
             </div>
