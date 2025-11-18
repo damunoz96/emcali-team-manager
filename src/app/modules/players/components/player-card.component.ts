@@ -1,17 +1,20 @@
-import { Component, Input } from "@angular/core";
+import { Component, input, Input } from "@angular/core";
 
 export interface Player {
-  name: string;
-  last_name: string;
-  position: string;
-  games: number;
-  points: number;
-  fouls: number;
-}
+          birth_date: string
+          created_at: string
+          id: number
+          image: string | null
+          last_name: string
+          name: string
+          number: number
+          position: "g" | "f" | "pf"
+      }
 
 @Component({
   selector: 'app-player-card',
   template: `
+    @let player = this.player();
     <div
       class="bg-card border border-border rounded-lg shadow-card hover:shadow-elevated transition-all duration-300 overflow-hidden group cursor-pointer"
     >
@@ -31,7 +34,7 @@ export interface Player {
               >
                 {{ player.name }}
               </h3>
-              <span class="text-2xl font-bold text-muted-foreground">#</span>
+              <span class="text-2xl font-bold text-muted-foreground"># {{player.number}}</span>
             </div>
             <span
               class="inline-block px-3 py-1 rounded-full text-xs font-semibold border text-white"
@@ -45,19 +48,19 @@ export interface Player {
           <div class="bg-muted/50 rounded-lg p-3">
             <p class="text-xs text-muted-foreground mb-1">Score (PPG)</p>
             <div class="flex items-center gap-2">
-              <p class="text-xl font-bold text-primary">{{ player.points / player.games }}</p>
+              <p class="text-xl font-bold text-primary"></p>
             </div>
           </div>
           <div class="bg-muted/50 rounded-lg p-3">
             <p class="text-xs text-muted-foreground mb-1">Games played</p>
-            <p class="text-xl font-bold text-foreground">{{ player.games }}</p>
+            <p class="text-xl font-bold text-foreground"></p>
           </div>
         </div>
 
         <div class="space-y-2 pt-4 border-t border-border">
           <div class="flex justify-between items-center">
             <span class="text-sm text-muted-foreground">Points</span>
-            <span class="font-semibold text-foreground">{{ player.points }}</span>
+            <span class="font-semibold text-foreground"></span>
           </div>
           <div class="flex justify-between items-center">
             <span class="text-sm text-muted-foreground">Rebounds</span>
@@ -73,5 +76,5 @@ export interface Player {
   `,
 })
 export class PlayerCardComponent {
-  @Input() player!: Player;
+  player = input.required<Player>();
 }

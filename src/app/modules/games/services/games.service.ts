@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { supabase } from "../../../core/supabase/supabase.client";
 
 @Injectable({ providedIn: 'root' })
+
 export class GameService {
   async getGames(options: { page: number }) {
     const init = (options.page - 1) * 10;

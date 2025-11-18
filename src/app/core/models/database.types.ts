@@ -44,6 +44,39 @@ export type Database = {
         }
         Relationships: []
       }
+      players: {
+        Row: {
+          birth_date: string
+          created_at: string
+          id: number
+          image: string | null
+          last_name: string
+          name: string
+          number: number
+          position: Database["public"]["Enums"]["position"]
+        }
+        Insert: {
+          birth_date: string
+          created_at?: string
+          id?: number
+          image?: string | null
+          last_name: string
+          name: string
+          number: number
+          position: Database["public"]["Enums"]["position"]
+        }
+        Update: {
+          birth_date?: string
+          created_at?: string
+          id?: number
+          image?: string | null
+          last_name?: string
+          name?: string
+          number?: number
+          position?: Database["public"]["Enums"]["position"]
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -61,6 +94,7 @@ export type Database = {
     }
     Enums: {
       game_status: "upcoming" | "completed"
+      position: "g" | "f" | "pf"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -189,6 +223,7 @@ export const Constants = {
   public: {
     Enums: {
       game_status: ["upcoming", "completed"],
+      position: ["g", "f", "pf"],
     },
   },
 } as const

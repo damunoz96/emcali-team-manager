@@ -40,7 +40,7 @@
         <!-- Completed Games -->
         <div>
           <h2 class="text-2xl font-bold text-foreground mb-4">Game history</h2>
-          @if (games.data(); as data) {
+          @if (games.data()) {
             <div
               (scrolled)="games.fetchNextPage()"
               [infiniteScrollDisabled]="!games.hasNextPage()"
