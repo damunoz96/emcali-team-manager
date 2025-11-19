@@ -4,7 +4,7 @@
       <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-6">
         <div>
           <div class="flex items-center gap-3 mb-2">
-            <span class="text-muted-foreground font-medium">gameid: {{gameId}}</span>
+            <span class="text-muted-foreground font-medium">gameid: {{ gameId }}</span>
           </div>
           <div class="flex items-center gap-3 mb-2">
             <span class="text-muted-foreground font-medium">Date</span>
@@ -29,6 +29,98 @@
           <h3 class="text-2xl font-bold text-foreground mb-2">game.opponent</h3>
           <div class="text-5xl font-bold text-accent">game.score.opponent</div>
         </div>
+      </div>
+    </div>
+    <div class="bg-card rounded-xl shadow-elevated border border-border mb-8">
+      <div class="p-6 border-b border-border bg-gradient-subtle">
+        <h2 class="text-2xl font-bold text-foreground flex items-center gap-2">
+          Estadísticas de Jugadores - Emcali
+        </h2>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full">
+          <thead>
+            <tr class="bg-muted/50">
+              <th class="px-6 py-4 text-left text-sm font-semibold text-foreground">#</th>
+              <th class="px-6 py-4 text-left text-sm font-semibold text-foreground">Jugador</th>
+              <th class="px-6 py-4 text-center text-sm font-semibold text-foreground">MIN</th>
+              <th class="px-6 py-4 text-center text-sm font-semibold text-foreground">PTS</th>
+              <th class="px-6 py-4 text-center text-sm font-semibold text-foreground">REB</th>
+              <th class="px-6 py-4 text-center text-sm font-semibold text-foreground">AST</th>
+            </tr>
+          </thead>
+          <tbody>
+            Aqui van las stats de los jugadores de emcali del partido
+            {{
+              gameId
+            }}
+            <tr
+              key="{player.id}"
+              class="border-t border-border hover:bg-muted/30 transition-colors duration-200"
+            >
+              <td class="px-6 py-4 text-foreground font-bold">player number del {{ gameId }}</td>
+              <td class="px-6 py-4 text-foreground font-medium">player name del {{ gameId }}</td>
+              <td class="px-6 py-4 text-center text-muted-foreground">
+                player minutes del {{ gameId }}
+              </td>
+              <td class="px-6 py-4 text-center">
+                <span class="font-semibold text-primary">player points del {{ gameId }}</span>
+              </td>
+              <td class="px-6 py-4 text-center text-muted-foreground">
+                player rebunds del {{ gameId }}
+              </td>
+              <td class="px-6 py-4 text-center">
+                <span class="font-semibold text-accent">player assits del {{ gameId }}</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="bg-card rounded-xl shadow-elevated border border-border mb-8">
+      <div class="p-6 border-b border-border bg-gradient-subtle">
+        <h2 class="text-2xl font-bold text-foreground flex items-center gap-2">
+          Estadísticas de Jugadores - Rival
+        </h2>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full">
+          <thead>
+            <tr class="bg-muted/50">
+              <th class="px-6 py-4 text-left text-sm font-semibold text-foreground">#</th>
+              <th class="px-6 py-4 text-left text-sm font-semibold text-foreground">Jugador</th>
+              <th class="px-6 py-4 text-center text-sm font-semibold text-foreground">MIN</th>
+              <th class="px-6 py-4 text-center text-sm font-semibold text-foreground">PTS</th>
+              <th class="px-6 py-4 text-center text-sm font-semibold text-foreground">REB</th>
+              <th class="px-6 py-4 text-center text-sm font-semibold text-foreground">AST</th>
+            </tr>
+          </thead>
+          <tbody>
+            Aqui van las stats de los jugadores de emcali del partido
+            {{
+              gameId
+            }}
+            <tr
+              key="{player.id}"
+              class="border-t border-border hover:bg-muted/30 transition-colors duration-200"
+            >
+              <td class="px-6 py-4 text-foreground font-bold">player number del {{ gameId }}</td>
+              <td class="px-6 py-4 text-foreground font-medium">player name del {{ gameId }}</td>
+              <td class="px-6 py-4 text-center text-muted-foreground">
+                player minutes del {{ gameId }}
+              </td>
+              <td class="px-6 py-4 text-center">
+                <span class="font-semibold text-primary">player points del {{ gameId }}</span>
+              </td>
+              <td class="px-6 py-4 text-center text-muted-foreground">
+                player rebunds del {{ gameId }}
+              </td>
+              <td class="px-6 py-4 text-center">
+                <span class="font-semibold text-accent">player assits del {{ gameId }}</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </main>

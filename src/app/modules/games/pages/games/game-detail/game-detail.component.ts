@@ -8,4 +8,6 @@ import { ActivatedRoute } from "@angular/router";
 export class GameDetailComponent {
   route = inject(ActivatedRoute);
   gameId = this.route.snapshot.params['id'];
+
+
 }
