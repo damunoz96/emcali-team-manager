@@ -1,14 +1,16 @@
-import { Component, input } from "@angular/core";
+import { Component, computed, input } from "@angular/core";
 import { Game } from "../models/games.model";
 import { DatePipe } from "@angular/common";
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-game-card',
-  imports: [DatePipe],
+  imports: [DatePipe, RouterLink],
   template: `
     @let game = this.game();
     <div
-      class="container relative bg-card rounded-xl p-6 shadow-elevated border border-border hover:shadow-glow transition-all duration-300"
+      [routerLink]="link()"
+      class="cursor-pointer container relative bg-card rounded-xl p-6 shadow-elevated border border-border hover:shadow-glow transition-all duration-300"
     >
       <span class="absolute top-3 right-4 rounded-full text-xs text-accent font-semibold">
         {{ game.status }}
@@ -39,4 +41,5 @@ import { DatePipe } from "@angular/common";
 })
 export class GameCardComponent {
   game = input.required<Game>();
+  link = computed(() => `/games/${this.game().id}`)
 }

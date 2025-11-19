@@ -39,7 +39,7 @@ export interface Player {
             <span
               class="inline-block px-3 py-1 rounded-full text-xs font-semibold border text-white"
             >
-              {{ player.position }}
+              {{ player.position.toUpperCase() }}
             </span>
           </div>
         </div>
