@@ -1,4 +1,5 @@
-import { Component, input, Input } from "@angular/core";
+import { Component, computed, input } from "@angular/core";
+import { RouterLink } from "@angular/router";
 
 export interface Player {
           birth_date: string
@@ -16,6 +17,7 @@ export interface Player {
   template: `
     @let player = this.player();
     <div
+      [routerLink]="link()"
       class="bg-card border border-border rounded-lg shadow-card hover:shadow-elevated transition-all duration-300 overflow-hidden group cursor-pointer"
     >
       <div class="p-6">
@@ -74,7 +76,9 @@ export interface Player {
       </div>
     </div>
   `,
+  imports: [RouterLink],
 })
 export class PlayerCardComponent {
   player = input.required<Player>();
+  link = computed(() => `/players/${this.player().id}`)
 }

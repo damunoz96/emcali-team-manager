@@ -21,4 +21,14 @@ export class GameService {
     if (error) throw error;
     return data[0];
   }
+
+  async getGame(id: number) {
+    const { data, error } = await supabase
+      .from('games')
+      .select('*')
+      .eq('id', id)
+      .single();
+    if (error) throw error;
+    return data;
+  }
 }
