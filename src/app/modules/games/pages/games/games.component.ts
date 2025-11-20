@@ -1,9 +1,9 @@
 import { Component, computed, inject } from '@angular/core';
-import { GameCardComponent } from '../components/game-card.component';
-import { CardComponent } from "../../../shared/components/card.component";
-import { GameService } from '../services/games.service';
 import { injectInfiniteQuery, injectQuery } from '@tanstack/angular-query-experimental';
 import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
+import { GameCardComponent } from '../../components/game-card.component';
+import { CardComponent } from '../../../../shared/components/card.component';
+import { GameService } from '../../services/games.service';
 
 @Component({
   selector: 'app-games-page',
