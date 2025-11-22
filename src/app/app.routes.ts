@@ -16,6 +16,10 @@ export const routes: Routes = [
         {
           path: 'games',
           loadChildren: () => import('./modules/games/games.routes').then(m => m.GAME_ROUTES)
+        },
+        {
+          path: 'auth',
+          loadChildren: () => import('./modules/auth/auth.routes').then(m => m.AUTH_ROUTES)
         }
 
 ]

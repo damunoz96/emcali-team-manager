@@ -4,6 +4,7 @@ import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
 import { GameCardComponent } from '../../components/game-card.component';
 import { CardComponent } from '../../../../shared/components/card.component';
 import { GameService } from '../../services/games.service';
+import { QUERY_KEYS } from '../../../../core/constants/query-keys';
 
 @Component({
   selector: 'app-games-page',
@@ -18,7 +19,7 @@ export class GamesComponent {
   private readonly gameService = inject(GameService);
 
   readonly games = injectInfiniteQuery(() => ({
-    queryKey: ['games'],
+    queryKey: [QUERY_KEYS.GAMES],
     queryFn: ({ pageParam }) => this.gameService.getGames({ page: pageParam }),
     initialPageParam: 1,
     getNextPageParam: (lastPage, _allPages, lastPageParam) => {

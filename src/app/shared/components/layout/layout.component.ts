@@ -18,4 +18,6 @@ export class LayoutComponent {
     { buttonText: 'Games', path: 'games' },
     { buttonText: 'Players', path: 'players' },
   ]
+
+  dataLoginButton: ButtonHeader = { buttonText: 'Login', path: 'auth' };
 }
