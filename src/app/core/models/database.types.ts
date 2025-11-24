@@ -77,6 +77,54 @@ export type Database = {
         }
         Relationships: []
       }
+      stats: {
+        Row: {
+          assists: number | null
+          created_at: string
+          fouls: number
+          game_id: number
+          id: number
+          player_id: number
+          points: number
+          rebounds: number | null
+        }
+        Insert: {
+          assists?: number | null
+          created_at?: string
+          fouls?: number
+          game_id: number
+          id?: number
+          player_id: number
+          points?: number
+          rebounds?: number | null
+        }
+        Update: {
+          assists?: number | null
+          created_at?: string
+          fouls?: number
+          game_id?: number
+          id?: number
+          player_id?: number
+          points?: number
+          rebounds?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "game_stats_game_id_fkey"
+            columns: ["game_id"]
+            isOneToOne: false
+            referencedRelation: "games"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "game_stats_player_id_fkey"
+            columns: ["player_id"]
+            isOneToOne: false
+            referencedRelation: "players"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
@@ -89,6 +137,31 @@ export type Database = {
           lost: number
           total: number
           won: number
+        }[]
+      }
+      get_player_game_history_detailed: {
+        Args: { limit_param?: number; player_id_param: number }
+        Returns: {
+          assists: number
+          fouls: number
+          game_date: string
+          game_id: number
+          opponent: string
+          opponent_score: number
+          points: number
+          rebounds: number
+          result: string
+          team_score: number
+        }[]
+      }
+      get_player_stats_detailed: {
+        Args: { player_id_param: number }
+        Returns: {
+          average_fouls: number
+          average_points: number
+          total_fouls: number
+          total_games: number
+          total_points: number
         }[]
       }
     }

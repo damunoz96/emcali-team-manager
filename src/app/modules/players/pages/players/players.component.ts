@@ -34,5 +34,7 @@ export class PlayersComponent {
     return this.allPlayers.data()?.length;
   })
 
+
+
 }
 

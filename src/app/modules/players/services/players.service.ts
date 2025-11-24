@@ -22,4 +22,14 @@ export class PlayerService {
       if (error) throw error;
       return data;
     }
+
+  async getPlayerById(id: number) {
+    const { data, error } = await supabase
+      .from('players')
+      .select('*')
+      .eq('id', id)
+      .single()
+    if (error) throw error;
+    return data;
+  }
 }
