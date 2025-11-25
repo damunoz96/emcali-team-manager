@@ -1,16 +1,7 @@
 import { Component, computed, input } from "@angular/core";
 import { RouterLink } from "@angular/router";
-
-export interface Player {
-          birth_date: string
-          created_at: string
-          id: number
-          image: string | null
-          last_name: string
-          name: string
-          number: number
-          position: "g" | "f" | "pf"
-      }
+import { Player } from "../models/player.models";
+import { AvatarPipe } from "../../../shared/pipes/avatar.pipe";
 
 @Component({
   selector: 'app-player-card',
@@ -24,9 +15,13 @@ export interface Player {
         <div class="flex items-start gap-4 mb-4">
           <div class="relative w-16 h-16">
             <div
-              class="w-16 h-16 rounded-full border-2 border-primary/30 shadow-glow bg-primary/20 text-primary font-bold flex items-center justify-center text-lg"
+              class="w-16 h-16 overflow-hidden rounded-full border-2 border-primary/30 shadow-glow bg-primary/20 text-primary font-bold flex items-center justify-center text-lg"
             >
-              {{ player.name.charAt(0) }}{{ player.last_name.charAt(0) }}
+              <img
+                class="w-full h-full object-cover"
+                [src]="player.id | avatar"
+                [alt]="player.name"
+              />
             </div>
           </div>
           <div class="flex-1">
@@ -76,7 +71,7 @@ export interface Player {
       </div>
     </div>
   `,
-  imports: [RouterLink],
+  imports: [RouterLink, AvatarPipe],
 })
 export class PlayerCardComponent {
   player = input.required<Player>();

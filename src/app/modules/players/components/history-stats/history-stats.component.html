@@ -1,0 +1,28 @@
+<div class="overflow-x-auto">
+  <table class="w-full">
+    <thead>
+      <tr class="border-b-2 border-border">
+        <th class="text-left py-4 px-6 text-sm font-semibold text-muted-foreground uppercase tracking-wide">Fecha</th>
+        <th class="text-left py-4 px-6 text-sm font-semibold text-muted-foreground uppercase tracking-wide">Oponente</th>
+        <th class="text-center py-4 px-6 text-sm font-semibold text-muted-foreground uppercase tracking-wide">Resultado</th>
+        <th class="text-center py-4 px-6 text-sm font-semibold text-muted-foreground uppercase tracking-wide">Puntos</th>
+        <th class="text-center py-4 px-6 text-sm font-semibold text-muted-foreground uppercase tracking-wide">Faltas</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (item of history.data(); track item.id){
+        <tr class="border-b border-border hover:bg-accent/5 transition-colors">
+          <td class="py-4 px-6 text-sm text-foreground">{{ item.games.created_at | date:"dd MMM yyyy hh:mm aa" }}</td>
+          <td class="py-4 px-6 text-sm text-foreground font-medium">{{ item.games.opponent }}</td>
+          <td class="py-4 px-6 text-center">
+            <span class="inline-block px-3 py-1.5 rounded-lg text-sm font-bold bg-primary/20 text-primary border border-primary/30">
+              {{ item.games.score }} - {{ item.games.opponent_score }}
+            </span>
+          </td>
+          <td class="py-4 px-6 text-center text-lg font-bold text-foreground">{{ item.points }}</td>
+          <td class="py-4 px-6 text-center text-lg font-bold text-foreground">{{ item.fouls }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

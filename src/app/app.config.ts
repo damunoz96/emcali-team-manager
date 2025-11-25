@@ -8,6 +8,7 @@ import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideTanStackQuery, QueryClient } from '@tanstack/angular-query-experimental';
+import { withDevtools } from '@tanstack/angular-query-experimental/devtools'
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -15,6 +16,6 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes, withComponentInputBinding()),
     provideClientHydration(withEventReplay()),
-    provideTanStackQuery(new QueryClient()),
+    provideTanStackQuery(new QueryClient(), withDevtools()),
   ],
 };

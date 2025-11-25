@@ -10,9 +10,20 @@ export class StatsService {
     if (error) throw error;
     return data;
   }
-  async getPlayerStatsDetailed( id: number) {
+
+  async getPlayerStatsDetailed(id: number) {
     const { data, error } = await supabase.rpc('get_player_stats_detailed', { player_id_param: id });
     if (error) throw error;
     return data[0];
+  }
+
+  async getPlayerMatches(id: number) {
+    const { error, data } = await supabase.from('stats')
+      .select('*, games(*)')
+      .eq('player_id', id)
+      .order('created_at', { ascending: false })
+      .limit(5);
+    if (error) throw error;
+    return data;
   }
 }

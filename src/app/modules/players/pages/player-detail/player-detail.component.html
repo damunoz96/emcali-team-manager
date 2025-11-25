@@ -4,27 +4,33 @@
     <app-back-button/>
 
     <!-- Player Header -->
-    <div class="bg-card border border-border rounded-lg shadow-card p-6 mb-8">
-      <div class="flex flex-col md:flex-row gap-6 items-start md:items-center">
-        <img
-          src=""
-          alt=""
-          class="w-32 h-32 rounded-lg object-cover border-2 border-border">
+    @if (player.data(); as player) {
+      <div class="bg-card border border-border rounded-lg shadow-card p-6 mb-8">
+        <div class="flex flex-col md:flex-row gap-6 items-start md:items-center">
+          <img
+            [src]="player.id | avatar"
+            [alt]="player.name"
+            class="w-32 h-32 rounded-lg object-cover border-2 border-border">
 
-        <div class="flex-1">
-          <div class="flex items-center gap-3 mb-3">
-            <h1 class="text-4xl font-bold text-foreground"> {{player.data()?.name}} {{player.data()?.last_name}}</h1>
-            <span class="px-3 py-1 rounded-full text-xs font-semibold border bg-primary/20 text-primary border-primary/30">
-              {{ player.data()?.position?.toUpperCase() }}
-            </span>
-          </div>
+          <div class="flex-1">
+            <div class="flex items-center gap-3 mb-3">
+              <h1 class="text-4xl font-bold text-foreground">
+                {{ player.name }} {{ player.last_name }}
+              </h1>
+              <span class="px-3 py-1 rounded-full text-xs font-semibold border bg-primary/20 text-primary border-primary/30">
+                {{ player.position.toUpperCase() }}
+              </span>
+            </div>
 
-          <div class=" mb-4">
-            <span class="text-5xl font-bold text-foreground"># {{player.data()?.number}}</span>
+            <div class=" mb-4">
+              <span class="text-5xl font-bold text-foreground">
+                # {{ player.number }}
+              </span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    }
 
     <!-- Stats Overview -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
@@ -36,7 +42,7 @@
           </svg>
           <p class="text-sm text-muted-foreground uppercase tracking-wide">Partidos Jugados</p>
         </div>
-        <p class="text-5xl font-bold text-foreground">{{stats.data()?.total_games}}</p>
+        <p class="text-5xl font-bold text-foreground">{{ stats.data()?.total_games }}</p>
       </div>
 
       <!-- Puntos Totales -->
@@ -47,8 +53,8 @@
           </svg>
           <p class="text-sm text-muted-foreground uppercase tracking-wide">Puntos Totales</p>
         </div>
-        <p class="text-5xl font-bold text-foreground">{{stats.data()?.total_points}}</p>
-        <p class="text-sm text-muted-foreground mt-2">{{stats.data()?.average_points}} PPG</p>
+        <p class="text-5xl font-bold text-foreground">{{ stats.data()?.total_points }}</p>
+        <p class="text-sm text-muted-foreground mt-2">{{ stats.data()?.average_points }} PPG</p>
       </div>
 
       <!-- Faltas Totales -->
@@ -59,54 +65,15 @@
           </svg>
           <p class="text-sm text-muted-foreground uppercase tracking-wide">Faltas Totales</p>
         </div>
-        <p class="text-5xl font-bold text-foreground"> {{ stats.data()?.total_fouls}} </p>
-        <p class="text-sm text-muted-foreground mt-2"> {{ stats.data()?.average_fouls}} por juego</p>
+        <p class="text-5xl font-bold text-foreground"> {{ stats.data()?.total_fouls }} </p>
+        <p class="text-sm text-muted-foreground mt-2"> {{ stats.data()?.average_fouls }} por juego</p>
       </div>
     </div>
 
     <!-- Advanced Stats -->
     <div class="bg-card border border-border rounded-lg shadow-card p-8">
       <h2 class="text-3xl font-bold text-foreground mb-6">Últimos 5 Partidos</h2>
-      <div class="overflow-x-auto">
-        <table class="w-full">
-          <thead>
-            <tr class="border-b-2 border-border">
-              <th class="text-left py-4 px-6 text-sm font-semibold text-muted-foreground uppercase tracking-wide">Fecha</th>
-              <th class="text-left py-4 px-6 text-sm font-semibold text-muted-foreground uppercase tracking-wide">Oponente</th>
-              <th class="text-center py-4 px-6 text-sm font-semibold text-muted-foreground uppercase tracking-wide">Resultado</th>
-              <th class="text-center py-4 px-6 text-sm font-semibold text-muted-foreground uppercase tracking-wide">Puntos</th>
-              <th class="text-center py-4 px-6 text-sm font-semibold text-muted-foreground uppercase tracking-wide">Faltas</th>
-            </tr>
-          </thead>
-          <tbody>
-            @for ( game of history.data(); track game.id ){
-            <tr class="border-b border-border hover:bg-accent/5 transition-colors">
-              <td class="py-4 px-6 text-sm text-foreground">{{game.created_at | date:"dd MMM yyyy hh:mm aa"}}</td>
-              <td class="py-4 px-6 text-sm text-foreground font-medium">Oponente</td>
-              <td class="py-4 px-6 text-center">
-                <span class="inline-block px-3 py-1.5 rounded-lg text-sm font-bold bg-primary/20 text-primary border border-primary/30">
-                  ?
-                </span>
-              </td>
-              <td class="py-4 px-6 text-center text-lg font-bold text-foreground">{{game.points}}</td>
-              <td class="py-4 px-6 text-center text-lg font-bold text-foreground">{{game.fouls}}</td>
-            </tr>
-            }
-            <!-- Game 1 -->
-            <tr class="border-b border-border hover:bg-accent/5 transition-colors">
-              <td class="py-4 px-6 text-sm text-foreground">2024-06-15</td>
-              <td class="py-4 px-6 text-sm text-foreground font-medium">Dragones</td>
-              <td class="py-4 px-6 text-center">
-                <span class="inline-block px-3 py-1.5 rounded-lg text-sm font-bold bg-primary/20 text-primary border border-primary/30">
-                  W
-                </span>
-              </td>
-              <td class="py-4 px-6 text-center text-lg font-bold text-foreground">18</td>
-              <td class="py-4 px-6 text-center text-lg font-bold text-foreground">2</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <app-history-stats [id]="playerId()" />
     </div>
   </main>
 </div>

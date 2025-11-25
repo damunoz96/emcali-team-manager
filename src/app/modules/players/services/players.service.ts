@@ -26,10 +26,18 @@ export class PlayerService {
   async getPlayerById(id: number) {
     const { data, error } = await supabase
       .from('players')
-      .select('*')
+      .select(`
+        *,
+        games:stats (
+          games(*)
+        )
+      `)
       .eq('id', id)
       .single()
     if (error) throw error;
-    return data;
+    return {
+      ...data,
+      games: data.games.map(g => g.games),
+    };
   }
 }
