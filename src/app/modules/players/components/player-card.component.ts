@@ -1,7 +1,10 @@
-import { Component, computed, input } from "@angular/core";
+import { Component, computed, inject, input } from "@angular/core";
 import { RouterLink } from "@angular/router";
 import { Player } from "../models/player.models";
 import { AvatarPipe } from "../../../shared/pipes/avatar.pipe";
+import { StatsService } from "../../../core/services/stats.service";
+import { injectQuery } from "@tanstack/angular-query-experimental";
+import { QUERY_KEYS } from "../../../core/constants/query-keys";
 
 @Component({
   selector: 'app-player-card',
@@ -45,27 +48,23 @@ import { AvatarPipe } from "../../../shared/pipes/avatar.pipe";
           <div class="bg-muted/50 rounded-lg p-3">
             <p class="text-xs text-muted-foreground mb-1">Score (PPG)</p>
             <div class="flex items-center gap-2">
-              <p class="text-xl font-bold text-primary"></p>
+              <p class="text-xl font-bold text-primary">{{stats.data()?.average_points}}</p>
             </div>
           </div>
           <div class="bg-muted/50 rounded-lg p-3">
             <p class="text-xs text-muted-foreground mb-1">Games played</p>
-            <p class="text-xl font-bold text-foreground"></p>
+            <p class="text-xl font-bold text-foreground">{{stats.data()?.total_games}}</p>
           </div>
         </div>
 
         <div class="space-y-2 pt-4 border-t border-border">
           <div class="flex justify-between items-center">
             <span class="text-sm text-muted-foreground">Points</span>
-            <span class="font-semibold text-foreground"></span>
+            <span class="font-semibold text-foreground">{{stats.data()?.total_points}}</span>
           </div>
           <div class="flex justify-between items-center">
-            <span class="text-sm text-muted-foreground">Rebounds</span>
-            <span class="font-semibold text-foreground"></span>
-          </div>
-          <div class="flex justify-between items-center">
-            <span class="text-sm text-muted-foreground">Assits</span>
-            <span class="font-semibold text-foreground"></span>
+            <span class="text-sm text-muted-foreground">Fouls</span>
+            <span class="font-semibold text-foreground">{{stats.data()?.total_fouls}}</span>
           </div>
         </div>
       </div>
@@ -74,6 +73,15 @@ import { AvatarPipe } from "../../../shared/pipes/avatar.pipe";
   imports: [RouterLink, AvatarPipe],
 })
 export class PlayerCardComponent {
+  private readonly statsService = inject(StatsService);
   player = input.required<Player>();
-  link = computed(() => `/players/${this.player().id}`)
+  link = computed(() => `/players/${this.player().id}`);
+
+  readonly stats = injectQuery(() => ({
+    queryKey: [QUERY_KEYS.PLAYER, this.player().id] as const,
+    queryFn: ({ queryKey }) => {
+      const playerId = queryKey[1];
+      return this.statsService.getPlayerStatsDetailed(playerId);
+    }
+  }))
 }

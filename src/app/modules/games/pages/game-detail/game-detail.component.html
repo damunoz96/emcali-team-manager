@@ -1,41 +1,94 @@
-@let gameId = this.gameId();
 <div class="pt-14 min-h-screen bg-gradient-subtle">
-  <app-back-button/>
+  <app-back-button />
   <main class="container mx-auto px-4 lg:px-8 py-8">
     <div class="bg-card rounded-xl p-8 shadow-elevated border border-border mb-8">
-      <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-6">
-        <div>
-          <div class="flex items-center gap-3 mb-2">
-            <span class="text-muted-foreground font-medium">gameid: {{ game.data()?.id }}</span>
-          </div>
-          <div class="flex items-center gap-3 mb-2">
-            <span class="text-muted-foreground font-medium">{{game.data()?.created_at | date:"dd MMM yyyy hh:mm aa"}}</span>
-          </div>
-          <div class="flex items-center gap-3 mb-2">
-            <span class="text-muted-foreground font-medium">{{ game.data()?.location }}</span>
-          </div>
-          <div class="flex items-center gap-3">
-            <span class="text-muted-foreground font-medium">Asistencia: </span>
-          </div>
-        </div>
+  <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-6">
+    <div>
+      <div class="flex items-center gap-3 mb-2">
+        <!-- Icono Calendar -->
+        <span class="w-6 h-6 text-primary">📅</span>
+        <span class="text-muted-foreground font-medium">{{game.data()?.created_at | date:"dd MMM yyyy hh:mm aa"}}</span>
       </div>
-      <div class="grid grid-cols-3 gap-6 items-center">
-        <div class="text-center">
-          <h3 class="text-2xl font-bold text-foreground mb-2"> Emcali </h3>
-          <div class="text-5xl font-bold text-primary">{{ game.data()?.score }}</div>
+
+      <div class="flex items-center gap-3 mb-2">
+        <!-- Icono MapPin -->
+        <span class="w-6 h-6 text-primary">📍</span>
+        <span class="text-muted-foreground font-medium">{{game.data()?.location}}</span>
+      </div>
+    </div>
+
+    <div class="px-6 py-3 rounded-full text-sm font-bold bg-primary/30 text-primary">
+      Finalizado
+    </div>
+  </div>
+
+  <!-- Score Display -->
+  <div class="grid grid-cols-3 gap-6 items-center">
+    <div class="text-center">
+      <h3 class="text-2xl font-bold text-foreground mb-2">Emcali</h3>
+      <div class="text-5xl font-bold text-primary">{{game.data()?.score}}</div>
+    </div>
+
+    <div class="text-center">
+      <!-- Icono Trophy -->
+      <span class="w-12 h-12 text-primary mx-auto mb-2">🏆</span>
+      <span class="text-muted-foreground font-medium">VS</span>
+    </div>
+
+    <div class="text-center">
+      <h3 class="text-2xl font-bold text-foreground mb-2">{{game.data()?.opponent}}</h3>
+      <div class="text-5xl font-bold text-accent">{{game.data()?.opponent_score}}</div>
+    </div>
+  </div>
+</div>
+    <div class="bg-card rounded-xl p-8 shadow-elevated border border-border mb-8">
+      <h2 class="text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-6 h-6 text-primary"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
+        </svg>
+        Estadísticas de Emcali
+      </h2>
+      <div class="grid w-full grid-cols-1 md:grid-cols-2 gap-6 max-w-md justify-center">
+        <div class="flex justify-between items-center">
+          <span class="text-muted-foreground">Puntos</span>
+          <span class="text-2xl font-bold text-primary">{{game.data()?.score}}</span>
         </div>
-        <div class="text-center">
-          <span class="text-muted-foreground font-medium">VS</span>
-        </div>
-        <div class="text-center">
-          <h3 class="text-2xl font-bold text-foreground mb-2">{{ game.data()?.opponent }}</h3>
-          <div class="text-5xl font-bold text-accent">{{ game.data()?.opponent_score }}</div>
+        <div class="flex justify-between items-center">
+          <span class="text-muted-foreground">Faltas</span>
+          <span class="text-2xl font-bold text-foreground">18</span>
         </div>
       </div>
     </div>
+
+    <!-- Emcali Players Stats -->
     <div class="bg-card rounded-xl shadow-elevated border border-border mb-8">
       <div class="p-6 border-b border-border bg-gradient-subtle">
         <h2 class="text-2xl font-bold text-foreground flex items-center gap-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-6 h-6 text-primary"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+            />
+          </svg>
           Estadísticas de Jugadores - Emcali
         </h2>
       </div>
@@ -45,82 +98,31 @@
             <tr class="bg-muted/50">
               <th class="px-6 py-4 text-left text-sm font-semibold text-foreground">#</th>
               <th class="px-6 py-4 text-left text-sm font-semibold text-foreground">Jugador</th>
-              <th class="px-6 py-4 text-center text-sm font-semibold text-foreground">MIN</th>
-              <th class="px-6 py-4 text-center text-sm font-semibold text-foreground">PTS</th>
-              <th class="px-6 py-4 text-center text-sm font-semibold text-foreground">REB</th>
-              <th class="px-6 py-4 text-center text-sm font-semibold text-foreground">AST</th>
+              <th class="px-6 py-4 text-center text-sm font-semibold text-foreground">Posición</th>
+              <th class="px-6 py-4 text-center text-sm font-semibold text-foreground">Puntos</th>
+              <th class="px-6 py-4 text-center text-sm font-semibold text-foreground">Faltas</th>
             </tr>
           </thead>
           <tbody>
-            Aqui van las stats de los jugadores de emcali del partido
-            {{
-              gameId
-            }}
-            <tr
-              key="{player.id}"
-              class="border-t border-border hover:bg-muted/30 transition-colors duration-200"
-            >
-              <td class="px-6 py-4 text-foreground font-bold">player number del {{ gameId }}</td>
-              <td class="px-6 py-4 text-foreground font-medium">player name del {{ gameId }}</td>
-              <td class="px-6 py-4 text-center text-muted-foreground">
-                player minutes del {{ gameId }}
+            <!-- Jugador 7 -->
+             @for (item of players.data(); track item.stats.player_id) {
+              <tr class="border-t border-border hover:bg-muted/30 transition-colors duration-200">
+              <td class="px-6 py-4 text-foreground font-bold">{{item.number}}</td>
+              <td class="px-6 py-4">
+                <a
+                  [routerLink]="['/players', item.stats.player_id]"
+                  class="text-foreground font-medium hover:text-primary transition-colors"
+                >
+                  {{item.name}} {{item.last_name}}
+                </a>
               </td>
+              <td class="px-6 py-4 text-center text-muted-foreground">{{item.position.toUpperCase()}}</td>
               <td class="px-6 py-4 text-center">
-                <span class="font-semibold text-primary">player points del {{ gameId }}</span>
+                <span class="font-semibold text-primary">{{item.stats.points}}</span>
               </td>
-              <td class="px-6 py-4 text-center text-muted-foreground">
-                player rebunds del {{ gameId }}
-              </td>
-              <td class="px-6 py-4 text-center">
-                <span class="font-semibold text-accent">player assits del {{ gameId }}</span>
-              </td>
+              <td class="px-6 py-4 text-center text-muted-foreground">{{item.stats.fouls}}</td>
             </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="bg-card rounded-xl shadow-elevated border border-border mb-8">
-      <div class="p-6 border-b border-border bg-gradient-subtle">
-        <h2 class="text-2xl font-bold text-foreground flex items-center gap-2">
-          Estadísticas de Jugadores - Rival
-        </h2>
-      </div>
-      <div class="overflow-x-auto">
-        <table class="w-full">
-          <thead>
-            <tr class="bg-muted/50">
-              <th class="px-6 py-4 text-left text-sm font-semibold text-foreground">#</th>
-              <th class="px-6 py-4 text-left text-sm font-semibold text-foreground">Jugador</th>
-              <th class="px-6 py-4 text-center text-sm font-semibold text-foreground">MIN</th>
-              <th class="px-6 py-4 text-center text-sm font-semibold text-foreground">PTS</th>
-              <th class="px-6 py-4 text-center text-sm font-semibold text-foreground">REB</th>
-              <th class="px-6 py-4 text-center text-sm font-semibold text-foreground">AST</th>
-            </tr>
-          </thead>
-          <tbody>
-            Aqui van las stats de los jugadores de emcali del partido
-            {{
-              gameId
-            }}
-            <tr
-              key="{player.id}"
-              class="border-t border-border hover:bg-muted/30 transition-colors duration-200"
-            >
-              <td class="px-6 py-4 text-foreground font-bold">player number del {{ gameId }}</td>
-              <td class="px-6 py-4 text-foreground font-medium">player name del {{ gameId }}</td>
-              <td class="px-6 py-4 text-center text-muted-foreground">
-                player minutes del {{ gameId }}
-              </td>
-              <td class="px-6 py-4 text-center">
-                <span class="font-semibold text-primary">player points del {{ gameId }}</span>
-              </td>
-              <td class="px-6 py-4 text-center text-muted-foreground">
-                player rebunds del {{ gameId }}
-              </td>
-              <td class="px-6 py-4 text-center">
-                <span class="font-semibold text-accent">player assits del {{ gameId }}</span>
-              </td>
-            </tr>
+             }
           </tbody>
         </table>
       </div>

@@ -11,7 +11,9 @@
     </thead>
     <tbody>
       @for (game of history.data(); track game.id){
-        <tr class="border-b border-border hover:bg-accent/5 transition-colors">
+        <tr
+        [routerLink]="['/games', game.stats.game_id]"
+        class="border-b border-border hover:bg-accent/5 transition-colors cursor-pointer">
           <td class="py-4 px-6 text-sm text-foreground">{{ game.created_at | date:"dd MMM yyyy hh:mm aa" }}</td>
           <td class="py-4 px-6 text-sm text-foreground font-medium">{{ game.opponent }}</td>
           <td class="py-4 px-6 text-center">
