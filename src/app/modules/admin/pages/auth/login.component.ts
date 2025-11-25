@@ -91,7 +91,7 @@ import { RouterLink } from "@angular/router";
           <div class="mt-6 text-center">
             <p class="text-sm text-muted-foreground">
               Don't have an account?
-              <a routerLink="/auth/signup" class="text-primary hover:underline font-medium cursor-pointer"> Sign up </a>
+              <a routerLink="/admin/signup" class="text-primary hover:underline font-medium cursor-pointer"> Sign up </a>
             </p>
           </div>
         </div>

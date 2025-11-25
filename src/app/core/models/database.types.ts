@@ -83,7 +83,6 @@ export type Database = {
           created_at: string
           fouls: number
           game_id: number
-          id: string | null
           player_id: number
           points: number
           rebounds: number | null
@@ -93,7 +92,6 @@ export type Database = {
           created_at?: string
           fouls?: number
           game_id: number
-          id?: string | null
           player_id: number
           points?: number
           rebounds?: number | null
@@ -103,7 +101,6 @@ export type Database = {
           created_at?: string
           fouls?: number
           game_id?: number
-          id?: string | null
           player_id?: number
           points?: number
           rebounds?: number | null

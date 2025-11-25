@@ -18,12 +18,21 @@ export class StatsService {
   }
 
   async getPlayerMatches(id: number) {
-    const { error, data } = await supabase.from('stats')
-      .select('*, games(*)')
-      .eq('player_id', id)
+    const { error, data } = await supabase.from('games')
+      .select(`
+        *,
+        stats!inner (
+          *,
+          players!inner (id)
+        )
+      `)
+      .eq('stats.players.id', id)
       .order('created_at', { ascending: false })
       .limit(5);
     if (error) throw error;
-    return data;
+    return data.map((game) => ({
+      ...game,
+      stats: game.stats.at(0)!,
+    }));
   }
 }

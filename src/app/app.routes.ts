@@ -5,22 +5,23 @@ export const routes: Routes = [
     path: '',
     component: LayoutComponent,
     children: [
-        {
-          path: '',
-          loadChildren: () => import('./modules/home/home.routes').then(m => m.HOME_ROUTES)
-        },
-        {
-          path: 'players',
-          loadChildren: () => import('./modules/players/players.routes').then(m => m.PLAYERS_ROUTES)
-        },
-        {
-          path: 'games',
-          loadChildren: () => import('./modules/games/games.routes').then(m => m.GAME_ROUTES)
-        },
-        {
-          path: 'auth',
-          loadChildren: () => import('./modules/auth/auth.routes').then(m => m.AUTH_ROUTES)
-        }
-
-]
-  }];
+      {
+        path: '',
+        loadChildren: () => import('./modules/home/home.routes').then((m) => m.HOME_ROUTES),
+      },
+      {
+        path: 'players',
+        loadChildren: () =>
+          import('./modules/players/players.routes').then((m) => m.PLAYERS_ROUTES),
+      },
+      {
+        path: 'games',
+        loadChildren: () => import('./modules/games/games.routes').then((m) => m.GAME_ROUTES),
+      },
+      {
+        path: 'admin',
+        loadChildren: () => import('./modules/admin/admin.routes').then((m) => m.ADMIN_ROUTES),
+      },
+    ],
+  },
+];
