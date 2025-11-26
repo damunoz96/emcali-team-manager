@@ -2,10 +2,11 @@ import { Component, inject, input, numberAttribute } from "@angular/core";
 import { BackButtonComponent } from "../../../../shared/components/back-button.component";
 import { PlayerService } from "../../services/players.service";
 import { StatsService } from "../../../../core/services/stats.service";
-import { injectQuery } from "@tanstack/angular-query-experimental";
+import { InfiniteData, injectQuery, QueryClient } from "@tanstack/angular-query-experimental";
 import { QUERY_KEYS } from "../../../../core/constants/query-keys";
 import { HistoryStatsComponent } from "../../components/history-stats/history-stats.component";
 import { AvatarPipe } from "../../../../shared/pipes/avatar.pipe";
+import { Player } from "../../models/player.models";
 
 @Component({
   selector: 'app-player-detail',
@@ -19,11 +20,18 @@ import { AvatarPipe } from "../../../../shared/pipes/avatar.pipe";
 export class PlayerDetailComponent {
   private readonly playerService = inject(PlayerService);
   private readonly statsService = inject(StatsService);
+  readonly client = inject(QueryClient);
+
   readonly playerId = input.required({ transform: numberAttribute, alias: 'id' });
 
-  readonly player = injectQuery(() => ({
+  readonly player = injectQuery<Player>(() => ({
     queryKey: [QUERY_KEYS.PLAYER, this.playerId()],
     queryFn: () => this.playerService.getPlayerById(this.playerId()),
+    placeholderData: () => {
+      const players = this.client.getQueryData<InfiniteData<Player>>([QUERY_KEYS.PLAYERS]);
+      const allPlayers = players?.pages.flat();
+      return allPlayers?.find((p) => p.id === this.playerId());
+    }
   }));
 
   readonly stats = injectQuery(() => ({

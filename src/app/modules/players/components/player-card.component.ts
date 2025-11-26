@@ -78,7 +78,7 @@ export class PlayerCardComponent {
   link = computed(() => `/players/${this.player().id}`);
 
   readonly stats = injectQuery(() => ({
-    queryKey: [QUERY_KEYS.PLAYER, this.player().id] as const,
+    queryKey: [QUERY_KEYS.PLAYER_STATS, this.player().id] as const,
     queryFn: ({ queryKey }) => {
       const playerId = queryKey[1];
       return this.statsService.getPlayerStatsDetailed(playerId);

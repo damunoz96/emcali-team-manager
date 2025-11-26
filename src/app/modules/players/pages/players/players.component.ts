@@ -4,6 +4,7 @@ import { InfiniteScrollDirective } from "ngx-infinite-scroll";
 import { PlayerCardComponent } from "../../components/player-card.component";
 import { CardComponent } from "../../../../shared/components/card.component";
 import { PlayerService } from "../../services/players.service";
+import { QUERY_KEYS } from "../../../../core/constants/query-keys";
 
 @Component({
   selector: 'app-players-page',
@@ -11,12 +12,11 @@ import { PlayerService } from "../../services/players.service";
   imports: [CardComponent, PlayerCardComponent, InfiniteScrollDirective],
 })
 export class PlayersComponent {
-
   private readonly playerService = inject(PlayerService);
 
   readonly players = injectInfiniteQuery( () => ({
-    queryKey:['players'],
-    queryFn: ({pageParam}) => this.playerService.getPlayers({page: pageParam}),
+    queryKey:[QUERY_KEYS.PLAYERS],
+    queryFn: ({pageParam}) => this.playerService.getPlayers({ page: pageParam }),
     initialPageParam: 1,
     getNextPageParam: (lastPage, _allPages, lastPageParam) => {
       if (lastPage.length < 12) return undefined;

@@ -6,4 +6,4 @@ export const QUERY_KEYS = {
   PLAYERS: 'players',
   PLAYER_STATS: 'player-stats',
   PLAYER_HISTORY: 'player-history',
-}
+} as const;
