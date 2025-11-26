@@ -1,0 +1,33 @@
+<div class="overflow-x-auto">
+        <table class="w-full">
+          <thead>
+            <tr class="bg-muted/50">
+              <th class="px-6 py-4 text-left text-sm font-semibold text-foreground">#</th>
+              <th class="px-6 py-4 text-left text-sm font-semibold text-foreground">Jugador</th>
+              <th class="px-6 py-4 text-center text-sm font-semibold text-foreground">Posición</th>
+              <th class="px-6 py-4 text-center text-sm font-semibold text-foreground">Puntos</th>
+              <th class="px-6 py-4 text-center text-sm font-semibold text-foreground">Faltas</th>
+            </tr>
+          </thead>
+          <tbody>
+             @for (item of players.data(); track item.id) {
+              <tr class="border-t border-border hover:bg-muted/30 transition-colors duration-200">
+              <td class="px-6 py-4 text-foreground font-bold">{{item.number}}</td>
+              <td class="px-6 py-4">
+                <a
+                  [routerLink]="['/players', item.stats.player_id]"
+                  class="text-foreground font-medium hover:text-primary transition-colors"
+                >
+                  {{item.name}} {{item.last_name}}
+                </a>
+              </td>
+              <td class="px-6 py-4 text-center text-muted-foreground">{{item.position.toUpperCase()}}</td>
+              <td class="px-6 py-4 text-center">
+                <span class="font-semibold text-primary">{{item.stats.points}}</span>
+              </td>
+              <td class="px-6 py-4 text-center text-muted-foreground">{{item.stats.fouls}}</td>
+            </tr>
+             }
+          </tbody>
+        </table>
+      </div>

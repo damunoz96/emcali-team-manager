@@ -6,11 +6,12 @@ import { BackButtonComponent } from "../../../../shared/components/back-button.c
 import { QUERY_KEYS } from "../../../../core/constants/query-keys";
 import { StatsService } from "../../../../core/services/stats.service";
 import { RouterLink } from "@angular/router";
+import { GameTableComponent } from "../../components/game-table/game-table.component";
 
 @Component({
   selector: 'app-game-detail',
   templateUrl: './game-detail.component.html',
-  imports: [BackButtonComponent, DatePipe, RouterLink],
+  imports: [BackButtonComponent, DatePipe, GameTableComponent],
 })
 export class GameDetailComponent {
   private readonly gameService = inject(GameService);
@@ -22,9 +23,6 @@ export class GameDetailComponent {
     queryFn: () => this.gameService.getGame(this.gameId()),
   }))
 
-  readonly players = injectQuery(() => ({
-    queryKey: [QUERY_KEYS.GAME_PLAYERS, this.gameId()],
-    queryFn: () => this.statsService.getGamePlayers(this.gameId()),
-  }))
+
 
 }

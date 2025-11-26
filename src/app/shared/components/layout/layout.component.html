@@ -3,11 +3,14 @@
       <div class="flex items-center justify-between h-16">
         <div class="flex items-center gap-3">
           <div class="flex items-center gap-2">
-            <div class=" w-10 h-10 rounded-lg bg-gradient-primary flex items-center justify-center shadow-glow">
-              <div class="text-primary-foreground w-6 h-6"></div>
+            <div class=" w-10 h-10 items-center justify-center flex">
+                <img
+                  class=""
+                  src="https://portalemcali.onrender.com/favicon.ico" alt="logo Emcali"/>
             </div>
             <div>
-              <h1 class="text-xl font-bold text-foreground">Emcali Team Manager</h1>
+              <h1 class="max-md:hidden text-xl font-bold text-foreground">Emcali Team Manager</h1>
+              <h1 class="md:hidden text-xl font-bold text-foreground">ETM</h1>
               <p class="text-xs text-muted-foreground">V1</p>
             </div>
           </div>
@@ -16,7 +19,7 @@
           @for( button of dataSourceButtons; track button.path ) {
             <app-button-header [buttonHeaderInfo]="button"/>
           }
-          <app-button-header [buttonHeaderInfo]="dataLoginButton"/>
+          <app-button-header [buttonHeaderInfo]="dataLoginButton" [isExact]="false"/>
         </div>
       </div>
     </div>
