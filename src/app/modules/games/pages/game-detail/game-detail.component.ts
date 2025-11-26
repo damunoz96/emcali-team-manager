@@ -4,8 +4,6 @@ import { injectQuery } from "@tanstack/angular-query-experimental";
 import { GameService } from "../../services/games.service";
 import { BackButtonComponent } from "../../../../shared/components/back-button.component";
 import { QUERY_KEYS } from "../../../../core/constants/query-keys";
-import { StatsService } from "../../../../core/services/stats.service";
-import { RouterLink } from "@angular/router";
 import { GameTableComponent } from "../../components/game-table/game-table.component";
 
 @Component({
@@ -15,7 +13,6 @@ import { GameTableComponent } from "../../components/game-table/game-table.compo
 })
 export class GameDetailComponent {
   private readonly gameService = inject(GameService);
-  private readonly statsService = inject(StatsService);
   readonly gameId = input.required({transform: numberAttribute, alias: 'id'});
 
   readonly game = injectQuery( () => ({

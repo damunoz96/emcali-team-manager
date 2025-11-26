@@ -11,7 +11,7 @@ import { RouterLink } from "@angular/router";
           <!-- Logo Icon -->
           <div class="flex items-center justify-center mb-6">
             <div
-              class="w-12 h-12 rounded-lg bg-gradient-primary flex items-center justify-center shadow-glow"
+              class="w-12 h-12 rounded-lg bg-primary flex items-center justify-center shadow-glow"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -67,7 +67,7 @@ import { RouterLink } from "@angular/router";
             <!-- Submit Button -->
             <button
               type="submit"
-              class="w-full inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2"
+              class="w-full inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 cursor-pointer"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

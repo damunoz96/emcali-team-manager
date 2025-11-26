@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { RouterOutlet } from "@angular/router";
+import { RouterOutlet, RouterLink } from "@angular/router";
 import { ButtonHeader, ButtonHeaderComponent } from "./components/button-header.component";
 
 
@@ -7,7 +7,7 @@ import { ButtonHeader, ButtonHeaderComponent } from "./components/button-header.
 @Component({
   selector: "app-layout",
   templateUrl: "./layout.component.html",
-  imports: [RouterOutlet, ButtonHeaderComponent],
+  imports: [RouterOutlet, ButtonHeaderComponent, RouterLink],
 })
 export class LayoutComponent {
   dataButton = 'GamesTest';

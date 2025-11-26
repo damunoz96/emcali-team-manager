@@ -18,7 +18,7 @@
     </div>
 
     <div class="px-6 py-3 rounded-full text-sm font-bold bg-primary/30 text-primary">
-      Finalizado
+      Completed
     </div>
   </div>
 
@@ -57,15 +57,15 @@
             d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
           />
         </svg>
-        Estadísticas de Emcali
+        Statistics
       </h2>
       <div class="grid w-full grid-cols-1 md:grid-cols-2 gap-6 max-w-md justify-center">
         <div class="flex justify-between items-center">
-          <span class="text-muted-foreground">Puntos</span>
+          <span class="text-muted-foreground">Points</span>
           <span class="text-2xl font-bold text-primary">{{game.data()?.score}}</span>
         </div>
         <div class="flex justify-between items-center">
-          <span class="text-muted-foreground">Faltas</span>
+          <span class="text-muted-foreground">Fouls</span>
           <span class="text-2xl font-bold text-foreground">18</span>
         </div>
       </div>
@@ -89,7 +89,7 @@
               d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
             />
           </svg>
-          Estadísticas de Jugadores - Emcali
+          Summary - Emcali
         </h2>
       </div>
       <app-game-table [id]="gameId()" />

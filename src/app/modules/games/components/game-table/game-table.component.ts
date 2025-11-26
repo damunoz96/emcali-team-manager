@@ -1,4 +1,4 @@
-import { Component, inject, input, numberAttribute } from "@angular/core";
+import { Component, inject, input} from "@angular/core";
 import { injectQuery } from "@tanstack/angular-query-experimental";
 import { QUERY_KEYS } from "../../../../core/constants/query-keys";
 import { StatsService } from "../../../../core/services/stats.service";

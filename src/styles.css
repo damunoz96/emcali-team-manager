@@ -13,7 +13,7 @@
   --color-popover-foreground: hsl(180 10% 95%);
 
   --color-primary: #20c5b5;
-  --color-primary-foreground: #f1f4f4;
+  --color-primary-foreground: hsl(200 25% 12%);
 
   --color-secondary: #BFD1E5;
   --color-secondary-foreground: hsl(0 0% 100%);
