@@ -11,77 +11,47 @@ import { QUERY_KEYS } from "../../../core/constants/query-keys";
   template: `
     @let player = this.player();
     <div
-      [routerLink]="link()"
-      class="bg-card border border-border rounded-lg shadow-card hover:shadow-elevated transition-all duration-300 overflow-hidden group cursor-pointer"
+      [routerLink]="this.link()"
+      class="bg-card border border-border rounded-lg shadow-card hover:shadow-elevated transition-all duration-300 overflow-hidden group cursor-pointer block"
     >
-      <div class="p-6">
-        <div class="flex items-start gap-4 mb-4">
-          <div class="relative w-16 h-16">
-            <div
-              class="w-16 h-16 overflow-hidden rounded-full border-2 border-primary/30 shadow-glow bg-primary/20 text-primary font-bold flex items-center justify-center text-lg"
-            >
-              <img
-                class="w-full h-full object-cover"
-                [src]="player.id | avatar"
-                [alt]="player.name"
-              />
-            </div>
-          </div>
-          <div class="flex-1">
-            <div class="flex items-center justify-between mb-1">
-              <h3
-                class="font-bold text-lg text-foreground group-hover:text-primary transition-colors"
-              >
-                {{ player.name }}
-              </h3>
-              <span class="text-2xl font-bold text-muted-foreground"># {{player.number}}</span>
-            </div>
-            <span
-              class="inline-block px-3 py-1 rounded-full text-xs font-semibold border text-white"
-            >
-              {{ player.position.toUpperCase() }}
-            </span>
+    <div class="p-6">
+      <!-- Player Content -->
+      <div class="flex flex-col items-center text-center">
+        <!-- Avatar -->
+        <div class="relative mb-4">
+          <img
+            [src]="player.id | avatar"
+            [alt]="player.id"
+            class="w-24 h-24 rounded-full border-3 border-primary/30 shadow-glow object-cover"
+          />
+          <!-- Number Badge -->
+          <div
+            class="absolute -bottom-2 -right-2 w-12 h-12 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold text-lg shadow-lg border-2 border-card"
+          >
+            {{player.number}}
           </div>
         </div>
 
-        <div class="grid grid-cols-2 gap-4 mb-4">
-          <div class="bg-muted/50 rounded-lg p-3">
-            <p class="text-xs text-muted-foreground mb-1">Score (PPG)</p>
-            <div class="flex items-center gap-2">
-              <p class="text-xl font-bold text-primary">{{stats.data()?.average_points}}</p>
-            </div>
-          </div>
-          <div class="bg-muted/50 rounded-lg p-3">
-            <p class="text-xs text-muted-foreground mb-1">Games played</p>
-            <p class="text-xl font-bold text-foreground">{{stats.data()?.total_games}}</p>
-          </div>
-        </div>
+        <!-- Name -->
+        <h3
+          class="font-bold text-xl text-foreground group-hover:text-primary transition-colors mb-2"
+        >
+          {{player.name}} {{player.last_name}}
+        </h3>
 
-        <div class="space-y-2 pt-4 border-t border-border">
-          <div class="flex justify-between items-center">
-            <span class="text-sm text-muted-foreground">Points</span>
-            <span class="font-semibold text-foreground">{{stats.data()?.total_points}}</span>
-          </div>
-          <div class="flex justify-between items-center">
-            <span class="text-sm text-muted-foreground">Fouls</span>
-            <span class="font-semibold text-foreground">{{stats.data()?.total_fouls}}</span>
-          </div>
-        </div>
+        <!-- Position -->
+        <span
+          class="inline-block px-4 py-1.5 rounded-full text-sm text-card-foreground font-semibold border bg-primary/80 border-primary"
+        >
+          {{player.position.toLocaleUpperCase()}}
+        </span>
       </div>
     </div>
+  </div>
   `,
   imports: [RouterLink, AvatarPipe],
 })
 export class PlayerCardComponent {
-  private readonly statsService = inject(StatsService);
   player = input.required<Player>();
   link = computed(() => `/players/${this.player().id}`);
-
-  readonly stats = injectQuery(() => ({
-    queryKey: [QUERY_KEYS.PLAYER_STATS, this.player().id] as const,
-    queryFn: ({ queryKey }) => {
-      const playerId = queryKey[1];
-      return this.statsService.getPlayerStatsDetailed(playerId);
-    }
-  }))
 }
