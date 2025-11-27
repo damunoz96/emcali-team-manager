@@ -19,9 +19,12 @@
         </div>
         <div class="flex items-center gap-1 ">
           @for( button of dataSourceButtons; track button.path ) {
-            <app-button-header [buttonHeaderInfo]="button"/>
+            <app-button-header
+              [text]="button.buttonText"
+              [path]="button.path"
+            />
           }
-          <app-button-header [buttonHeaderInfo]="dataLoginButton" [isExact]="false"/>
+          <app-login-button />
         </div>
       </div>
     </div>

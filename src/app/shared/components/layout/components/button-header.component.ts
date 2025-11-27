@@ -1,4 +1,4 @@
-import { Component, computed, input } from '@angular/core';
+import { booleanAttribute, Component, computed, input } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 export interface ButtonHeader {
@@ -10,21 +10,18 @@ export interface ButtonHeader {
   selector: 'app-button-header',
   template: `
     <a
-      [routerLink]="link()"
+      [routerLink]="path()"
       class="px-4 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted transition-all duration-200"
       routerLinkActive="text-foreground bg-primary/10"
       [routerLinkActiveOptions]="{ exact: isExact() }"
     >
-      {{ buttonHeaderInfo().buttonText }}
+      {{ text() }}
     </a>
   `,
   imports: [RouterLink, RouterLinkActive],
 })
 export class ButtonHeaderComponent {
-  buttonHeaderInfo = input.required<ButtonHeader>();
-  isExact = input<boolean>(true);
-
-  link = computed(() => {
-    return `/${this.buttonHeaderInfo().path}`;
-  });
+  text = input.required<string>();
+  path = input.required<string>();
+  isExact = input(true, { transform: booleanAttribute });
 }

@@ -6,7 +6,7 @@ import { funEmoji } from '@dicebear/collection';
   name: 'avatar'
 })
 export class AvatarPipe implements PipeTransform {
-  transform(seed: string | number) {
+  transform(seed: string | number = '') {
     seed = typeof seed === 'number' ? seed.toString() : seed;
     return createAvatar(funEmoji, { seed }).toDataUri();
   }

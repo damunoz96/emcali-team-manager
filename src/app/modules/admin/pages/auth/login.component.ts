@@ -1,5 +1,9 @@
-import { Component } from '@angular/core';
-import { RouterLink } from "@angular/router";
+import { Component, inject } from '@angular/core';
+import { FormsModule, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router, RouterLink } from "@angular/router";
+import { AuthService } from '../../../../core/services/auth.service';
+import { toast } from 'ngx-sonner';
+import { AuthApiError } from '@supabase/supabase-js';
 
 @Component({
   selector: 'app-login-page',
@@ -35,19 +39,23 @@ import { RouterLink } from "@angular/router";
           <p class="text-muted-foreground text-center mb-8">Sign in to your account to continue</p>
 
           <!-- Login Form -->
-          <form class="space-y-6">
+          <form [formGroup]="group" (ngSubmit)="handleLogin()" class="space-y-6">
             <!-- Email Input -->
             <div>
               <label for="email" class="block text-sm font-medium text-foreground mb-2">
                 Email
               </label>
               <input
+                formControlName="email"
                 id="email"
                 type="email"
                 required
                 class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-foreground ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                 placeholder="you@example.com"
               />
+              @if (group.controls['email'].getError('required') && group.controls['email'].touched) {
+                <p class="text-red-500">Error!!</p>
+              }
             </div>
 
             <!-- Password Input -->
@@ -56,6 +64,7 @@ import { RouterLink } from "@angular/router";
                 Password
               </label>
               <input
+                formControlName="password"
                 id="password"
                 type="password"
                 required
@@ -66,6 +75,7 @@ import { RouterLink } from "@angular/router";
 
             <!-- Submit Button -->
             <button
+              [disabled]="group.invalid"
               type="submit"
               class="w-full inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 cursor-pointer"
             >
@@ -99,6 +109,36 @@ import { RouterLink } from "@angular/router";
     </main>
   </div>
   `,
-  imports: [RouterLink],
+  imports: [
+    RouterLink,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
 })
-export class LoginComponent {}
+export class LoginComponent {
+  private readonly fb = inject(NonNullableFormBuilder);
+  private readonly auth = inject(AuthService);
+  private readonly router = inject(Router);
+
+  readonly group = this.fb.group({
+    email: ['', [Validators.required, Validators.email, Validators.minLength(5)]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
+  });
+
+  async handleLogin() {
+    try {
+      const group = this.group.getRawValue();
+      await this.auth.login(group);
+      this.router.navigate(['/games']);
+    } catch (error) {
+      if (error instanceof Error) {
+        toast.error(error.message);
+        return;
+      }
+      toast.error('An unexpected error occurred. Please try again.');
+    } finally {
+      this.group.reset();
+    }
+  }
+}
+
