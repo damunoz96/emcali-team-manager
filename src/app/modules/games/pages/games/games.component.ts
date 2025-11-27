@@ -1,4 +1,4 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { injectInfiniteQuery, injectQuery } from '@tanstack/angular-query-experimental';
 import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
 import { GameCardComponent } from '../../components/game-card.component';
@@ -6,6 +6,7 @@ import { CardComponent } from '../../../../shared/components/card.component';
 import { GameService } from '../../services/games.service';
 import { QUERY_KEYS } from '../../../../core/constants/query-keys';
 import { AddGameModalComponent } from "../../components/add-game-modal/add-game-modal.component";
+import { ModalComponent } from '../../../../shared/components/modal';
 
 @Component({
   selector: 'app-games-page',
@@ -14,11 +15,13 @@ import { AddGameModalComponent } from "../../components/add-game-modal/add-game-
     GameCardComponent,
     CardComponent,
     InfiniteScrollDirective,
-    AddGameModalComponent
-],
+    AddGameModalComponent,
+    ModalComponent,
+  ],
 })
 export class GamesComponent {
   private readonly gameService = inject(GameService);
+  readonly isOpen = signal(false);
 
   readonly games = injectInfiniteQuery(() => ({
     queryKey: [QUERY_KEYS.GAMES],
