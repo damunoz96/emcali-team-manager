@@ -11,12 +11,12 @@
 
         <!-- Stats Cards -->
         <div class="grid grid-cols-2 gap-4 mb-8">
-          @if (allPlayers.data(); as allPlayers) {
-            <app-card title="Total players" [content]="totalPlayers()"></app-card>
-          } @else if (allPlayers.isLoading()) {
+          @if (players.data()) {
+            <app-card title="Total players" [content]="players.data()?.total"></app-card>
+          } @else if (players.isLoading()) {
             <div class="h-[114px] w-full rounded-xl bg-card animate-pulse"></div>
-          } @else if (allPlayers.isLoading()) {
-            <p class="text-xl text-white font-semibold">{{ allPlayers.error() }}</p>
+          } @else if (players.isLoading()) {
+            <p class="text-xl text-white font-semibold">{{ players.error() }}</p>
           }
         </div>
 
@@ -30,7 +30,7 @@
             [infiniteScrollDisabled]="!players.hasNextPage()"
             infinite-scroll
             class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            @for (player of players.data(); track player.id) {
+            @for (player of data.pages; track player.id) {
               <app-player-card [player]="player"></app-player-card>
             }
             @if (players.isFetchingNextPage()) {

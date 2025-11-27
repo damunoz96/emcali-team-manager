@@ -1,5 +1,5 @@
-import { Component, computed, inject } from "@angular/core";
-import { injectInfiniteQuery, injectQuery } from "@tanstack/angular-query-experimental";
+import { Component, inject } from "@angular/core";
+import { injectInfiniteQuery } from "@tanstack/angular-query-experimental";
 import { InfiniteScrollDirective } from "ngx-infinite-scroll";
 import { PlayerCardComponent } from "../../components/player-card.component";
 import { CardComponent } from "../../../../shared/components/card.component";
@@ -16,25 +16,24 @@ export class PlayersComponent {
 
   readonly players = injectInfiniteQuery( () => ({
     queryKey:[QUERY_KEYS.PLAYERS],
-    queryFn: ({pageParam}) => this.playerService.getPlayers({ page: pageParam }),
+    queryFn: async ({pageParam}) => {
+      const res = await this.playerService.getPlayers({ page: pageParam })
+      return {
+        items: res.data,
+        total: res.count,
+      }
+    },
     initialPageParam: 1,
     getNextPageParam: (lastPage, _allPages, lastPageParam) => {
-      if (lastPage.length < 12) return undefined;
+      if (lastPage.items.length < 12) return undefined;
       return lastPageParam + 1
     },
-    select: (data) => data.pages.flat(),
+    select: (data) => ({
+      pages: data.pages.map((p) => p.items).flat(),
+      total: data.pages[0]?.total ?? 0,
+    }),
+
   }));
-
-  readonly allPlayers = injectQuery( () => ({
-    queryKey:['all-players'],
-    queryFn: () => this.playerService.getAllPlayers(),
-  }));
-
-  readonly totalPlayers = computed(() => {
-    return this.allPlayers.data()?.length;
-  })
-
-
 
 }
 

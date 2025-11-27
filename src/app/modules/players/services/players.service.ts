@@ -15,12 +15,12 @@ export class PlayerService {
   async getPlayers(options: { page: number }) {
       const init = (options.page - 1) * 12;
       const end = (options.page * 12) - 1;
-      const { data, error } = await supabase
+      const { data, error, count } = await supabase
         .from('players')
-        .select('*')
+        .select('*', { count: 'exact' })
         .range(init,end)
       if (error) throw error;
-      return data;
+      return {data , count};
     }
 
   async getPlayerById(id: number) {
