@@ -1,6 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NgxSonnerToaster } from 'ngx-sonner';
+
 
 @Component({
   selector: 'app-root',
@@ -10,4 +11,5 @@ import { NgxSonnerToaster } from 'ngx-sonner';
 })
 export class App {
   protected readonly title = signal('emcali-team');
+
 }

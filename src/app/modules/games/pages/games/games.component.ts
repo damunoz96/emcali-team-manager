@@ -5,6 +5,7 @@ import { GameCardComponent } from '../../components/game-card.component';
 import { CardComponent } from '../../../../shared/components/card.component';
 import { GameService } from '../../services/games.service';
 import { QUERY_KEYS } from '../../../../core/constants/query-keys';
+import { AddGameModalComponent } from "../../components/add-game-modal/add-game-modal.component";
 
 @Component({
   selector: 'app-games-page',
@@ -12,8 +13,9 @@ import { QUERY_KEYS } from '../../../../core/constants/query-keys';
   imports: [
     GameCardComponent,
     CardComponent,
-    InfiniteScrollDirective
-  ],
+    InfiniteScrollDirective,
+    AddGameModalComponent
+],
 })
 export class GamesComponent {
   private readonly gameService = inject(GameService);

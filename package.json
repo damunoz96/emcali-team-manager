@@ -36,6 +36,7 @@
     "@supabase/supabase-js": "^2.81.1",
     "@tailwindcss/postcss": "^4.1.17",
     "@tanstack/angular-query-experimental": "^5.90.10",
+    "flowbite": "^4.0.1",
     "ngx-infinite-scroll": "^20.0.0",
     "ngx-sonner": "^3.1.0",
     "postcss": "^8.5.6",

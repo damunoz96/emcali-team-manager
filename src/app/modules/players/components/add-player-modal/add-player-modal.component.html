@@ -1,0 +1,55 @@
+<div id="add-player-modal" data-modal-backdrop="static" class=" hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+
+
+  <!-- Contenido del diálogo -->
+  <div class="dialog-content sm:max-w-[500px] bg-card rounded-lg shadow-lg p-6 mt-4">
+    <!-- Header -->
+    <header class="dialog-header mb-4">
+      <h2 id="dialog-title" class="text-lg text-accent-foreground font-semibold">Add new players</h2>
+      <p id="dialog-desc" class="text-sm text-muted-foreground">Complete all the information to add a new player successfully</p>
+    </header>
+
+    <!-- Formulario (estático) -->
+    <form class="space-y-4 mt-4" >
+      <div class="grid grid-cols-2 gap-4">
+        <div class="space-y-2">
+          <label for="firstName" class="block text-accent-foreground text-sm font-medium">Name</label>
+          <input id="firstName" name="firstName" type="text" placeholder="Enter name" class="input px-3 py-2 border rounded-lg w-full" value=""/>
+        </div>
+
+        <div class="space-y-2">
+          <label for="lastName" class="block text-accent-foreground text-sm font-medium">Last name</label>
+          <input id="lastName" name="lastName" type="text" placeholder="Enter last name" class="input px-3 py-2 border rounded-lg w-full" value=""/>
+        </div>
+      </div>
+
+      <div class="space-y-2">
+        <label for="birthDate" class="block text-accent-foreground text-sm font-medium">Birth Date</label>
+        <input id="birthDate" name="birthDate" type="date" class="input px-3 py-2 border rounded-lg w-full" value=""/>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4">
+        <div class="space-y-2">
+          <label for="number" class="block text-accent-foreground text-sm font-medium">Number</label>
+          <input id="number" name="number" type="number" placeholder="Enter a number(0-99)" min="0" max="99" class="input px-3 py-2 border rounded-lg w-full" value=""/>
+        </div>
+
+        <div class="space-y-2">
+          <label for="position" class="block text-accent-foreground text-sm font-medium">Position</label>
+          <select id="position" name="position" class="select px-3 py-2 border rounded-lg w-full" aria-placeholder="Seleccionar">
+            <option value="">Select</option>
+            <option value="g">Guard</option>
+            <option value="pf">Power Forward</option>
+            <option value="f">Forward</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Acciones -->
+      <div class="flex justify-end gap-3 pt-4">
+        <button type="button" data-modal-hide="add-player-modal" class="px-4 py-2 border border-border rounded-lg hover:bg-muted transition-colors cursor-pointer">Cancelar</button>
+        <button type="submit" class="px-4 py-2 bg-gradient-primary text-primary-foreground rounded-lg hover:opacity-90 transition-all">Agregar Jugador</button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -6,8 +6,13 @@
             <h1 class="text-4xl font-bold text-foreground mb-2 flex items-center gap-3">Games</h1>
             <p class="text-muted-foreground">Check and manage every game of the team</p>
           </div>
-          <button class="px-6 py-3 bg-primary/90 text-primary-foreground rounded-lg font-semibold hover:opacity-90 transition-all duration-200 shadow-glow hover:scale-105 cursor-pointer">+ Agregar Juego</button>
+          <button
+            data-modal-target="add-game-modal"
+            data-modal-toggle="add-game-modal"
+            type="button"
+            class="px-6 py-3 bg-primary/90 text-primary-foreground rounded-lg font-semibold hover:opacity-90 transition-all duration-200 shadow-glow hover:scale-105 cursor-pointer">+ Agregar Juego</button>
         </div>
+        <app-add-game-modal/>
 
         <!-- Stats Summary -->
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">

@@ -6,8 +6,14 @@
             <h1 class="text-4xl font-bold text-foreground mb-2">Players</h1>
             <p class="text-muted-foreground">Manage the roster of Emcali´s basketball team</p>
           </div>
-          <button class="px-6 py-3 bg-primary/90 text-primary-foreground rounded-lg font-semibold hover:opacity-90 transition-all duration-200 shadow-glow hover:scale-105 cursor-pointer">+ Agregar Jugador</button>
+          <button
+            data-modal-target="add-player-modal"
+            data-modal-toggle="add-player-modal"
+            type="button"
+            class="px-6 py-3 bg-primary/90 text-primary-foreground rounded-lg font-semibold hover:opacity-90 transition-all duration-200 shadow-glow hover:scale-105 cursor-pointer">+ Agregar Jugador
+          </button>
         </div>
+        <app-add-player-modal/>
 
         <!-- Stats Cards -->
         <div class="grid grid-cols-2 gap-4 mb-8">
@@ -45,6 +51,7 @@
           } @else if (players.isError()) {
             <p class="text-xl text-white font-semibold">{{ players.error() }}</p>
           }
+
 
       </main>
 </div>
