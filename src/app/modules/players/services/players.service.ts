@@ -15,6 +15,15 @@ export class PlayerService {
     return { data, count };
   }
 
+  async getAllPlayersData() {
+    const { data, error } = await supabase
+      .from('players')
+      .select('*')
+      .order('name', { ascending: true});
+    if (error) throw error;
+    return data
+  }
+
   async getPlayerById(id: number) {
     const { data, error } = await supabase
       .from('players')
