@@ -9,7 +9,8 @@ export class PlayerService {
     const { data, error, count } = await supabase
       .from('players')
       .select('*', { count: 'exact' })
-      .range(init, end);
+      .range(init, end)
+      .order('name', { ascending: true});
     if (error) throw error;
     return { data, count };
   }

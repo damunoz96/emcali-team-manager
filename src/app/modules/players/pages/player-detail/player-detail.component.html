@@ -30,45 +30,64 @@
           </div>
         </div>
       </div>
+    } @else if (player.isLoading()) {
+      <div class="w-full h-[178px] bg-card border border-border rounded-lg shadow-card p-6 mb-8 animate-pulse">
+      </div>
+    } @else if (player.isError()) {
+      <p class="text-xl text-white font-semibold">{{ player.error() }}</p>
     }
 
     <!-- Stats Overview -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-      <!-- Partidos Jugados -->
-      <div class="p-8 bg-card border border-border rounded-lg shadow-card hover:shadow-elevated transition-all">
-        <div class="flex items-center gap-3 mb-3">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-          </svg>
-          <p class="text-sm text-muted-foreground uppercase tracking-wide">Games played</p>
-        </div>
-        <p class="text-5xl font-bold text-foreground">{{ stats.data()?.total_games }}</p>
-      </div>
+     @if (stats.data(); as stats) {
+       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+         <!-- Partidos Jugados -->
+         <div class="p-8 bg-card border border-border rounded-lg shadow-card hover:shadow-elevated transition-all">
+           <div class="flex items-center gap-3 mb-3">
+             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+             </svg>
+             <p class="text-sm text-muted-foreground uppercase tracking-wide">Games played</p>
+           </div>
+           <p class="text-5xl font-bold text-foreground">{{ stats.total_games }}</p>
+         </div>
 
-      <!-- Puntos Totales -->
-      <div class="p-8 bg-card border border-border rounded-lg shadow-card hover:shadow-elevated transition-all">
-        <div class="flex items-center gap-3 mb-3">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-          </svg>
-          <p class="text-sm text-muted-foreground uppercase tracking-wide">Total Points</p>
-        </div>
-        <p class="text-5xl font-bold text-foreground">{{ stats.data()?.total_points }}</p>
-        <p class="text-sm text-muted-foreground mt-2">{{ stats.data()?.average_points }} PPG</p>
-      </div>
+         <!-- Puntos Totales -->
+         <div class="p-8 bg-card border border-border rounded-lg shadow-card hover:shadow-elevated transition-all">
+           <div class="flex items-center gap-3 mb-3">
+             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+             </svg>
+             <p class="text-sm text-muted-foreground uppercase tracking-wide">Total Points</p>
+           </div>
+           <p class="text-5xl font-bold text-foreground">{{ stats.total_points }}</p>
+           <p class="text-sm text-muted-foreground mt-2">{{ stats.average_points }} PPG</p>
+         </div>
 
-      <!-- Faltas Totales -->
-      <div class="p-8 bg-card border border-border rounded-lg shadow-card hover:shadow-elevated transition-all">
-        <div class="flex items-center gap-3 mb-3">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-destructive" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-          <p class="text-sm text-muted-foreground uppercase tracking-wide">Total Fouls</p>
+         <!-- Faltas Totales -->
+         <div class="p-8 bg-card border border-border rounded-lg shadow-card hover:shadow-elevated transition-all">
+           <div class="flex items-center gap-3 mb-3">
+             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-destructive" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+             </svg>
+             <p class="text-sm text-muted-foreground uppercase tracking-wide">Total Fouls</p>
+           </div>
+           <p class="text-5xl font-bold text-foreground"> {{ stats.total_fouls }} </p>
+           <p class="text-sm text-muted-foreground mt-2"> {{ stats.average_fouls }}FPG</p>
+         </div>
+       </div>
+
+     } @else if (stats.isLoading()) {
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <div class="h-[150px] bg-card border border-border rounded-lg shadow-card p-6 mb-8 animate-pulse">
+          </div>
+          <div class="h-[150px] bg-card border border-border rounded-lg shadow-card p-6 mb-8 animate-pulse">
+          </div>
+          <div class="h-[150px] bg-card border border-border rounded-lg shadow-card p-6 mb-8 animate-pulse">
+          </div>
         </div>
-        <p class="text-5xl font-bold text-foreground"> {{ stats.data()?.total_fouls }} </p>
-        <p class="text-sm text-muted-foreground mt-2"> {{ stats.data()?.average_fouls }}FPG</p>
-      </div>
-    </div>
+     } @else if (stats.isError()) {
+        <p class="text-xl text-white font-semibold">{{ stats.error() }}</p>
+     }
 
     <!-- Advanced Stats -->
     <div class="bg-card border border-border rounded-lg shadow-card p-8">
