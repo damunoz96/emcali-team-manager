@@ -1,4 +1,4 @@
-import { Component, inject } from "@angular/core";
+import { Component, inject, signal } from "@angular/core";
 import { injectInfiniteQuery } from "@tanstack/angular-query-experimental";
 import { InfiniteScrollDirective } from "ngx-infinite-scroll";
 import { PlayerCardComponent } from "../../components/player-card.component";
@@ -6,14 +6,16 @@ import { CardComponent } from "../../../../shared/components/card.component";
 import { PlayerService } from "../../services/players.service";
 import { QUERY_KEYS } from "../../../../core/constants/query-keys";
 import { AddPlayerModalComponent } from "../../components/add-player-modal/add-player-modal.component";
+import { ModalComponent } from "../../../../shared/components/modal";
 
 @Component({
   selector: 'app-players-page',
   templateUrl: './players.component.html',
-  imports: [CardComponent, PlayerCardComponent, InfiniteScrollDirective, AddPlayerModalComponent],
+  imports: [CardComponent, PlayerCardComponent, InfiniteScrollDirective, AddPlayerModalComponent, ModalComponent],
 })
 export class PlayersComponent {
   private readonly playerService = inject(PlayerService);
+  readonly isOpen = signal(false);
 
   readonly players = injectInfiniteQuery( () => ({
     queryKey:[QUERY_KEYS.PLAYERS],

@@ -3,7 +3,7 @@ import { FormsModule, NonNullableFormBuilder, ReactiveFormsModule, Validators } 
 import { Router, RouterLink } from "@angular/router";
 import { AuthService } from '../../../../core/services/auth.service';
 import { toast } from 'ngx-sonner';
-import { AuthApiError } from '@supabase/supabase-js';
+import { AuthError } from '@supabase/supabase-js';
 
 @Component({
   selector: 'app-login-page',
@@ -131,7 +131,7 @@ export class LoginComponent {
       await this.auth.login(group);
       this.router.navigate(['/games']);
     } catch (error) {
-      if (error instanceof Error) {
+      if (error instanceof AuthError) {
         toast.error(error.message);
         return;
       }
@@ -141,4 +141,3 @@ export class LoginComponent {
     }
   }
 }
-
