@@ -1,9 +1,11 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { FormsModule, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from "@angular/router";
 import { AuthService } from '../../../../core/services/auth.service';
 import { toast } from 'ngx-sonner';
 import { AuthError } from '@supabase/supabase-js';
+import { QueryClient } from '@tanstack/angular-query-experimental';
+import { authOptions } from '../../../../core/query-options';
 
 @Component({
   selector: 'app-login-page',
@@ -119,6 +121,9 @@ export class LoginComponent {
   private readonly fb = inject(NonNullableFormBuilder);
   private readonly auth = inject(AuthService);
   private readonly router = inject(Router);
+  private readonly client = inject(QueryClient);
+
+  readonly redirect = input<string>();
 
   readonly group = this.fb.group({
     email: ['', [Validators.required, Validators.email, Validators.minLength(5)]],
@@ -129,6 +134,14 @@ export class LoginComponent {
     try {
       const group = this.group.getRawValue();
       await this.auth.login(group);
+      const redirect = this.redirect();
+      await this.client.invalidateQueries({
+        queryKey: this.auth.options().queryKey,
+      });
+      if (redirect) {
+        this.router.navigate([redirect]);
+        return;
+      }
       this.router.navigate(['/games']);
     } catch (error) {
       if (error instanceof AuthError) {

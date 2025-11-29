@@ -2,6 +2,8 @@ import { Injectable } from "@angular/core";
 import { supabase } from "../supabase/supabase.client";
 import { Observable } from "rxjs";
 import { User } from "@supabase/supabase-js";
+import { queryOptions } from "@tanstack/angular-query-experimental";
+import { QUERY_KEYS } from "../constants/query-keys";
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -20,8 +22,22 @@ export class AuthService {
     });
   }
 
+  async getUserV2() {
+    const { data, error } = await supabase.auth.getUser();
+    if (error) return null;
+    return data.user;
+  }
+
   async logout() {
     const { error } = await supabase.auth.signOut();
     if (error) throw error;
+  }
+
+  options() {
+    return queryOptions({
+      queryKey: [QUERY_KEYS.AUTH_STATE],
+      queryFn: () => this.getUserV2(),
+      staleTime: Infinity,
+    })
   }
 }

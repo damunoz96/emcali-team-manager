@@ -8,8 +8,7 @@ import {
 } from '@angular/forms';
 import { toast } from 'ngx-sonner';
 import { PlayerService } from '../../services/players.service';
-import { QueryClient } from '@tanstack/angular-query-experimental';
-import { QUERY_KEYS } from '../../../../core/constants/query-keys';
+import { Position } from '../../models/player.models';
 
 @Component({
   selector: 'app-add-player-modal',
@@ -19,7 +18,6 @@ import { QUERY_KEYS } from '../../../../core/constants/query-keys';
 export class AddPlayerModalComponent {
   private readonly fb = inject(NonNullableFormBuilder);
   private readonly playerService = inject(PlayerService);
-  private readonly queryClient = inject(QueryClient);
   readonly modal = inject(ModalComponent);
 
 
@@ -28,7 +26,7 @@ export class AddPlayerModalComponent {
     last_name: ['', [Validators.required, Validators.minLength(2)]],
     birth_date: ['', [Validators.required]],
     number: [0, [Validators.required, Validators.min(0), Validators.max(99)]],
-    position: ['' as 'g' | 'f' | 'pf', [Validators.required]],
+    position: ['' as Position, [Validators.required]],
   });
 
   closeModal() {
@@ -45,10 +43,6 @@ export class AddPlayerModalComponent {
     } finally {
       this.group.reset();
       this.closeModal();
-      this.queryClient.invalidateQueries({
-        queryKey: [QUERY_KEYS.PLAYERS]
-      })
-
     }
   }
 }

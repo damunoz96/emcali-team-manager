@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { supabase } from '../../../core/supabase/supabase.client';
+import { PlayerInsert } from '../models/player.models';
 
 @Injectable({ providedIn: 'root' })
 export class PlayerService {
@@ -10,7 +11,7 @@ export class PlayerService {
       .from('players')
       .select('*', { count: 'exact' })
       .range(init, end)
-      .order('name', { ascending: true});
+      .order('name', { ascending: true });
     if (error) throw error;
     return { data, count };
   }
@@ -19,9 +20,9 @@ export class PlayerService {
     const { data, error } = await supabase
       .from('players')
       .select('*')
-      .order('name', { ascending: true});
+      .order('name', { ascending: true });
     if (error) throw error;
-    return data
+    return data;
   }
 
   async getPlayerById(id: number) {
@@ -44,15 +45,9 @@ export class PlayerService {
     };
   }
 
-  async createNewPlayer(options: {
-    name: string;
-    last_name: string;
-    birth_date: string;
-    number: number;
-    position: 'g' | 'f' | 'pf';
-  }) {
+  async createNewPlayer(options: PlayerInsert) {
     const { data, error } = await supabase.from('players').insert([options]).select();
     if (error) throw error;
-    return data
+    return data;
   }
 }

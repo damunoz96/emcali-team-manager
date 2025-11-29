@@ -7,6 +7,7 @@ import { GameService } from '../../services/games.service';
 import { QUERY_KEYS } from '../../../../core/constants/query-keys';
 import { ModalComponent } from '../../../../shared/components/modal';
 import { RouterLink } from "@angular/router";
+import { AuthDirective } from '../../../../shared/directives/auth.directive';
 
 @Component({
   selector: 'app-games-page',
@@ -15,8 +16,8 @@ import { RouterLink } from "@angular/router";
     GameCardComponent,
     CardComponent,
     InfiniteScrollDirective,
-    ModalComponent,
-    RouterLink
+    RouterLink,
+    AuthDirective,
 ],
 })
 export class GamesComponent {
