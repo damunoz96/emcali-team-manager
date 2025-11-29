@@ -5,13 +5,13 @@ import { PlayerCardComponent } from "../../components/player-card.component";
 import { CardComponent } from "../../../../shared/components/card.component";
 import { PlayerService } from "../../services/players.service";
 import { QUERY_KEYS } from "../../../../core/constants/query-keys";
-import { AddPlayerModalComponent } from "../../components/add-player-modal/add-player-modal.component";
 import { ModalComponent } from "../../../../shared/components/modal";
+import { AddPlayerModalComponent } from "../../components/add-player-modal/add-player-modal.component";
 
 @Component({
   selector: 'app-players-page',
   templateUrl: './players.component.html',
-  imports: [CardComponent, PlayerCardComponent, InfiniteScrollDirective, AddPlayerModalComponent, ModalComponent],
+  imports: [CardComponent, PlayerCardComponent, InfiniteScrollDirective, ModalComponent, AddPlayerModalComponent],
 })
 export class PlayersComponent {
   private readonly playerService = inject(PlayerService);

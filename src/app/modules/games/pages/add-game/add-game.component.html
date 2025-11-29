@@ -1,0 +1,143 @@
+<div class="pt-14 min-h-screen bg-gradient-subtle">
+  <main class="container mx-auto px-4 lg:px-8 py-8 max-w-4xl">
+    <div class="mb-8">
+      <h1 class="text-4xl font-bold text-foreground mb-2 flex items-center gap-3">
+        <span class="w-10 h-10 text-primary inline-flex items-center justify-center bg-primary/10 rounded-full">🏆</span>
+        Add new game
+      </h1>
+      <p class="text-muted-foreground">Record a new game and player's stats</p>
+    </div>
+
+    <form class="space-y-8">
+      <!-- Game Details Card -->
+      <div class="p-6 shadow-elevated border-border rounded-xl bg-card">
+        <h2 class="text-xl font-bold text-foreground mb-6 flex items-center gap-2">
+          <span class="w-5 h-5 inline-flex items-center justify-center">🏆</span>
+          Game details
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="space-y-2">
+            <label for="date" class="flex items-center gap-2 text-sm text-foreground">
+              <span class="w-4 h-4 inline-flex items-center">📅</span>
+              Date
+            </label>
+            <input id="date" type="date" class="input border-border w-full" />
+          </div>
+
+          <div class="space-y-2">
+            <label for="location" class="flex items-center gap-2 text-sm text-foreground">
+              <span class="w-4 h-4 inline-flex items-center">📍</span>
+              Place
+            </label>
+            <input id="location" type="text" placeholder="Coliseo Municipal" class="input border-border w-full" />
+          </div>
+
+          <div class="space-y-2">
+            <label for="emcaliScore" class="text-sm text-foreground">Emcali' score</label>
+            <input id="emcaliScore" type="number" min="0" placeholder="0" class="input border-border w-full" />
+          </div>
+
+          <div class="space-y-2">
+            <label for="opponentScore" class="text-sm text-foreground">Oponnent's score</label>
+            <input id="opponentScore" type="number" min="0" placeholder="0" class="input border-border w-full" />
+          </div>
+
+          <div class="space-y-2 md:col-span-2">
+            <label for="opponentName" class="text-sm text-foreground">Oponnent's name</label>
+            <input id="opponentName" type="text" placeholder="Dragones" class="input border-border w-full" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Player Statistics Card -->
+      <div class="p-6 shadow-elevated border-border rounded-xl bg-card">
+        <h2 class="text-xl font-bold text-foreground mb-6 flex items-center gap-2">
+          <span class="w-5 h-5 inline-flex items-center">👥</span>
+          Player's stats
+        </h2>
+
+        <div class="space-y-4 mb-6">
+          <div class="flex gap-3">
+            <div class="flex-1">
+              <!-- Select con opciones estáticas (sin lógica) -->
+              <div class="relative">
+                <select class="w-full border-border rounded-md p-2">
+                  <option value="" disabled selected>Pick a player</option>
+                  <option value="1">Juan Pérez</option>
+                  <option value="2">Carlos Gómez</option>
+                  <option value="3">Luis Martínez</option>
+                </select>
+              </div>
+            </div>
+
+            <button type="button" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground font-semibold shadow-glow">
+              <span class="w-4 h-4">➕</span>
+              Add
+            </button>
+          </div>
+        </div>
+
+        <!-- Ejemplo estático de lista de estadísticas para jugadores. Repetir bloques según sea necesario. -->
+        <div class="space-y-4">
+          <!-- Jugador 1 -->
+          <div class="bg-muted/50 rounded-lg p-4 border border-border">
+            <div class="flex items-center justify-between mb-4">
+              <span class="font-semibold text-foreground">Juan Pérez</span>
+              <button type="button" class="text-destructive hover:bg-destructive/10 rounded p-1">✖</button>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+              <div class="space-y-2">
+                <label for="points-1" class="text-sm">Points</label>
+                <input id="points-1" type="number" min="0" value="12" class="input border-border w-full" />
+              </div>
+
+              <div class="space-y-2">
+                <label for="fouls-1" class="text-sm">Fouls</label>
+                <input id="fouls-1" type="number" min="0" value="2" class="input border-border w-full" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Jugador 2 -->
+          <div class="bg-muted/50 rounded-lg p-4 border border-border">
+            <div class="flex items-center justify-between mb-4">
+              <span class="font-semibold text-foreground">Carlos Gómez</span>
+              <button type="button" class="text-destructive hover:bg-destructive/10 rounded p-1">✖</button>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+              <div class="space-y-2">
+                <label for="points-2" class="text-sm">Puntos</label>
+                <input id="points-2" type="number" min="0" value="8" class="input border-border w-full" />
+              </div>
+
+              <div class="space-y-2">
+                <label for="fouls-2" class="text-sm">Faltas</label>
+                <input id="fouls-2" type="number" min="0" value="1" class="input border-border w-full" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mensaje alternativo cuando no hay jugadores (estático) -->
+        <!--
+        <div class="text-center py-8 text-muted-foreground">
+          No hay jugadores agregados. Selecciona jugadores para registrar sus estadísticas.
+        </div>
+        -->
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex justify-end gap-4">
+        <button type="button" class="px-4 py-2 rounded-md border border-border">Cancel</button>
+
+        <button type="submit" class="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground font-semibold">
+          <span class="w-4 h-4">🏆</span>
+          <p>Save Game</p>
+        </button>
+      </div>
+    </form>
+  </main>
+</div>
