@@ -8,6 +8,8 @@ import { HistoryStatsComponent } from "../../components/history-stats/history-st
 import { AvatarPipe } from "../../../../shared/pipes/avatar.pipe";
 import { Player } from "../../models/player.models";
 
+type PlayersQuery = InfiniteData<{ items: Player, count: number }>;
+
 @Component({
   selector: 'app-player-detail',
   templateUrl: './player-detail.component.html',
@@ -28,8 +30,8 @@ export class PlayerDetailComponent {
     queryKey: [QUERY_KEYS.PLAYER, this.playerId()],
     queryFn: () => this.playerService.getPlayerById(this.playerId()),
     placeholderData: () => {
-      const players = this.client.getQueryData<InfiniteData<Player>>([QUERY_KEYS.PLAYERS]);
-      const allPlayers = players?.pages.flat();
+      const players = this.client.getQueryData<PlayersQuery>([QUERY_KEYS.PLAYERS]);
+      const allPlayers = players?.pages.flatMap((p) => p.items);
       return allPlayers?.find((p) => p.id === this.playerId());
     }
   }));
