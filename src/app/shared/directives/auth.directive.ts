@@ -4,14 +4,14 @@ import { injectQuery } from "@tanstack/angular-query-experimental";
 
 @Directive({
   selector: '[appAuth]',
-  host: { '[class.hidden]': 'authenticated()' },
+  host: { '[class.hidden]': 'hide()' },
 })
 export class AuthDirective {
   private readonly auth = inject(AuthService);
   readonly user = injectQuery(() => this.auth.options());
 
-  readonly authenticated = computed(() => {
+  readonly hide = computed(() => {
     const user = this.user.data();
-    return Boolean(user);
+    return !user;
   });
 }
