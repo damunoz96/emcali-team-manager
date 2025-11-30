@@ -134,15 +134,11 @@ export class LoginComponent {
     try {
       const group = this.group.getRawValue();
       await this.auth.login(group);
+      const { queryKey } = this.auth.options();
+      await this.client.invalidateQueries({ queryKey });
       const redirect = this.redirect();
-      await this.client.invalidateQueries({
-        queryKey: this.auth.options().queryKey,
-      });
-      if (redirect) {
-        this.router.navigate([redirect]);
-        return;
-      }
-      this.router.navigate(['/games']);
+      const path = redirect || '/games';
+      this.router.navigate([path]);
     } catch (error) {
       if (error instanceof AuthError) {
         toast.error(error.message);
