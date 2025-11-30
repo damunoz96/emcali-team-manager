@@ -5,7 +5,6 @@ import { AuthService } from '../../../../core/services/auth.service';
 import { toast } from 'ngx-sonner';
 import { AuthError } from '@supabase/supabase-js';
 import { QueryClient } from '@tanstack/angular-query-experimental';
-import { authOptions } from '../../../../core/query-options';
 
 @Component({
   selector: 'app-login-page',
