@@ -1,4 +1,4 @@
-import { Component, inject, input, numberAttribute } from "@angular/core";
+import { Component, inject, input, numberAttribute, signal } from "@angular/core";
 import { BackButtonComponent } from "../../../../shared/components/back-button.component";
 import { PlayerService } from "../../services/players.service";
 import { StatsService } from "../../../../core/services/stats.service";
@@ -9,6 +9,8 @@ import { AvatarPipe } from "../../../../shared/pipes/avatar.pipe";
 import { Player } from "../../models/player.models";
 import { AuthDirective } from "../../../../shared/directives/auth.directive";
 import { toast } from "ngx-sonner";
+import { ModalComponent } from "../../../../shared/components/modal";
+import { EditPlayerModalComponent } from "../../components/edit-player-modal/edit-player-modal.component";
 
 type PlayersQuery = InfiniteData<{ items: Player, count: number }>;
 
@@ -19,19 +21,22 @@ type PlayersQuery = InfiniteData<{ items: Player, count: number }>;
     BackButtonComponent,
     HistoryStatsComponent,
     AvatarPipe,
-    AuthDirective
+    AuthDirective,
+    ModalComponent,
+    EditPlayerModalComponent
 ],
 })
 export class PlayerDetailComponent {
   private readonly playerService = inject(PlayerService);
   private readonly statsService = inject(StatsService);
   readonly client = inject(QueryClient);
+  readonly isOpen = signal(false);
 
   readonly playerId = input.required({ transform: numberAttribute, alias: 'id' });
 
   readonly player = injectQuery<Player>(() => ({
     queryKey: [QUERY_KEYS.PLAYER, this.playerId()],
-    queryFn: () => this.playerService.getPlayerById(this.playerId()),
+    queryFn: () => this.playerService.getPlayerAndGamesById(this.playerId()),
     placeholderData: () => {
       const players = this.client.getQueryData<PlayersQuery>([QUERY_KEYS.PLAYERS]);
       const allPlayers = players?.pages.flatMap((p) => p.items);
@@ -60,6 +65,7 @@ export class PlayerDetailComponent {
     try {
       await this.playerService.activatePlayerById(this.playerId())
       toast.success('Player Activated successfully')
+      console.log(this.player.data())
     } catch (error) {
       toast.error('Something went wrong')
     } finally {
@@ -68,4 +74,6 @@ export class PlayerDetailComponent {
       })
     }
   }
+
+
 }

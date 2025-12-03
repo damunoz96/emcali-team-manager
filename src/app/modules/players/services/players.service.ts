@@ -25,7 +25,8 @@ export class PlayerService {
     return data;
   }
 
-  async getPlayerById(id: number) {
+
+  async getPlayerAndGamesById(id: number) {
     const { data, error } = await supabase
       .from('players')
       .select(
@@ -51,6 +52,15 @@ export class PlayerService {
     return data;
   }
 
+  async updatePlayerById (id:number, options:PlayerUpdate){
+    const {data, error} = await supabase
+      .from('players')
+      .update(options)
+      .eq('id', id)
+      .select();
+      if (error) throw error;
+      return data
+  }
   async deactivatePlayerById(id: number) {
     const { data, error } = await supabase
       .from('players')

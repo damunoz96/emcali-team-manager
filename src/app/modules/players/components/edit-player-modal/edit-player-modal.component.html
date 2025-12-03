@@ -6,15 +6,15 @@
     <!-- Header -->
     <header class="dialog-header mb-4">
       <h2 id="dialog-title" class="text-lg text-accent-foreground font-semibold">
-        Add new players
+        Edit player
       </h2>
       <p id="dialog-desc" class="text-sm text-muted-foreground">
-        Complete all the information to add a new player successfully
+        Update information about {{name()}} {{last_name()}}
       </p>
     </header>
 
     <!-- Formulario (estático) -->
-    <form [formGroup]="group" (ngSubmit)="handleAddPlayer()" class="space-y-4 mt-4">
+    <form  [formGroup]="group" (ngSubmit)="handleEditPlayer()" class="space-y-4 mt-4">
       <div class="grid grid-cols-2 gap-4">
         <div class="space-y-2">
           <label for="name" class=" block text-accent-foreground text-sm font-medium">Name</label>
@@ -27,7 +27,7 @@
             type="text"
             placeholder="Enter name"
             class="bg-card text-accent-foreground px-3 py-2 border rounded-lg w-full"
-            value=""
+            [value]="name()"
           />
         </div>
 
@@ -44,7 +44,7 @@
             type="text"
             placeholder="Enter last name"
             class="bg-card text-accent-foreground px-3 py-2 border rounded-lg w-full "
-            value=""
+            [value]="last_name()"
           />
         </div>
       </div>
@@ -58,8 +58,9 @@
           id="birthDate"
           name="birthDate"
           type="date"
+          [value]="birth_date()"
           class="bg-card input px-3 py-2 border rounded-lg w-full text-accent-foreground"
-          value=""
+
         />
       </div>
 
@@ -77,7 +78,7 @@
             min="0"
             max="99"
             class="bg-card text-accent-foreground input px-3 py-2 border rounded-lg w-full"
-            value=""
+            [value]="number()"
           />
         </div>
 
@@ -87,10 +88,11 @@
           >
           <select
             formControlName="position"
+
             id="position"
             name="position"
             class="bg-card text-accent-foreground select px-3 py-2 border rounded-lg w-full"
-            aria-placeholder="Seleccionar"
+            aria-placeholder="Select"
           >
             <option value="">Select</option>
             <option value="g">Guard</option>
@@ -110,11 +112,11 @@
           Cancel
         </button>
         <button
-          [disabled]="group.invalid"
+          [disabled]=""
           type="submit"
           class="px-4 py-2 border text-foreground border-border rounded-lg hover:bg-primary transition-colors cursor-pointer"
         >
-          Add player
+          Confirm
         </button>
       </div>
     </form>

@@ -41,6 +41,7 @@
           </div>
           <div appAuth class="flex gap-6 absolute bottom-6 right-6">
             <div
+              (click)="this.isOpen.set(true)"
               class="flex items-center gap-2 bg-card text-card-foreground rounded-sm border border-border cursor-pointer px-4 py-2 hover:bg-muted transition-all duration-200"
             >
               <svg
@@ -203,3 +204,13 @@
     </div>
   </main>
 </div>
+<app-modal [(isOpen)]="isOpen">
+  <app-edit-player-modal
+    [playerId]="playerId()"
+    [name]="player.data()?.name"
+    [last_name]="player.data()?.last_name"
+    [birth_date]="player.data()?.birth_date"
+    [number]="player.data()?.number"
+    [position]="player.data()?.position"
+  ></app-edit-player-modal>
+</app-modal>
