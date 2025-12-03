@@ -8,6 +8,7 @@ import { HistoryStatsComponent } from "../../components/history-stats/history-st
 import { AvatarPipe } from "../../../../shared/pipes/avatar.pipe";
 import { Player } from "../../models/player.models";
 import { AuthDirective } from "../../../../shared/directives/auth.directive";
+import { toast } from "ngx-sonner";
 
 type PlayersQuery = InfiniteData<{ items: Player, count: number }>;
 
@@ -42,4 +43,29 @@ export class PlayerDetailComponent {
     queryKey: [QUERY_KEYS.PLAYER_STATS, this.playerId()],
     queryFn: () => this.statsService.getPlayerStatsDetailed(this.playerId()),
   }));
+
+  async handleDeactivatePlayer() {
+    try {
+      await this.playerService.deactivatePlayerById(this.playerId())
+      toast.success('Player deactivated successfully')
+    } catch (error) {
+      toast.error('Something went wrong')
+    } finally {
+      this.client.invalidateQueries({
+        queryKey: [QUERY_KEYS.PLAYER, this.playerId()]
+      })
+    }
+  }
+  async handleActivatePlayer() {
+    try {
+      await this.playerService.activatePlayerById(this.playerId())
+      toast.success('Player Activated successfully')
+    } catch (error) {
+      toast.error('Something went wrong')
+    } finally {
+      this.client.invalidateQueries({
+        queryKey: [QUERY_KEYS.PLAYER, this.playerId()]
+      })
+    }
+  }
 }
