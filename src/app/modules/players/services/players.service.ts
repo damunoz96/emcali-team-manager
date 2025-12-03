@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { supabase } from '../../../core/supabase/supabase.client';
-import { PlayerInsert } from '../models/player.models';
+import { PlayerDeactivate, PlayerInsert } from '../models/player.models';
 
 @Injectable({ providedIn: 'root' })
 export class PlayerService {
@@ -47,6 +47,16 @@ export class PlayerService {
 
   async createNewPlayer(options: PlayerInsert) {
     const { data, error } = await supabase.from('players').insert([options]).select();
+    if (error) throw error;
+    return data;
+  }
+
+  async deactivatePlayerById(id: number) {
+    const { data, error } = await supabase
+      .from('players')
+      .update({ active: false} as PlayerDeactivate)
+      .eq('id', id)
+      .select();
     if (error) throw error;
     return data;
   }

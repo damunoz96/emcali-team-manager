@@ -7,6 +7,7 @@ import { QUERY_KEYS } from "../../../../core/constants/query-keys";
 import { HistoryStatsComponent } from "../../components/history-stats/history-stats.component";
 import { AvatarPipe } from "../../../../shared/pipes/avatar.pipe";
 import { Player } from "../../models/player.models";
+import { AuthDirective } from "../../../../shared/directives/auth.directive";
 
 type PlayersQuery = InfiniteData<{ items: Player, count: number }>;
 
@@ -14,10 +15,11 @@ type PlayersQuery = InfiniteData<{ items: Player, count: number }>;
   selector: 'app-player-detail',
   templateUrl: './player-detail.component.html',
   imports: [
-    BackButtonComponent ,
+    BackButtonComponent,
     HistoryStatsComponent,
     AvatarPipe,
-  ],
+    AuthDirective
+],
 })
 export class PlayerDetailComponent {
   private readonly playerService = inject(PlayerService);

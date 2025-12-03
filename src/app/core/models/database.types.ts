@@ -46,6 +46,7 @@ export type Database = {
       }
       players: {
         Row: {
+          active: boolean
           birth_date: string
           created_at: string
           id: number
@@ -56,6 +57,7 @@ export type Database = {
           position: Database["public"]["Enums"]["position"]
         }
         Insert: {
+          active?: boolean
           birth_date: string
           created_at?: string
           id?: number
@@ -66,6 +68,7 @@ export type Database = {
           position: Database["public"]["Enums"]["position"]
         }
         Update: {
+          active?: boolean
           birth_date?: string
           created_at?: string
           id?: number
@@ -127,6 +130,36 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      get_all_players_stats: {
+        Args: never
+        Returns: {
+          average_fouls: number
+          average_points: number
+          player_id: number
+          player_last_name: string
+          player_name: string
+          player_number: number
+          player_position: string
+          total_fouls: number
+          total_games: number
+          total_points: number
+        }[]
+      }
+      get_all_players_stats_filtered: {
+        Args: { min_games?: number; position_filter?: string }
+        Returns: {
+          average_fouls: number
+          average_points: number
+          player_id: number
+          player_last_name: string
+          player_name: string
+          player_number: number
+          player_position: string
+          total_fouls: number
+          total_games: number
+          total_points: number
+        }[]
+      }
       get_games_stats: {
         Args: never
         Returns: {

@@ -17,7 +17,7 @@
     <form [formGroup]="group" (ngSubmit)="handleAddPlayer()" class="space-y-4 mt-4">
       <div class="grid grid-cols-2 gap-4">
         <div class="space-y-2">
-          <label for="name" class="block text-accent-foreground text-sm font-medium">Name</label>
+          <label for="name" class=" block text-accent-foreground text-sm font-medium">Name</label>
           <input
             formControlName="name"
             minlength="2"
@@ -26,7 +26,7 @@
             name="name"
             type="text"
             placeholder="Enter name"
-            class="input px-3 py-2 border rounded-lg w-full"
+            class="bg-card text-accent-foreground px-3 py-2 border rounded-lg w-full"
             value=""
           />
         </div>
@@ -43,7 +43,7 @@
             name="last_name"
             type="text"
             placeholder="Enter last name"
-            class="input px-3 py-2 border rounded-lg w-full"
+            class="bg-card text-accent-foreground px-3 py-2 border rounded-lg w-full "
             value=""
           />
         </div>
@@ -58,7 +58,7 @@
           id="birthDate"
           name="birthDate"
           type="date"
-          class="input px-3 py-2 border rounded-lg w-full"
+          class="bg-card input px-3 py-2 border rounded-lg w-full text-accent-foreground"
           value=""
         />
       </div>
@@ -76,7 +76,7 @@
             placeholder="Enter a number(0-99)"
             min="0"
             max="99"
-            class="input px-3 py-2 border rounded-lg w-full"
+            class="bg-card text-accent-foreground input px-3 py-2 border rounded-lg w-full"
             value=""
           />
         </div>
@@ -89,7 +89,7 @@
             formControlName="position"
             id="position"
             name="position"
-            class="select px-3 py-2 border rounded-lg w-full"
+            class="bg-card text-accent-foreground select px-3 py-2 border rounded-lg w-full"
             aria-placeholder="Seleccionar"
           >
             <option value="">Select</option>
