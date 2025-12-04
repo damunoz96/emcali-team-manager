@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { supabase } from "../../../core/supabase/supabase.client";
+import { AddGameOptions } from "../models/games.model";
 
 @Injectable({ providedIn: 'root' })
 
@@ -29,6 +30,31 @@ export class GameService {
       .eq('id', id)
       .single();
     if (error) throw error;
+    return data;
+  }
+
+  async addGame(options: AddGameOptions) {
+    const { data: game, error } = await supabase
+      .from('games')
+      .insert({
+        opponent: options.opponent,
+        score: options.score,
+        opponent_score: options.opponent_score,
+        location: options.location,
+      })
+      .select()
+      .single();
+    if (error) throw error;
+    const inserData = options.players.map((p) => ({
+      player_id: p.id,
+      game_id: game.id,
+      points: p.points,
+      fouls: p.fouls,
+    }));
+    const { data, error: e } = await supabase
+      .from('stats')
+      .insert(inserData);
+    if (e) throw e;
     return data;
   }
 }
