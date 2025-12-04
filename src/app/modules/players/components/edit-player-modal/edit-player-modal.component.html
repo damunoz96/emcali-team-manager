@@ -20,14 +20,12 @@
         <div class="space-y-2">
           <label for="name" class=" block text-accent-foreground text-sm font-medium">Name</label>
           <input
+            appInput
             formControlName="name"
-            minlength="2"
-            maxlength="15"
             id="name"
             name="name"
             type="text"
             placeholder="Enter name"
-            class="bg-card text-accent-foreground px-3 py-2 border rounded-lg w-full"
           />
         </div>
 
@@ -36,14 +34,12 @@
             >Last name</label
           >
           <input
+            appInput
             formControlName="last_name"
-            minlength="2"
-            maxlength="15"
             id="last_name"
             name="last_name"
             type="text"
             placeholder="Enter last name"
-            class="bg-card text-accent-foreground px-3 py-2 border rounded-lg w-full"
           />
         </div>
       </div>
@@ -57,7 +53,7 @@
           id="birthDate"
           name="birthDate"
           type="date"
-          class="bg-card input px-3 py-2 border rounded-lg w-full text-accent-foreground"
+          appInput
         />
       </div>
 
@@ -67,14 +63,12 @@
             >Number</label
           >
           <input
+            appInput
             formControlName="number"
             id="number"
             name="number"
             type="number"
             placeholder="Enter a number(0-99)"
-            min="0"
-            max="99"
-            class="bg-card text-accent-foreground input px-3 py-2 border rounded-lg w-full"
           />
         </div>
 
@@ -84,7 +78,6 @@
           >
           <select
             formControlName="position"
-
             id="position"
             name="position"
             class="bg-card text-accent-foreground select px-3 py-2 border rounded-lg w-full"
@@ -100,17 +93,13 @@
 
       <!-- Acciones -->
       <div class="flex justify-end gap-3 pt-4">
-        <button
-          (click)="closeModal()"
-          type="button"
-          class="px-4 py-2 border text-foreground border-border rounded-lg hover:bg-red-600 transition-colors cursor-pointer"
-        >
+        <button (click)="closeModal()" type="button" appButton color="danger">
           Cancel
         </button>
         <button
           [disabled]="group.invalid || upsert.isPending()"
           type="submit"
-          class="px-4 py-2 border text-foreground border-border rounded-lg hover:bg-primary transition-colors cursor-pointer"
+          appButton
         >
           @if (upsert.isPending()) {
             Cargando...

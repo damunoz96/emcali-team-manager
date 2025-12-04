@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, input } from "@angular/core";
+import { Component, computed, effect, inject, input, OnInit } from "@angular/core";
 import { Player, PlayerInsert, Position } from "../../models/player.models";
 import { NonNullableFormBuilder, Validators, ReactiveFormsModule } from "@angular/forms";
 import { PlayerService } from "../../services/players.service";
@@ -6,11 +6,13 @@ import { ModalComponent } from "../../../../shared/components/modal";
 import { toast } from "ngx-sonner";
 import { injectMutation, QueryClient } from "@tanstack/angular-query-experimental";
 import { QUERY_KEYS } from "../../../../core/constants/query-keys";
+import { InputComponent } from "../../../../shared/ui/input/input.component";
+import { ButtonComponent } from "../../../../shared/ui/button/button.component";
 
 @Component({
   selector: 'app-edit-player-modal',
   templateUrl: './edit-player-modal.component.html',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, InputComponent, ButtonComponent],
 })
 export class EditPlayerModalComponent {
   private readonly fb = inject(NonNullableFormBuilder);
