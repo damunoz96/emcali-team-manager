@@ -205,12 +205,5 @@
   </main>
 </div>
 <app-modal [(isOpen)]="isOpen">
-  <app-edit-player-modal
-    [playerId]="playerId()"
-    [name]="player.data()?.name"
-    [last_name]="player.data()?.last_name"
-    [birth_date]="player.data()?.birth_date"
-    [number]="player.data()?.number"
-    [position]="player.data()?.position"
-  ></app-edit-player-modal>
+  <app-edit-player-modal [player]="player.data()" />
 </app-modal>

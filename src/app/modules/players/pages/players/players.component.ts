@@ -6,8 +6,8 @@ import { CardComponent } from '../../../../shared/components/card.component';
 import { PlayerService } from '../../services/players.service';
 import { QUERY_KEYS } from '../../../../core/constants/query-keys';
 import { ModalComponent } from '../../../../shared/components/modal';
-import { AddPlayerModalComponent } from '../../components/add-player-modal/add-player-modal.component';
 import { AuthDirective } from '../../../../shared/directives/auth.directive';
+import { EditPlayerModalComponent } from '../../components/edit-player-modal/edit-player-modal.component';
 
 @Component({
   selector: 'app-players-page',
@@ -17,7 +17,7 @@ import { AuthDirective } from '../../../../shared/directives/auth.directive';
     PlayerCardComponent,
     InfiniteScrollDirective,
     ModalComponent,
-    AddPlayerModalComponent,
+    EditPlayerModalComponent,
     AuthDirective,
   ],
 })

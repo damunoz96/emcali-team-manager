@@ -9,7 +9,7 @@
         Edit player
       </h2>
       <p id="dialog-desc" class="text-sm text-muted-foreground">
-        Update information about {{name()}} {{last_name()}}
+        Update information about this player
       </p>
     </header>
 
@@ -27,7 +27,6 @@
             type="text"
             placeholder="Enter name"
             class="bg-card text-accent-foreground px-3 py-2 border rounded-lg w-full"
-            [value]="name()"
           />
         </div>
 
@@ -43,8 +42,7 @@
             name="last_name"
             type="text"
             placeholder="Enter last name"
-            class="bg-card text-accent-foreground px-3 py-2 border rounded-lg w-full "
-            [value]="last_name()"
+            class="bg-card text-accent-foreground px-3 py-2 border rounded-lg w-full"
           />
         </div>
       </div>
@@ -58,9 +56,7 @@
           id="birthDate"
           name="birthDate"
           type="date"
-          [value]="birth_date()"
           class="bg-card input px-3 py-2 border rounded-lg w-full text-accent-foreground"
-
         />
       </div>
 
@@ -78,7 +74,6 @@
             min="0"
             max="99"
             class="bg-card text-accent-foreground input px-3 py-2 border rounded-lg w-full"
-            [value]="number()"
           />
         </div>
 
@@ -112,11 +107,15 @@
           Cancel
         </button>
         <button
-          [disabled]=""
+          [disabled]="group.invalid || upsert.isPending()"
           type="submit"
           class="px-4 py-2 border text-foreground border-border rounded-lg hover:bg-primary transition-colors cursor-pointer"
         >
-          Confirm
+          @if (upsert.isPending()) {
+            Cargando...
+          } @else {
+            Confirm
+          }
         </button>
       </div>
     </form>

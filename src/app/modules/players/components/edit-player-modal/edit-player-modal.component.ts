@@ -1,59 +1,73 @@
-import { Component, inject, input, numberAttribute } from "@angular/core";
-import { Player, Position } from "../../models/player.models";
-import { NonNullableFormBuilder, Validators, ɵInternalFormsSharedModule, ReactiveFormsModule } from "@angular/forms";
+import { Component, effect, inject, input } from "@angular/core";
+import { Player, PlayerInsert, Position } from "../../models/player.models";
+import { NonNullableFormBuilder, Validators, ReactiveFormsModule } from "@angular/forms";
 import { PlayerService } from "../../services/players.service";
 import { ModalComponent } from "../../../../shared/components/modal";
 import { toast } from "ngx-sonner";
-import { QueryClient } from "@tanstack/angular-query-experimental";
+import { injectMutation, QueryClient } from "@tanstack/angular-query-experimental";
 import { QUERY_KEYS } from "../../../../core/constants/query-keys";
 
 @Component({
   selector: 'app-edit-player-modal',
   templateUrl: './edit-player-modal.component.html',
-  imports: [ɵInternalFormsSharedModule, ReactiveFormsModule],
+  imports: [ReactiveFormsModule],
 })
 export class EditPlayerModalComponent {
   private readonly fb = inject(NonNullableFormBuilder);
   private readonly playerService = inject(PlayerService);
   private readonly client = inject(QueryClient);
-  readonly playerId = input.required<number>();
+  private readonly modal = inject(ModalComponent);
 
-  readonly modal = inject(ModalComponent);
-  group = this.fb.group({
+  readonly player = input<Player>();
+
+  readonly group = this.fb.group({
+    id: this.fb.control<number | undefined>(undefined),
     name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(15)]],
     last_name: ['', [Validators.required]],
     birth_date: ['', [Validators.required]],
     number: [0, [Validators.required, Validators.min(0), Validators.max(99)]],
     position: ['' as Position, [Validators.required]],
   });
-  name = input.required<string | undefined>();
-  last_name = input.required<string | undefined>();
-  birth_date = input.required<string | undefined>();
-  number = input.required<number | undefined>();
-  position = input.required<Position | undefined>();
 
+  constructor() {
+    effect(() => {
+      const player = this.player();
+      this.group.reset({
+        id: player?.id,
+        name: player?.name ?? '',
+        last_name: player?.last_name ?? '',
+        birth_date: player?.birth_date ?? '',
+        number: player?.number ?? 0,
+        position: player?.position ?? 'f',
+      });
+    });
+  }
+
+  readonly upsert = injectMutation(() => ({
+    mutationFn: (player: PlayerInsert) => {
+      return this.playerService.upsertPlayer(player);
+    },
+    onSuccess: () => {
+      toast.success('Player update successfully');
+      this.modal.close();
+    },
+    onError: () => {
+      toast.error('Something went wrong');
+    },
+    onSettled: (_result, _error, player) => {
+      this.client.invalidateQueries({
+        queryKey: [QUERY_KEYS.PLAYER, player.id],
+      });
+    },
+  }));
 
   closeModal() {
     this.modal.close();
   }
 
   async handleEditPlayer() {
-    try {
-      await this.playerService.updatePlayerById(this.playerId(), {
-        name: this.group.getRawValue().name,
-        last_name: this.group.getRawValue().last_name,
-        birth_date: this.group.getRawValue().birth_date,
-        number: this.group.getRawValue().number,
-        position: this.group.getRawValue().position,
-      });
-      toast('Player update successfully');
-    } catch (error) {
-      toast.error('Something went wrong');
-    } finally {
-      this.closeModal();
-      this.client.invalidateQueries({
-        queryKey: [QUERY_KEYS.PLAYER, this.playerId()],
-      });
-    }
+    const data = this.group.getRawValue();
+    data.id ??= undefined;
+    this.upsert.mutate(data);
   }
 }
