@@ -4,12 +4,13 @@
   <!-- Contenido del diálogo -->
   <div class="dialog-content sm:max-w-[500px] bg-card rounded-lg shadow-lg p-6 mt-4">
     <!-- Header -->
+    @let headers = this.headers();
     <header class="dialog-header mb-4">
       <h2 id="dialog-title" class="text-lg text-accent-foreground font-semibold">
-        Edit player
+        {{ headers.title }}
       </h2>
       <p id="dialog-desc" class="text-sm text-muted-foreground">
-        Update information about this player
+        {{ headers.message }}
       </p>
     </header>
 
