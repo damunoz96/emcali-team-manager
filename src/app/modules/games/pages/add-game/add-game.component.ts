@@ -87,8 +87,6 @@ export class AddGameComponent {
       const stats = this.stats.data();
       const datePipe = new DatePipe('en-US');
       const formattedDate = datePipe.transform(game?.created_at, 'yyyy-MM-dd');
-      console.log('Game:', game);
-      console.log('Stats:', stats);
       if (!game || !stats) return;
       this.gameGroup.reset({
         id: game.id,
@@ -98,23 +96,10 @@ export class AddGameComponent {
         location: game.location,
         date: formattedDate ?? ''
       });
-      this.stats.data()?.forEach(gameStat => {
-        const player = {
-          active: gameStat.active,
-          created_at: gameStat.created_at,
-          birth_date: gameStat.birth_date,
-          position: gameStat.position, 
-          id: gameStat.id,
-          name: gameStat.name,
-          last_name: gameStat.last_name,
-          number: gameStat.number,
-          image: gameStat.image
-        };
-        const group = this.playerGroup(player, gameStat.stats.points, gameStat.stats.fouls);
+      this.stats.data()?.forEach(({stats, ...player}) => {
+        const group = this.playerGroup(player, stats.points, stats.fouls);
         this.gameGroup.controls.players.push(group);
-        }
-      );
-
+      });
     })
   }
 
