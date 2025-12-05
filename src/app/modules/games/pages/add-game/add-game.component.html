@@ -22,7 +22,7 @@
               <span class="w-4 h-4 inline-flex items-center">📅</span>
               Date
             </label>
-            <input id="date" formControlName="date" type="date" class="input border-border w-full" />
+            <input id="date" formControlName="date" type="date" class="input border-border w-full rounded-lg" />
           </div>
 
           <div class="space-y-2">
@@ -30,22 +30,22 @@
               <span class="w-4 h-4 inline-flex items-center">📍</span>
               Place
             </label>
-            <input id="location" formControlName="location" type="text" placeholder="Coliseo Municipal" class="input border-border w-full" />
+            <input id="location" formControlName="location" type="text" placeholder="Coliseo Municipal" class="input border-border w-full rounded-lg" />
           </div>
 
           <div class="space-y-2">
             <label for="score" class="text-sm text-foreground">Emcali' score</label>
-            <input id="score" formControlName="score" type="number" min="0" placeholder="0" class="input border-border w-full" />
+            <input id="score" formControlName="score" type="number" min="0" placeholder="0" class="input border-border w-full rounded-lg" />
           </div>
 
           <div class="space-y-2">
             <label for="opponent_score" class="text-sm text-foreground">Oponnent's score</label>
-            <input id="opponent_score" formControlName="opponent_score" type="number" min="0" placeholder="0" class="input border-border w-full" />
+            <input id="opponent_score" formControlName="opponent_score" type="number" min="0" placeholder="0" class="input border-border w-full rounded-lg" />
           </div>
 
           <div class="space-y-2 md:col-span-2">
             <label for="opponent" class="text-sm text-foreground">Oponnent's name</label>
-            <input id="opponent" formControlName="opponent" type="text" placeholder="Dragones" class="input border-border w-full" />
+            <input id="opponent" formControlName="opponent" type="text" placeholder="Dragones" class="input border-border w-full rounded-lg" />
           </div>
         </div>
       </div>
@@ -65,7 +65,7 @@
                 <select
                   [formControl]="playerIdControl"
                   name="player"
-                  class="w-full border-border rounded-md p-2"
+                  class="w-full border-border rounded-lg p-2"
                 >
                   <option value="" disabled selected>Pick a player</option>
                   @for (player of players.data(); track player.id) {
@@ -105,14 +105,14 @@
               </div>
 
               <div class="grid grid-cols-2 gap-4">
-                <div class="space-y-2">
-                  <label for="points-1" class="text-sm">Points</label>
-                  <input formControlName="points" id="points-1" type="number" min="0" value="12" class="input border-border w-full" />
+                <div class="space-y-4">
+                  <label for="points-1" class="text-sm text-foreground">Points</label>
+                  <input formControlName="points" id="points-1" type="number" min="0" value="12" class="input border-border w-full rounded-lg" />
                 </div>
 
-                <div class="space-y-2">
-                  <label for="fouls-1" class="text-sm">Fouls</label>
-                  <input formControlName="fouls" id="fouls-1" type="number" min="0" value="2" class="input border-border w-full" />
+                <div class="space-y-4">
+                  <label for="fouls-1" class="text-sm text-foreground">Fouls</label>
+                  <input formControlName="fouls" id="fouls-1" type="number" min="0" value="2" class="input border-border w-full rounded-lg" />
                 </div>
               </div>
             </div>

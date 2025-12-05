@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, input, OnInit } from "@angular/core";
+import { Component, computed, effect, inject, input } from "@angular/core";
 import { Player, PlayerInsert, Position } from "../../models/player.models";
 import { NonNullableFormBuilder, Validators, ReactiveFormsModule } from "@angular/forms";
 import { PlayerService } from "../../services/players.service";

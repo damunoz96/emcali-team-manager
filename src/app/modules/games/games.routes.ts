@@ -12,6 +12,11 @@ export const GAME_ROUTES: Routes = [
     loadComponent: () => import('./pages/add-game/add-game.component').then(m => m.AddGameComponent)
   },
   {
+    path: ':id/edit',
+    canActivate: [authGuard],
+    loadComponent: () => import('./pages/add-game/add-game.component').then(m => m.AddGameComponent)
+  },
+  {
     path: ':id',
     loadComponent: () => import('./pages/game-detail/game-detail.component').then(m => m.GameDetailComponent)
   },

@@ -1,11 +1,13 @@
-import { Component, computed, inject } from "@angular/core";
-import { FormsModule, NonNullableFormBuilder, Validators, ReactiveFormsModule, FormGroup, FormControl, FormArray } from "@angular/forms";
+import { Component, computed, effect, inject, input, numberAttribute } from "@angular/core";
+import { FormsModule, NonNullableFormBuilder, Validators, ReactiveFormsModule, FormGroup, FormControl, FormArray, NumberValueAccessor } from "@angular/forms";
 import { injectQuery } from "@tanstack/angular-query-experimental";
 import { QUERY_KEYS } from "../../../../core/constants/query-keys";
 import { PlayerService } from "../../../players/services/players.service";
 import { Player } from "../../../players/models/player.models";
 import { toSignal } from '@angular/core/rxjs-interop';
 import { GameService } from "../../services/games.service";
+import { StatsService } from "../../../../core/services/stats.service";
+import { DatePipe } from "@angular/common";
 
 @Component ({
   selector: 'app-add-game',
@@ -14,8 +16,13 @@ import { GameService } from "../../services/games.service";
 })
 export class AddGameComponent {
   private readonly playerService = inject(PlayerService);
-  private readonly fb = inject(NonNullableFormBuilder);
   private readonly gameService = inject(GameService);
+  private readonly statsService = inject(StatsService);
+  private readonly fb = inject(NonNullableFormBuilder);
+
+  readonly gameId = input.required({transform: numberAttribute, alias:'id'});
+
+  readonly isEditMode = computed(()=> !!this.gameId());
 
   readonly playerIdControl = this.fb.control<string>('');
   readonly selectedPlayerId = toSignal(
@@ -23,14 +30,15 @@ export class AddGameComponent {
     { initialValue: '' },
   );
 
-  readonly playerGroup = (player: Player) => this.fb.group({
+  readonly playerGroup = (player: Player, points?:number, fouls?:number) => this.fb.group({
     id: [player.id, Validators.required],
     name: [`${player.name} ${player.last_name}`],
-    points: [0],
-    fouls: [0],
+    points: [points ?? 0],
+    fouls: [fouls ?? 0],
   });
 
   readonly gameGroup = this.fb.group({
+    id: this.fb.control<number | undefined>(undefined),
     score: [0, [Validators.required, Validators.min(0)]],
     opponent_score: [0, [Validators.required, Validators.min(0)]],
     opponent: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
@@ -59,6 +67,58 @@ export class AddGameComponent {
     queryKey:[QUERY_KEYS.PLAYERS_DATA],
     queryFn: async () => await this.playerService.getAllPlayersData()
   }));
+
+  readonly game = injectQuery(() => ({
+    queryKey: [QUERY_KEYS.GAME, this.gameId()],
+    queryFn: () =>this.gameService.getGame(this.gameId()),
+    enabled: this.isEditMode()
+  }))
+
+  readonly stats = injectQuery (() => ({
+    queryKey: [QUERY_KEYS.GAME_PLAYERS, this.gameId()],
+    queryFn: () => this.statsService.getGamePlayers(this.gameId()),
+    enabled: this.isEditMode()
+  }))
+
+
+  constructor () {
+    effect (()=>{
+      const game = this.game.data();
+      const stats = this.stats.data();
+      const datePipe = new DatePipe('en-US');
+      const formattedDate = datePipe.transform(game?.created_at, 'yyyy-MM-dd');
+      console.log('Game:', game);
+      console.log('Stats:', stats);
+      if (!game || !stats) return;
+      this.gameGroup.reset({
+        id: game.id,
+        score: game.score,
+        opponent: game.opponent,
+        opponent_score: game.opponent_score,
+        location: game.location,
+        date: formattedDate ?? ''
+      });
+      this.stats.data()?.forEach(gameStat => {
+        const player = {
+          active: gameStat.active,
+          created_at: gameStat.created_at,
+          birth_date: gameStat.birth_date,
+          position: gameStat.position, 
+          id: gameStat.id,
+          name: gameStat.name,
+          last_name: gameStat.last_name,
+          number: gameStat.number,
+          image: gameStat.image
+        };
+        const group = this.playerGroup(player, gameStat.stats.points, gameStat.stats.fouls);
+        this.gameGroup.controls.players.push(group);
+        }
+      );
+
+    })
+  }
+
+
 
   handleAddPlayer() {
     const player = this.selectedPlayer();

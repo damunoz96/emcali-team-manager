@@ -41,6 +41,7 @@ export class GameService {
         score: options.score,
         opponent_score: options.opponent_score,
         location: options.location,
+        status: 'completed'
       })
       .select()
       .single();
