@@ -1,0 +1,279 @@
+<!-- home.component.html -->
+<div class="min-h-screen bg-background pt-14 w-full overflow-x-hidden">
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 bg-linear-to-br from-primary/20 via-background to-accent/10"></div>
+    <div class="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-10 right-10 w-96 h-96 bg-accent/10 rounded-full blur-3xl"></div>
+
+    <div class="relative container mx-auto px-4 lg:px-8 py-16">
+      <div class="text-center mb-12">
+        <div
+          class="inline-flex items-center gap-2 px-4 py-2 bg-primary/20 rounded-full text-primary text-sm font-medium mb-6"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-4 h-4"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M13 10V3L4 14h7v7l9-11h-7z"
+            />
+          </svg>
+          Season 2024
+        </div>
+        <h1 class="text-5xl md:text-7xl font-black text-foreground mb-4 tracking-tight">EMCALI</h1>
+        <p class="text-xl text-muted-foreground max-w-md mx-auto">
+          Dominando la cancha, partido a partido
+        </p>
+      </div>
+
+      <!-- Quick Stats -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mb-16">
+        <!-- Stat 1: Games -->
+        <div
+          class="group bg-card/50 backdrop-blur-sm border border-border/50 rounded-xl p-6 text-center hover:bg-card hover:border-primary/30 transition-all duration-300 hover:shadow-glow"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-6 h-6 text-primary mx-auto mb-3 group-hover:scale-110 transition-transform"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+          <div class="text-3xl font-bold text-foreground mb-1">24</div>
+          <div class="text-sm text-muted-foreground">Partidos</div>
+        </div>
+
+        <!-- Stat 2: Wins -->
+        <div
+          class="group bg-card/50 backdrop-blur-sm border border-border/50 rounded-xl p-6 text-center hover:bg-card hover:border-primary/30 transition-all duration-300 hover:shadow-glow"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-6 h-6 text-primary mx-auto mb-3 group-hover:scale-110 transition-transform"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
+            />
+          </svg>
+          <div class="text-3xl font-bold text-foreground mb-1">18</div>
+          <div class="text-sm text-muted-foreground">Victorias</div>
+        </div>
+
+        <!-- Stat 3: Players -->
+        <div
+          class="group bg-card/50 backdrop-blur-sm border border-border/50 rounded-xl p-6 text-center hover:bg-card hover:border-primary/30 transition-all duration-300 hover:shadow-glow"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-6 h-6 text-primary mx-auto mb-3 group-hover:scale-110 transition-transform"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
+            />
+          </svg>
+          <div class="text-3xl font-bold text-foreground mb-1">15</div>
+          <div class="text-sm text-muted-foreground">Jugadores</div>
+        </div>
+
+        <!-- Stat 4: Average Points -->
+        <div
+          class="group bg-card/50 backdrop-blur-sm border border-border/50 rounded-xl p-6 text-center hover:bg-card hover:border-primary/30 transition-all duration-300 hover:shadow-glow"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-6 h-6 text-primary mx-auto mb-3 group-hover:scale-110 transition-transform"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+            />
+          </svg>
+          <div class="text-3xl font-bold text-foreground mb-1">92.5</div>
+          <div class="text-sm text-muted-foreground">Prom. Puntos</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Top Players Section -->
+  <section class="container mx-auto px-4 lg:px-8 py-12">
+    <div class="flex items-center justify-between mb-8">
+      <div class="flex items-center gap-3">
+        <div class="p-2 bg-accent/20 rounded-lg">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-6 h-6 text-accent"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
+            />
+          </svg>
+        </div>
+        <h2 class="text-2xl font-bold text-foreground">Top Players</h2>
+      </div>
+      <a
+        routerLink="/players"
+        class="text-primary hover:text-primary/80 text-sm font-medium transition-colors"
+      >
+        Ver todos →
+      </a>
+    </div>
+
+    <!-- Podium Style -->
+    <div class="flex items-end justify-center gap-4 md:gap-8 mb-12">
+      <!-- 2nd Place -->
+      <a routerLink="/players/2" class="group flex flex-col items-center">
+        <div class="relative mb-4">
+          <div
+            class="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden border-4 border-muted-foreground/50 group-hover:border-muted-foreground transition-colors shadow-elevated"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop"
+              alt="Miguel Ángel Torres"
+              class="w-full h-full object-cover"
+            />
+          </div>
+          <div
+            class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-8 h-8 bg-muted-foreground/80 rounded-full flex items-center justify-center text-foreground font-bold text-sm"
+          >
+            2
+          </div>
+        </div>
+        <div
+          class="bg-card border border-border rounded-xl p-4 text-center w-28 md:w-36 h-32 flex flex-col justify-center group-hover:border-primary/30 transition-colors"
+        >
+          <div class="text-sm font-semibold text-foreground truncate">Miguel Torres</div>
+          <div class="text-xs text-muted-foreground mb-2">Escolta</div>
+          <div class="text-2xl font-bold text-primary">18.5</div>
+          <div class="text-xs text-muted-foreground">PPG</div>
+        </div>
+      </a>
+
+      <!-- 1st Place -->
+      <a routerLink="/players/1" class="group flex flex-col items-center -mt-8">
+        <div class="relative mb-4">
+          <div class="absolute inset-0 bg-accent/30 rounded-full blur-xl scale-150"></div>
+          <div
+            class="relative w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden border-4 border-accent group-hover:border-accent/80 transition-colors shadow-elevated"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop"
+              alt="Carlos Rodríguez"
+              class="w-full h-full object-cover"
+            />
+          </div>
+          <div
+            class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-10 h-10 bg-accent rounded-full flex items-center justify-center text-accent-foreground font-bold shadow-lg"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-5 h-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          class="bg-linear-to-b from-card to-card/80 border border-accent/30 rounded-xl p-4 text-center w-32 md:w-40 h-40 flex flex-col justify-center shadow-glow"
+        >
+          <div class="text-sm font-semibold text-foreground truncate">Carlos Rodríguez</div>
+          <div class="text-xs text-muted-foreground mb-2">Delantero</div>
+          <div class="text-4xl font-black text-accent">22.3</div>
+          <div class="text-xs text-muted-foreground">PPG</div>
+        </div>
+      </a>
+
+      <!-- 3rd Place -->
+      <a routerLink="/players/3" class="group flex flex-col items-center">
+        <div class="relative mb-4">
+          <div
+            class="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden border-4 border-amber-700/50 group-hover:border-amber-700 transition-colors shadow-elevated"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop"
+              alt="Andrés Martínez"
+              class="w-full h-full object-cover"
+            />
+          </div>
+          <div
+            class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-8 h-8 bg-amber-700/80 rounded-full flex items-center justify-center text-foreground font-bold text-sm"
+          >
+            3
+          </div>
+        </div>
+        <div
+          class="bg-card border border-border rounded-xl p-4 text-center w-28 md:w-36 h-28 flex flex-col justify-center group-hover:border-primary/30 transition-colors"
+        >
+          <div class="text-sm font-semibold text-foreground truncate">Andrés Martínez</div>
+          <div class="text-xs text-muted-foreground mb-2">Pivot</div>
+          <div class="text-2xl font-bold text-primary">16.8</div>
+          <div class="text-xs text-muted-foreground">PPG</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="container mx-auto px-4 lg:px-8 py-16">
+    <div
+      class="relative overflow-hidden bg-linear-to-r from-primary/20 via-card to-accent/20 border border-border rounded-2xl p-8 md:p-12 text-center"
+    >
+      <div class="absolute top-0 left-1/4 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-0 right-1/4 w-64 h-64 bg-accent/10 rounded-full blur-3xl"></div>
+
+      <a class="relative">
+        <h3 class="text-2xl md:text-3xl font-bold text-foreground mb-4">
+          ¿Listo para el próximo partido?
+        </h3>
+        <p class="text-muted-foreground mb-8 max-w-md mx-auto">
+          Registra los resultados y mantén las estadísticas actualizadas
+        </p>
+      </a>
+    </div>
+  </section>
+</div>
