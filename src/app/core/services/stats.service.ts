@@ -63,4 +63,14 @@ export class StatsService {
       stats: player.stats.at(0)!,
     }));
   }
+
+  async deleteStatsByGameId(id:number){
+    const { data, error } = await supabase
+      .from('stats')
+      .delete()
+      .eq('game_id',id)
+      .select();
+      if (error) throw error;
+      return data
+  }
 }

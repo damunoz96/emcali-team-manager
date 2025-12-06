@@ -1,11 +1,22 @@
+@let editPage = this.isEditMode();
 <div class="pt-14 min-h-screen bg-gradient-subtle">
   <main class="container mx-auto px-4 lg:px-8 py-8 max-w-4xl">
     <div class="mb-8">
       <h1 class="text-4xl font-bold text-foreground mb-2 flex items-center gap-3">
         <span class="w-10 h-10 text-primary inline-flex items-center justify-center bg-primary/10 rounded-full">🏆</span>
-        Add new game
+        @if (editPage) {
+          Edit game
+        } @else {
+          Add new game
+        }
       </h1>
-      <p class="text-muted-foreground">Record a new game and player's stats</p>
+      <p class="text-muted-foreground">
+        @if (editPage) {
+          Edit game and player's stats
+        } @else {
+          Record a new game and player's stats
+        }        
+      </p>
     </div>
 
     <form (ngSubmit)="handleSubmit()" [formGroup]="gameGroup" class="space-y-8">
@@ -22,7 +33,7 @@
               <span class="w-4 h-4 inline-flex items-center">📅</span>
               Date
             </label>
-            <input id="date" formControlName="date" type="date" class="input border-border w-full rounded-lg" />
+            <input id="date" formControlName="date" type="date" class="input border-border w-full rounded-lg bg-card text-card-foreground" />
           </div>
 
           <div class="space-y-2">
@@ -30,22 +41,22 @@
               <span class="w-4 h-4 inline-flex items-center">📍</span>
               Place
             </label>
-            <input id="location" formControlName="location" type="text" placeholder="Coliseo Municipal" class="input border-border w-full rounded-lg" />
+            <input id="location" formControlName="location" type="text" placeholder="Coliseo Municipal" class="input border-border w-full rounded-lg bg-card text-card-foreground" />
           </div>
 
           <div class="space-y-2">
             <label for="score" class="text-sm text-foreground">Emcali' score</label>
-            <input id="score" formControlName="score" type="number" min="0" placeholder="0" class="input border-border w-full rounded-lg" />
+            <input id="score" formControlName="score" type="number" min="0" placeholder="0" class="input border-border w-full rounded-lg bg-card text-card-foreground" />
           </div>
 
           <div class="space-y-2">
             <label for="opponent_score" class="text-sm text-foreground">Oponnent's score</label>
-            <input id="opponent_score" formControlName="opponent_score" type="number" min="0" placeholder="0" class="input border-border w-full rounded-lg" />
+            <input id="opponent_score" formControlName="opponent_score" type="number" min="0" placeholder="0" class="input border-border w-full rounded-lg bg-card text-card-foreground" />
           </div>
 
           <div class="space-y-2 md:col-span-2">
             <label for="opponent" class="text-sm text-foreground">Oponnent's name</label>
-            <input id="opponent" formControlName="opponent" type="text" placeholder="Dragones" class="input border-border w-full rounded-lg" />
+            <input id="opponent" formControlName="opponent" type="text" placeholder="Dragones" class="input border-border w-full rounded-lg bg-card text-card-foreground" />
           </div>
         </div>
       </div>
@@ -65,7 +76,7 @@
                 <select
                   [formControl]="playerIdControl"
                   name="player"
-                  class="w-full border-border rounded-lg p-2"
+                  class="w-full border-border rounded-lg p-2 bg-card text-card-foreground"
                 >
                   <option value="" disabled selected>Pick a player</option>
                   @for (player of players.data(); track player.id) {
@@ -107,12 +118,12 @@
               <div class="grid grid-cols-2 gap-4">
                 <div class="space-y-4">
                   <label for="points-1" class="text-sm text-foreground">Points</label>
-                  <input formControlName="points" id="points-1" type="number" min="0" value="12" class="input border-border w-full rounded-lg" />
+                  <input formControlName="points" id="points-1" type="number" min="0" value="12" class="input border-border w-full rounded-lg bg-card text-card-foreground" />
                 </div>
 
                 <div class="space-y-4">
                   <label for="fouls-1" class="text-sm text-foreground">Fouls</label>
-                  <input formControlName="fouls" id="fouls-1" type="number" min="0" value="2" class="input border-border w-full rounded-lg" />
+                  <input formControlName="fouls" id="fouls-1" type="number" min="0" value="2" class="input border-border w-full rounded-lg bg-card text-card-foreground" />
                 </div>
               </div>
             </div>
@@ -135,9 +146,9 @@
 
       <!-- Action Buttons -->
       <div class="flex justify-end gap-4">
-        <button type="button" class="px-4 py-2 rounded-md border border-border">Cancel</button>
+        <button type="button" (click)="goBack()" class="px-4 py-2 rounded-md border border-border hover:bg-destructive">Cancel</button>
 
-        <button [disabled]="gameGroup.invalid" type="submit" class="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground font-semibold">
+        <button [disabled]="gameGroup.invalid" type="submit" class="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary/80 hover:bg-primary text-primary-foreground font-semibold">
           <span class="w-4 h-4">🏆</span>
           <p>Save Game</p>
         </button>

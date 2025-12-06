@@ -2,75 +2,63 @@
   <app-back-button />
   <main class="container mx-auto px-4 lg:px-8 py-8">
     <div class="bg-card rounded-xl p-8 shadow-elevated border border-border mb-8">
-  <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-6">
-    <div>
-      <div class="flex items-center gap-3 mb-2">
-        <!-- Icono Calendar -->
-        <span class="w-6 h-6 text-primary">📅</span>
-        <span class="text-muted-foreground font-medium">{{game.data()?.created_at | date:"dd MMM yyyy hh:mm aa"}}</span>
-      </div>
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-6">
+        <div>
+          <div class="flex items-center gap-3 mb-2">
+            <!-- Icono Calendar -->
+            <span class="w-6 h-6 text-primary">📅</span>
+            <span class="text-muted-foreground font-medium">{{
+              game.data()?.created_at | date : 'dd MMM yyyy hh:mm aa'
+            }}</span>
+          </div>
 
-      <div class="flex items-center gap-3 mb-2">
-        <!-- Icono MapPin -->
-        <span class="w-6 h-6 text-primary">📍</span>
-        <span class="text-muted-foreground font-medium">{{game.data()?.location}}</span>
-      </div>
-    </div>
-
-    <div class="px-6 py-3 rounded-full text-sm font-bold bg-primary/30 text-primary">
-      Completed
-    </div>
-  </div>
-
-  <!-- Score Display -->
-  <div class="grid grid-cols-3 gap-6 items-center">
-    <div class="text-center">
-      <h3 class="text-2xl font-bold text-foreground mb-2">Emcali</h3>
-      <div class="text-5xl font-bold text-primary">{{game.data()?.score}}</div>
-    </div>
-
-    <div class="text-center">
-      <!-- Icono Trophy -->
-      <span class="w-12 h-12 text-primary mx-auto mb-2">🏆</span>
-      <span class="text-muted-foreground font-medium">VS</span>
-    </div>
-
-    <div class="text-center">
-      <h3 class="text-2xl font-bold text-foreground mb-2">{{game.data()?.opponent}}</h3>
-      <div class="text-5xl font-bold text-accent">{{game.data()?.opponent_score}}</div>
-    </div>
-  </div>
-</div>
-    <div class="bg-card rounded-xl p-8 shadow-elevated border border-border mb-8">
-      <h2 class="text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="w-6 h-6 text-primary"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-          />
-        </svg>
-        Statistics
-      </h2>
-      <div class="grid w-full grid-cols-1 md:grid-cols-2 gap-6 max-w-md justify-center">
-        <div class="flex justify-between items-center">
-          <span class="text-muted-foreground">Points</span>
-          <span class="text-2xl font-bold text-primary">{{game.data()?.score}}</span>
+          <div class="flex items-center gap-3 mb-2">
+            <!-- Icono MapPin -->
+            <span class="w-6 h-6 text-primary">📍</span>
+            <span class="text-muted-foreground font-medium">{{ game.data()?.location }}</span>
+          </div>
         </div>
-        <div class="flex justify-between items-center">
-          <span class="text-muted-foreground">Fouls</span>
-          <span class="text-2xl font-bold text-foreground">18</span>
+
+        <div class="flex gap-4 items-center">
+          <div
+            appAuth
+            [routerLink]="['/games', gameId(), 'edit']"
+            class="px-6 py-3 text-sm text-card rounded-md border border-border bg-primary/80 hover:bg-primary transition-all duration-200 cursor-pointer"
+          >
+            Edit Game
+          </div>
+          <div
+            appAuth
+            (click)="this.isOpen.set(true)"
+            class="px-6 py-3 text-sm text-card-foreground rounded-md border border-border bg-destructive/80 hover:bg-destructive transition-all duration-200 cursor-pointer"
+          >
+            Delete Game
+          </div>
+          <div class="px-6 py-3 rounded-full text-sm font-bold bg-primary/30 text-primary">
+            {{ game.data()?.status }}
+          </div>
+        </div>
+      </div>
+
+      <!-- Score Display -->
+      <div class="grid grid-cols-3 gap-6 items-center">
+        <div class="text-center">
+          <h3 class="text-2xl font-bold text-foreground mb-2">Emcali</h3>
+          <div class="text-5xl font-bold text-primary">{{ game.data()?.score }}</div>
+        </div>
+
+        <div class="text-center">
+          <!-- Icono Trophy -->
+          <span class="w-12 h-12 text-primary mx-auto mb-2">🏆</span>
+          <span class="text-muted-foreground font-medium">VS</span>
+        </div>
+
+        <div class="text-center">
+          <h3 class="text-2xl font-bold text-foreground mb-2">{{ game.data()?.opponent }}</h3>
+          <div class="text-5xl font-bold text-accent">{{ game.data()?.opponent_score }}</div>
         </div>
       </div>
     </div>
-
     <!-- Emcali Players Stats -->
     <div class="bg-card rounded-xl shadow-elevated border border-border mb-8">
       <div class="p-6 border-b border-border bg-gradient-subtle">
@@ -93,7 +81,9 @@
         </h2>
       </div>
       <app-game-table [id]="gameId()" />
-
     </div>
   </main>
 </div>
+<app-modal [(isOpen)]="isOpen">
+  <app-delete-game-modal [gameId]="gameId()" />
+</app-modal>

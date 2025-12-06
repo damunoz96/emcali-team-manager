@@ -7,7 +7,8 @@ import { Player } from "../../../players/models/player.models";
 import { toSignal } from '@angular/core/rxjs-interop';
 import { GameService } from "../../services/games.service";
 import { StatsService } from "../../../../core/services/stats.service";
-import { DatePipe } from "@angular/common";
+import { DatePipe, Location } from "@angular/common";
+import { toast } from "ngx-sonner";
 
 @Component ({
   selector: 'app-add-game',
@@ -81,7 +82,7 @@ export class AddGameComponent {
   }))
 
 
-  constructor () {
+  constructor (private location: Location) {
     effect (()=>{
       const game = this.game.data();
       const stats = this.stats.data();
@@ -103,11 +104,23 @@ export class AddGameComponent {
     })
   }
 
+  goBack () {
+    this.location.back()
+  }
+
 
 
   handleAddPlayer() {
     const player = this.selectedPlayer();
     if (!player) return;
+    const playerAlreadyAdded = this.gameGroup.controls.players.controls.some(
+      (control) => control.value.id === player.id
+    );
+
+    if (playerAlreadyAdded) {
+      toast.error('El jugador ya ha sido agregado');
+      return;
+    }
     const group = this.playerGroup(player);
     this.gameGroup.controls.players.push(group);
     this.playerIdControl.reset();
@@ -119,7 +132,15 @@ export class AddGameComponent {
 
   async handleSubmit() {
     const data = this.gameGroup.getRawValue();
-    await this.gameService.addGame(data);
+    data.id ??= undefined;
+    try {
+      await this.gameService.addGame(data);
+    } catch (error) {
+      toast.error('Something went wrong');
+    } finally {
+      toast.success('Game successfully edited!');
+      this.goBack();
+    }
   }
 
 }

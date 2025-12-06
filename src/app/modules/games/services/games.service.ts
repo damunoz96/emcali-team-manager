@@ -34,9 +34,13 @@ export class GameService {
   }
 
   async addGame(options: AddGameOptions) {
+    if(options.id) {
+      await supabase.from('stats').delete().eq('game_id', options.id)
+    }
     const { data: game, error } = await supabase
       .from('games')
-      .insert({
+      .upsert({
+        id: options.id,
         opponent: options.opponent,
         score: options.score,
         opponent_score: options.opponent_score,
@@ -57,5 +61,15 @@ export class GameService {
       .insert(inserData);
     if (e) throw e;
     return data;
+  }
+
+  async deleteGameById (id:number){
+    const { data, error } = await supabase
+      .from('games')
+      .delete()
+      .eq('id', id)
+      .select();
+    if (error) throw error;
+    return data
   }
 }
