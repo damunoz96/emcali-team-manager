@@ -14,12 +14,14 @@ import { toast } from "ngx-sonner";
   selector: 'app-add-game',
   templateUrl: './add-game.component.html',
   imports: [FormsModule, ReactiveFormsModule],
+  providers: [DatePipe],
 })
 export class AddGameComponent {
   private readonly playerService = inject(PlayerService);
   private readonly gameService = inject(GameService);
   private readonly statsService = inject(StatsService);
   private readonly fb = inject(NonNullableFormBuilder);
+  private readonly datePipe = inject(DatePipe);
 
   readonly gameId = input.required({transform: numberAttribute, alias:'id'});
 
@@ -86,8 +88,7 @@ export class AddGameComponent {
     effect (()=>{
       const game = this.game.data();
       const stats = this.stats.data();
-      const datePipe = new DatePipe('en-US');
-      const formattedDate = datePipe.transform(game?.created_at, 'yyyy-MM-dd');
+      const formattedDate = this.datePipe.transform(game?.created_at, 'yyyy-MM-dd');
       if (!game || !stats) return;
       this.gameGroup.reset({
         id: game.id,
@@ -95,7 +96,7 @@ export class AddGameComponent {
         opponent: game.opponent,
         opponent_score: game.opponent_score,
         location: game.location,
-        date: formattedDate ?? ''
+        date: formattedDate || '',
       });
       this.stats.data()?.forEach(({stats, ...player}) => {
         const group = this.playerGroup(player, stats.points, stats.fouls);
@@ -107,8 +108,6 @@ export class AddGameComponent {
   goBack () {
     this.location.back()
   }
-
-
 
   handleAddPlayer() {
     const player = this.selectedPlayer();

@@ -35,9 +35,13 @@ export class GameService {
 
   async addGame(options: AddGameOptions) {
     if(options.id) {
-      await supabase.from('stats').delete().eq('game_id', options.id)
+      await supabase
+        .from('stats')
+        .delete()
+        .eq('game_id', options.id)
+        .throwOnError();
     }
-    const { data: game, error } = await supabase
+    const { data: game } = await supabase
       .from('games')
       .upsert({
         id: options.id,
@@ -48,18 +52,19 @@ export class GameService {
         status: 'completed'
       })
       .select()
-      .single();
-    if (error) throw error;
+      .single()
+      .throwOnError();
+
     const inserData = options.players.map((p) => ({
       player_id: p.id,
       game_id: game.id,
       points: p.points,
       fouls: p.fouls,
     }));
-    const { data, error: e } = await supabase
+    const { data } = await supabase
       .from('stats')
-      .insert(inserData);
-    if (e) throw e;
+      .insert(inserData)
+      .throwOnError();
     return data;
   }
 
