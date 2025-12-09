@@ -36,7 +36,7 @@ export class StatsService {
       )
       .eq('stats.players.id', id)
       .order('created_at', { ascending: false })
-      .limit(5);
+      .limit(10);
     if (error) throw error;
     return data.map((game) => ({
       ...game,

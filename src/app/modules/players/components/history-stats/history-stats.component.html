@@ -2,28 +2,82 @@
   <table class="w-full">
     <thead>
       <tr class="border-b-2 border-border">
-        <th class="text-left py-4 px-6 text-sm font-semibold text-muted-foreground uppercase tracking-wide">Date</th>
-        <th class="text-left py-4 px-6 text-sm font-semibold text-muted-foreground uppercase tracking-wide">Opponent</th>
-        <th class="text-center py-4 px-6 text-sm font-semibold text-muted-foreground uppercase tracking-wide">Result</th>
-        <th class="text-center py-4 px-6 text-sm font-semibold text-muted-foreground uppercase tracking-wide">Points</th>
-        <th class="text-center py-4 px-6 text-sm font-semibold text-muted-foreground uppercase tracking-wide">Fouls</th>
+        <th
+          class="text-left py-4 px-6 text-sm font-semibold text-muted-foreground uppercase tracking-wide"
+        >
+          Date
+        </th>
+        <th
+          class="text-left py-4 px-6 text-sm font-semibold text-muted-foreground uppercase tracking-wide"
+        >
+          Opponent
+        </th>
+        <th
+          class="text-center py-4 px-6 text-sm font-semibold text-muted-foreground uppercase tracking-wide"
+        >
+          Result
+        </th>
+        <th
+          class="text-center py-4 px-6 text-sm font-semibold text-muted-foreground uppercase tracking-wide"
+        >
+          Points
+        </th>
+        <th
+          class="text-center py-4 px-6 text-sm font-semibold text-muted-foreground uppercase tracking-wide"
+        >
+          Fouls
+        </th>
       </tr>
     </thead>
     <tbody>
-      @for (game of history.data(); track game.id){
-        <tr
+      @if (history.data()) { @for (game of history.data(); track game.id){
+      <tr
         [routerLink]="['/games', game.stats.game_id]"
-        class="border-b border-border hover:bg-accent/5 transition-colors cursor-pointer">
-          <td class="py-4 px-6 text-sm text-foreground">{{ game.created_at | date:"dd MMM yyyy hh:mm aa" }}</td>
-          <td class="py-4 px-6 text-sm text-foreground font-medium">{{ game.opponent }}</td>
-          <td class="py-4 px-6 text-center">
-            <span class="inline-block px-3 py-1.5 rounded-lg text-sm font-bold bg-primary/20 text-primary border border-primary/30">
-              {{ game.score }} - {{ game.opponent_score }}
-            </span>
-          </td>
-          <td class="py-4 px-6 text-center text-lg font-bold text-foreground">{{ game.stats.points }}</td>
-          <td class="py-4 px-6 text-center text-lg font-bold text-foreground">{{ game.stats.fouls }}</td>
-        </tr>
+        class="border-b border-border hover:bg-accent/5 transition-colors cursor-pointer"
+      >
+        <td class="py-4 px-6 text-sm text-foreground">
+          {{ game.created_at | date : 'dd MMM yyyy hh:mm aa' }}
+        </td>
+        <td class="py-4 px-6 text-sm text-foreground font-medium">{{ game.opponent }}</td>
+        <td class="py-4 px-6 text-center">
+          <span
+            class="inline-block px-3 py-1.5 rounded-lg text-sm font-bold bg-primary/20 text-primary border border-primary/30"
+          >
+            {{ game.score }} - {{ game.opponent_score }}
+          </span>
+        </td>
+        <td class="py-4 px-6 text-center text-lg font-bold text-foreground">
+          {{ game.stats.points }}
+        </td>
+        <td class="py-4 px-6 text-center text-lg font-bold text-foreground">
+          {{ game.stats.fouls }}
+        </td>
+      </tr>
+      } } @else if (history.isLoading()) {
+      <tr class="border-b border-border animate-pulse">
+        <td class="py-4 px-6">
+          <div class="h-4 w-24 bg-border rounded"></div>
+        </td>
+        <td class="py-4 px-6">
+          <div class="h-4 w-32 bg-border rounded"></div>
+        </td>
+        <td class="py-4 px-6 text-center">
+          <div class="h-4 w-16 bg-border rounded mx-auto"></div>
+        </td>
+        <td class="py-4 px-6 text-center">
+          <div class="h-4 w-8 bg-border rounded mx-auto"></div>
+        </td>
+        <td class="py-4 px-6 text-center">
+          <div class="h-4 w-8 bg-border rounded mx-auto"></div>
+        </td>
+      </tr>
+
+      } @else if (history.isError()) {
+      <tr>
+        <td colspan="5" class="py-4 px-6">
+          <p class="text-sm text-red-500 font-semibold">{{ history.error() }}</p>
+        </td>
+      </tr>
       }
     </tbody>
   </table>

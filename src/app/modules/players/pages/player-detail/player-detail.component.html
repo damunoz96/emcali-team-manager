@@ -128,7 +128,7 @@
           </svg>
           <p class="text-sm text-muted-foreground uppercase tracking-wide">Games played</p>
         </div>
-        <p class="text-5xl font-bold text-foreground">{{ stats.total_games }}</p>
+        <p class="text-5xl font-bold text-foreground">{{ stats.total_games || 0 }}</p>
       </div>
 
       <!-- Puntos Totales -->
@@ -152,8 +152,8 @@
           </svg>
           <p class="text-sm text-muted-foreground uppercase tracking-wide">Total Points</p>
         </div>
-        <p class="text-5xl font-bold text-foreground">{{ stats.total_points }}</p>
-        <p class="text-sm text-muted-foreground mt-2">{{ stats.average_points }} PPG</p>
+        <p class="text-5xl font-bold text-foreground">{{ stats.total_points || 0 }}</p>
+        <p class="text-sm text-muted-foreground mt-2">{{ stats.average_points || 0 }} PPG</p>
       </div>
 
       <!-- Faltas Totales -->
@@ -177,8 +177,8 @@
           </svg>
           <p class="text-sm text-muted-foreground uppercase tracking-wide">Total Fouls</p>
         </div>
-        <p class="text-5xl font-bold text-foreground">{{ stats.total_fouls }}</p>
-        <p class="text-sm text-muted-foreground mt-2">{{ stats.average_fouls }}FPG</p>
+        <p class="text-5xl font-bold text-foreground">{{ stats.total_fouls || 0 }}</p>
+        <p class="text-sm text-muted-foreground mt-2">{{ stats.average_fouls || 0 }}FPG</p>
       </div>
     </div>
 
@@ -200,7 +200,7 @@
 
     <!-- Advanced Stats -->
     <div class="bg-card border border-border rounded-lg shadow-card p-8">
-      <h2 class="text-3xl font-bold text-foreground mb-6">Last 5 games</h2>
+      <h2 class="text-3xl font-bold text-foreground mb-6">Last 10 games</h2>
       <app-history-stats [id]="playerId()" />
     </div>
   </main>
