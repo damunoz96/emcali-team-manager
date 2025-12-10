@@ -2,7 +2,6 @@ import { Component, inject, input, numberAttribute, signal } from "@angular/core
 import { DatePipe } from "@angular/common";
 import { injectQuery } from "@tanstack/angular-query-experimental";
 import { GameService } from "../../services/games.service";
-import { BackButtonComponent } from "../../../../shared/components/back-button.component";
 import { QUERY_KEYS } from "../../../../core/constants/query-keys";
 import { GameTableComponent } from "../../components/game-table/game-table.component";
 import { AuthDirective } from "../../../../shared/directives/auth.directive";
@@ -13,7 +12,7 @@ import { DeleteGameModalComponent } from "../../components/delete-game-modal.com
 @Component({
   selector: 'app-game-detail',
   templateUrl: './game-detail.component.html',
-  imports: [BackButtonComponent, DatePipe, GameTableComponent, AuthDirective, RouterLink, ModalComponent, DeleteGameModalComponent],
+  imports: [ DatePipe, GameTableComponent, AuthDirective, RouterLink, ModalComponent, DeleteGameModalComponent],
 })
 export class GameDetailComponent {
   private readonly gameService = inject(GameService);

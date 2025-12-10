@@ -1,5 +1,4 @@
 import { Component, inject, input, numberAttribute, signal } from "@angular/core";
-import { BackButtonComponent } from "../../../../shared/components/back-button.component";
 import { PlayerService } from "../../services/players.service";
 import { StatsService } from "../../../../core/services/stats.service";
 import { InfiniteData, injectQuery, QueryClient } from "@tanstack/angular-query-experimental";
@@ -19,7 +18,6 @@ type PlayersQuery = InfiniteData<{ items: Player, count: number }>;
   selector: 'app-player-detail',
   templateUrl: './player-detail.component.html',
   imports: [
-    BackButtonComponent,
     HistoryStatsComponent,
     AvatarPipe,
     AuthDirective,
