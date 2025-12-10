@@ -8,6 +8,7 @@ import { QUERY_KEYS } from '../../../../core/constants/query-keys';
 import { ModalComponent } from '../../../../shared/components/modal';
 import { RouterLink } from "@angular/router";
 import { AuthDirective } from '../../../../shared/directives/auth.directive';
+import { ButtonComponent } from "../../../../shared/components/button.component";
 
 @Component({
   selector: 'app-games-page',
@@ -18,6 +19,7 @@ import { AuthDirective } from '../../../../shared/directives/auth.directive';
     InfiniteScrollDirective,
     RouterLink,
     AuthDirective,
+    ButtonComponent
 ],
 })
 export class GamesComponent {

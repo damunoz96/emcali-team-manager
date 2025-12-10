@@ -8,6 +8,7 @@ import { QUERY_KEYS } from '../../../../core/constants/query-keys';
 import { ModalComponent } from '../../../../shared/components/modal';
 import { AuthDirective } from '../../../../shared/directives/auth.directive';
 import { EditPlayerModalComponent } from '../../components/edit-player-modal/edit-player-modal.component';
+import { ButtonComponent } from '../../../../shared/components/button.component';
 
 @Component({
   selector: 'app-players-page',
@@ -19,6 +20,7 @@ import { EditPlayerModalComponent } from '../../components/edit-player-modal/edi
     ModalComponent,
     EditPlayerModalComponent,
     AuthDirective,
+    ButtonComponent
   ],
 })
 export class PlayersComponent {

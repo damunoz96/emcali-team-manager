@@ -5,18 +5,18 @@
         <h1 class="text-4xl font-bold text-foreground mb-2">Players</h1>
         <p class="text-muted-foreground">Manage the roster of Emcali´s basketball team</p>
       </div>
-      <button
-        appAuth
-        (click)="isOpen.set(true)"
-        type="button"
-        class="px-6 py-3 bg-primary/90 text-primary-foreground rounded-lg font-semibold hover:opacity-90 transition-all duration-200 shadow-glow hover:scale-105 cursor-pointer"
-      >
-        + Agregar Jugador
-      </button>
+      <app-button
+       appAuth
+       routerLink="/games/add-game"
+       (click)="isOpen.set(true)"
+       variant="primary"
+       size="lg"
+
+      >+ Add Player</app-button>
     </div>
 
     <!-- Stats Cards -->
-    <div class="grid grid-cols-2 gap-4 mb-8">
+    <div class="grid grid-cols-1 gap-4 mb-8">
       @if (players.data()) {
       <app-card title="Total players" [content]="players.data()?.total"></app-card>
       } @else if (players.isLoading()) {

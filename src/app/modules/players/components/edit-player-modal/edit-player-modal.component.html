@@ -93,20 +93,23 @@
 
       <!-- Acciones -->
       <div class="flex justify-end gap-3 pt-4">
-        <button (click)="closeModal()" type="button" appButton color="danger">
-          Cancel
-        </button>
-        <button
+        <app-button
+          variant="destructive"
+          size="md"
+          type="button"
+          (click)="closeModal()"
+        >Cancel</app-button>
+        <app-button
+          variant="primary"
+          size="md"
           [disabled]="group.invalid || upsert.isPending()"
           type="submit"
-          appButton
         >
           @if (upsert.isPending()) {
             Cargando...
           } @else {
             Confirm
-          }
-        </button>
+          }</app-button>
       </div>
     </form>
   </div>

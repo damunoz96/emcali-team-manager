@@ -2,7 +2,7 @@ import { Component, computed, Directive, inject, input } from '@angular/core';
 import { tv, VariantProps } from 'tailwind-variants';
 
 const tvClass = tv({
-  base: 'rounded-lg font-semibold transition-all duration-300',
+  base: 'rounded-lg font-semibold transition-all duration-300 border border-border',
   variants: {
     variant: {
       primary: 'bg-primary/80 hover:bg-primary text-primary-foreground',
@@ -23,13 +23,15 @@ const tvClass = tv({
 @Component({
   selector: 'app-button',
   styles: [],
-  template: `<button [class]="clx()">
+  template: `<button [class]="clx()" [type]="type()" [disabled]="disabled()">
     <ng-content></ng-content>
-  </button>`,
+  </button>`
 })
 export class ButtonComponent {
   variant = input<VariantProps<typeof tvClass>['variant']>();
   size = input<VariantProps<typeof tvClass>['size']>();
+  disabled = input<boolean>(false);
+  type = input<'submit' | 'button' | 'reset'>()
 
   clx = computed(() => tvClass({ variant: this.variant(), size: this.size() }));
 }

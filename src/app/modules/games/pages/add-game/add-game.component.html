@@ -85,16 +85,13 @@
                 </select>
               </div>
             </div>
-
-            <button
-              [disabled]="!selectedPlayer()"
-              (click)="handleAddPlayer()"
+            <app-button
               type="button"
-              class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground font-semibold shadow-glow"
-            >
-              <span class="w-4 h-4">➕</span>
-              Add
-            </button>
+              (click)="handleAddPlayer()"
+              variant="primary"
+              size="md"
+            >Add
+            </app-button>
           </div>
         </div>
 
@@ -106,13 +103,14 @@
                 <span class="font-semibold text-foreground">
                   {{ playerGroup.controls.name.value }}
                 </span>
-                <button
+                <app-button
                   type="button"
-                  class="text-destructive hover:bg-destructive/10 rounded p-1"
                   (click)="deletePlayerGroup($index)"
+                  variant="destructive"
+                  size="sm"
                 >
                   ✖
-                </button>
+                </app-button>
               </div>
 
               <div class="grid grid-cols-2 gap-4">
@@ -146,12 +144,22 @@
 
       <!-- Action Buttons -->
       <div class="flex justify-end gap-4">
-        <button type="button" (click)="goBack()" class="px-4 py-2 rounded-md border border-border hover:bg-destructive">Cancel</button>
-
-        <button [disabled]="gameGroup.invalid" type="submit" class="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary/80 hover:bg-primary text-primary-foreground font-semibold">
+        <app-button
+          type="button"
+          (click)="goBack()"
+          variant="destructive"
+          size="md"
+        >Cancel</app-button>
+        <app-button
+         type="submit"
+         [disabled]="gameGroup.invalid"
+         variant="primary"
+         size="md"
+        >Save Game</app-button>
+        <!-- <button [disabled]="gameGroup.invalid" type="submit" class="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary/80 hover:bg-primary text-primary-foreground font-semibold">
           <span class="w-4 h-4">🏆</span>
           <p>Save Game</p>
-        </button>
+        </button> -->
       </div>
     </form>
   </main>

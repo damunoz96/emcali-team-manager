@@ -6,13 +6,13 @@ import { ModalComponent } from "../../../../shared/components/modal";
 import { toast } from "ngx-sonner";
 import { injectMutation, QueryClient } from "@tanstack/angular-query-experimental";
 import { QUERY_KEYS } from "../../../../core/constants/query-keys";
+import { ButtonComponent } from "../../../../shared/components/button.component";
 import { InputComponent } from "../../../../shared/ui/input/input.component";
-import { ButtonComponent } from "../../../../shared/ui/button/button.component";
 
 @Component({
   selector: 'app-edit-player-modal',
   templateUrl: './edit-player-modal.component.html',
-  imports: [ReactiveFormsModule, InputComponent, ButtonComponent],
+  imports: [ReactiveFormsModule, ButtonComponent, InputComponent],
 })
 export class EditPlayerModalComponent {
   private readonly fb = inject(NonNullableFormBuilder);
@@ -62,7 +62,11 @@ export class EditPlayerModalComponent {
       return this.playerService.upsertPlayer(player);
     },
     onSuccess: () => {
-      toast.success('Player update successfully');
+      if (!this.player()?.id) {
+        toast.success('Player Added successfully')
+      } else {
+        toast.success('Player updated successfully');
+      }
       this.modal.close();
     },
     onError: () => {

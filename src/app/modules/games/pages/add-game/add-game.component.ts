@@ -9,11 +9,12 @@ import { GameService } from "../../services/games.service";
 import { StatsService } from "../../../../core/services/stats.service";
 import { DatePipe, Location } from "@angular/common";
 import { toast } from "ngx-sonner";
+import { ButtonComponent } from "../../../../shared/components/button.component";
 
 @Component ({
   selector: 'app-add-game',
   templateUrl: './add-game.component.html',
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [FormsModule, ReactiveFormsModule, ButtonComponent],
   providers: [DatePipe],
 })
 export class AddGameComponent {
