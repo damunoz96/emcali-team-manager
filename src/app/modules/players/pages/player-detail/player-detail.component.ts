@@ -11,6 +11,7 @@ import { AuthDirective } from "../../../../shared/directives/auth.directive";
 import { toast } from "ngx-sonner";
 import { ModalComponent } from "../../../../shared/components/modal";
 import { EditPlayerModalComponent } from "../../components/edit-player-modal/edit-player-modal.component";
+import { ButtonComponent } from "../../../../shared/components/button.component";
 
 type PlayersQuery = InfiniteData<{ items: Player, count: number }>;
 
@@ -23,7 +24,8 @@ type PlayersQuery = InfiniteData<{ items: Player, count: number }>;
     AvatarPipe,
     AuthDirective,
     ModalComponent,
-    EditPlayerModalComponent
+    EditPlayerModalComponent,
+    ButtonComponent
 ],
 })
 export class PlayerDetailComponent {
