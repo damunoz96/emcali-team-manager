@@ -1,5 +1,5 @@
 <div class="pt-14 min-h-screen bg-gradient-subtle">
-  <main class="container mx-auto px-4 lg:px-8 py-8">
+  <main class="md:container mx-auto px-4 lg:px-8 py-8">
     <!-- Back Button -->
     <app-back-button />
 
@@ -13,11 +13,11 @@
           class="w-32 h-32 rounded-lg object-cover border-2 border-border"
         />
 
-        <div class="flex-1">
+        <div class="flex flex-col gap-2">
+          <h1 class="text-4xl font-bold text-foreground">
+            {{ player.name }} {{ player.last_name }}
+          </h1>
           <div class="flex items-center gap-3 mb-3">
-            <h1 class="text-4xl font-bold text-foreground">
-              {{ player.name }} {{ player.last_name }}
-            </h1>
             <span
               class="px-3 py-1 rounded-full text-xs font-semibold border bg-primary/20 text-primary border-primary/30"
             >
@@ -35,29 +35,23 @@
             >
             }
           </div>
-
-          <div class="mb-4">
-            <span class="text-5xl font-bold text-primary"> # {{ player.number }} </span>
-          </div>
-          <div appAuth class="flex gap-6 absolute bottom-6 right-6">            
+          <span class="text-5xl font-bold text-primary items-center"> # {{ player.number }} </span>
+          <div appAuth class="flex gap-6 md:absolute md:bottom-6 md:right-6">
             <app-button
               type="button"
               (click)="this.isOpen.set(true)"
               [disabled]="!player.active"
               variant="neutral"
-            >Edit player</app-button>
-            @if (player.active){            
-            <app-button
-              type="button"
-              (click)="handleDeactivatePlayer()"
-              variant="destructive"
-            >Deactivate Player</app-button>
+              >Edit player</app-button
+            >
+            @if (player.active){
+            <app-button type="button" (click)="handleDeactivatePlayer()" variant="destructive"
+              >Deactivate Player</app-button
+            >
             } @else {
-              <app-button
-                type="button"
-                (click)="handleActivatePlayer()"
-                variant="primary"
-              >Activate Player</app-button>
+            <app-button type="button" (click)="handleActivatePlayer()" variant="primary"
+              >Activate Player</app-button
+            >
             }
           </div>
         </div>
