@@ -17,6 +17,14 @@ export class GameService {
     return data;
   }
 
+  async getCount () {
+    const { count, error} = await supabase
+      .from('games')
+      .select('*', {count: 'exact'});
+      if (error) throw error;
+      return count
+  }
+
   async getStats() {
     const { data, error } = await supabase.rpc('get_games_stats');
     if (error) throw error;

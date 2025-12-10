@@ -1,9 +1,11 @@
 export const QUERY_KEYS = {
   GAME: 'game',
   GAMES: 'games',
+  GAMES_COUNT:'games-count',
   GAME_PLAYERS: 'game-players',
   PLAYER: 'player',
   PLAYERS: 'players',
+  PLAYERS_COUNT:'players-count',
   PLAYERS_DATA: 'players-data',
   PLAYER_STATS: 'player-stats',
   PLAYER_HISTORY: 'player-history',

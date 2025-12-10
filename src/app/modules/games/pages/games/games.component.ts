@@ -54,16 +54,4 @@ export class GamesComponent {
     return games.filter((g) => g.status === 'upcoming');
   });
 
-  readonly totalLosses = computed(() => {
-    return this.completedGames().filter((g) => g.score && g.score < g.opponent_score).length;
-  });
-
-  readonly totalPoints = computed(() => {
-    return this.completedGames().reduce((acc, g) => acc + (g.score || 0), 0);
-  });
-
-  readonly avgPoints = computed(() => {
-    if (this.completedGames().length <= 0) return 0;
-    return (this.totalPoints() / this.completedGames().length);
-  });
 }

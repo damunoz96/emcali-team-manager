@@ -25,6 +25,14 @@ export class PlayerService {
     return data;
   }
 
+  async getCount() {
+    const { count, error } = await supabase
+      .from('players')
+      .select('*', {count: 'exact'});
+    if (error) throw error;
+    return count
+  }
+
 
   async getPlayerAndGamesById(id: number) {
     const { data, error } = await supabase
