@@ -46,7 +46,7 @@ export class AddGameComponent {
     score: [0, [Validators.required, Validators.min(0)]],
     opponent_score: [0, [Validators.required, Validators.min(0)]],
     opponent: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
-    location: ['', [Validators.required, Validators.minLength(0), Validators.maxLength(20)]],
+    location: ['', [Validators.required, Validators.minLength(0), Validators.maxLength(30)]],
     date: ['', Validators.required],
     players: this.fb.array<ReturnType<typeof this.playerGroup>>([]),
   }, {
