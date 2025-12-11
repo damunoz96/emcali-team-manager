@@ -8,11 +8,12 @@ import { AuthDirective } from "../../../../shared/directives/auth.directive";
 import { RouterLink } from "@angular/router";
 import { ModalComponent } from "../../../../shared/components/modal";
 import { DeleteGameModalComponent } from "../../components/delete-game-modal.component";
+import { ButtonComponent } from "../../../../shared/components/button.component";
 
 @Component({
   selector: 'app-game-detail',
   templateUrl: './game-detail.component.html',
-  imports: [ DatePipe, GameTableComponent, AuthDirective, RouterLink, ModalComponent, DeleteGameModalComponent],
+  imports: [DatePipe, GameTableComponent, AuthDirective, RouterLink, ModalComponent, DeleteGameModalComponent, ButtonComponent],
 })
 export class GameDetailComponent {
   private readonly gameService = inject(GameService);

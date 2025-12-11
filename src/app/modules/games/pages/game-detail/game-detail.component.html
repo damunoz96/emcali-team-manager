@@ -18,21 +18,16 @@
           </div>
         </div>
 
-        <div class="flex gap-4 items-center">
-          <div
-            appAuth
+        <div appAuth class="flex gap-4 items-center">
+          <app-button
+            type="button"
             [routerLink]="['/games', gameId(), 'edit']"
-            class="px-6 py-3 text-sm text-card rounded-md border border-border bg-primary/80 hover:bg-primary transition-all duration-200 cursor-pointer"
-          >
-            Edit Game
-          </div>
-          <div
-            appAuth
+          >Edit Game</app-button>
+          <app-button
+            type="button"
             (click)="this.isOpen.set(true)"
-            class="px-6 py-3 text-sm text-card-foreground rounded-md border border-border bg-destructive/80 hover:bg-destructive transition-all duration-200 cursor-pointer"
-          >
-            Delete Game
-          </div>
+            variant="destructive"
+          >Delete Game</app-button>
           <div class="px-6 py-3 rounded-full text-sm font-bold bg-primary/30 text-primary">
             {{ game.data()?.status }}
           </div>

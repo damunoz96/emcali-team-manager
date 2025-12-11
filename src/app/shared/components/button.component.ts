@@ -37,7 +37,7 @@ export class ButtonComponent {
   variant = input<VariantProps<typeof tvClass>['variant']>();
   size = input<VariantProps<typeof tvClass>['size']>();
   disabled = input<boolean>(false);
-  type = input<'submit' | 'button' | 'reset'>()
+  type = input.required<'submit' | 'button' | 'reset'>()
 
   clx = computed(() => tvClass({ variant: this.variant(), size: this.size(), disabled:this.disabled() }));
 }

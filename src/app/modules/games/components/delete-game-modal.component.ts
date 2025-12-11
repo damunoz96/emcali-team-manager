@@ -4,6 +4,7 @@ import { Modal } from "flowbite";
 import { GameService } from "../services/games.service";
 import { toast } from "ngx-sonner";
 import { Router } from "@angular/router";
+import { ButtonComponent } from "../../../shared/components/button.component";
 
 @Component({
   selector: 'app-delete-game-modal',
@@ -11,33 +12,30 @@ import { Router } from "@angular/router";
     class="overflow-y-auto overflow-x-hidden fixed flex justify-center z-50 inset-0 items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
   >
     <!-- Contenido del diálogo -->
-    <div class="dialog-content sm:max-w-[500px] bg-card rounded-lg shadow-lg p-6 mt-4">
+    <div class="dialog-content sm:max-w-[500px] bg-card rounded-lg shadow-lg p-6">
       <!-- Header -->
-      <header class="mb-4 flex flex-col gap-6">
+      <header class="flex flex-col gap-6">
         <h2 id="dialog-title" class="text-lg text-accent-foreground font-semibold">
           Do you want to delete this game?
         </h2>
         <div class="flex gap-6 justify-end">
-          <button
+          <app-button
+            type="button"
             (click)="this.closeModal()"
-            class=" hover:bg-primary/90 text-md text-card-foreground rounded-md px-6 py-3 transition-all duration-200 cursor-pointer"
-          >
-            Cancel
-          </button>
-          <button
-            id="dialog-desc"
+            variant="primary"
+            size="sm"
+          >Cancel</app-button>
+          <app-button
+            type="button"
             (click)="handleDeleteGame()"
-            class="bg-destructive/80 hover:bg-destructive text-md text-card-foreground rounded-md px-6 py-3 transition-all duration-200 cursor-pointer"
-          >
-            Delete
-          </button>
+            variant="destructive"
+            size="sm"
+          >Delete</app-button>
         </div>
       </header>
-
-      <!-- Formulario (estático) -->
     </div>
   </div>`,
-  imports: [],
+  imports: [ButtonComponent],
 })
 export class DeleteGameModalComponent {
     private readonly gameService = inject(GameService);
