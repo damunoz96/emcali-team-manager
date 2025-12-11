@@ -138,7 +138,11 @@ export class AddGameComponent {
     } catch (error) {
       toast.error('Something went wrong');
     } finally {
-      toast.success('Game successfully edited!');
+      if (this.gameId()) {
+        toast.success('Game successfully edited!');
+      } else {
+        toast.success('Game successfully added!');
+      }
       this.goBack();
     }
   }
