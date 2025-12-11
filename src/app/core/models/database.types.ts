@@ -17,6 +17,7 @@ export type Database = {
       games: {
         Row: {
           created_at: string
+          date: string | null
           id: number
           location: string
           opponent: string
@@ -26,6 +27,7 @@ export type Database = {
         }
         Insert: {
           created_at?: string
+          date?: string | null
           id?: number
           location: string
           opponent: string
@@ -35,6 +37,7 @@ export type Database = {
         }
         Update: {
           created_at?: string
+          date?: string | null
           id?: number
           location?: string
           opponent?: string

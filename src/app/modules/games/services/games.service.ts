@@ -57,6 +57,7 @@ export class GameService {
         score: options.score,
         opponent_score: options.opponent_score,
         location: options.location,
+        date: options.date,
         status: 'completed'
       })
       .select()

@@ -30,7 +30,7 @@ import { RouterLink } from "@angular/router";
           </div>
         </div>
           <div class="flex items-center gap-5 w-full justify-center border-t border-border pt-2 mt-4">
-            <span class=" text-muted-foreground font-ligh max-lg:text-sm">{{ game.created_at | date:"dd MMM yyyy hh:mm aa"}}</span>
+            <span class=" text-muted-foreground font-ligh max-lg:text-sm">{{ game.date | date:"dd MMM yyyy hh:mm aa"}}</span>
             <span class="text-muted-foreground max-lg:text-sm">
               {{ game.location }}
             </span>

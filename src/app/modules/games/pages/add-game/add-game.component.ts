@@ -89,7 +89,7 @@ export class AddGameComponent {
     effect (()=>{
       const game = this.game.data();
       const stats = this.stats.data();
-      const formattedDate = this.datePipe.transform(game?.created_at, 'yyyy-MM-dd');
+      const formattedDate = this.datePipe.transform(game?.date, 'yyyy-MM-dd');
       if (!game || !stats) return;
       this.gameGroup.reset({
         id: game.id,

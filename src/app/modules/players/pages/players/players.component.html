@@ -17,7 +17,7 @@
     </div>
 
     <!-- Stats Cards -->
-    <div class="grid grid-cols-1 gap-4 mb-8">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
       @if (players.data()) {
       <app-card title="Total players" [content]="players.data()?.total"></app-card>
       } @else if (players.isLoading()) {

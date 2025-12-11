@@ -76,6 +76,9 @@ export class EditPlayerModalComponent {
       this.client.invalidateQueries({
         queryKey: [QUERY_KEYS.PLAYER, player.id],
       });
+      this.client.invalidateQueries({
+        queryKey: [QUERY_KEYS.PLAYERS],
+      });
     },
   }));
 

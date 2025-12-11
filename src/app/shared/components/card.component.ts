@@ -9,7 +9,7 @@ import { Component, input, Input, numberAttribute } from "@angular/core";
       <div class="flex items-center justify-between mb-2">
         <span class="text-muted-foreground text-sm font-medium"> {{ title() }}</span>
       </div>
-      <div class="text-3xl font-bold text-foreground">{{ content() }}</div>
+      <div class="text-3xl font-bold text-foreground">{{ content() || 0}}</div>
     </div>
   `,
 })
