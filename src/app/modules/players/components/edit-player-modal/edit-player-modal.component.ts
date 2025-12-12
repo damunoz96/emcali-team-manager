@@ -68,6 +68,7 @@ export class EditPlayerModalComponent {
         toast.success('Player updated successfully');
       }
       this.modal.close();
+      this.group.reset();
     },
     onError: () => {
       toast.error('Something went wrong');
